@@ -43,16 +43,19 @@ import java.util.List;
 
 import dsa.eetac.upc.edu.clientjoc.ClassesClon.Jugador;
 import dsa.eetac.upc.edu.clientjoc.inputOutput.ApiAdapter;
+import dsa.eetac.upc.edu.clientjoc.inputOutput.ApiService;
+import dsa.eetac.upc.edu.clientjoc.inputOutput.Response.LoginBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import retrofit2.Retrofit;
 
 import static android.Manifest.permission.READ_CONTACTS;
 
 /**
  * A login screen that offers login via email/password.
  */
-public class LoginActivity extends AppCompatActivity implements Callback<Jugador> {
+public class LoginActivity extends AppCompatActivity {
 
     // UI references.
     private ImageView mLogoView;
@@ -63,20 +66,22 @@ public class LoginActivity extends AppCompatActivity implements Callback<Jugador
     private View mProgressView;
     private View mLoginFormView;
 
+    //retrofit
+    private ApiService mRestAdapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        //servei rest, singleton
+        mRestAdapter =  ApiAdapter.getApiService();
 
         mLogoView = (ImageView) findViewById(R.id.imageLogo);
         mProgressView = findViewById(R.id.login_progress);
 
         mEmailView = (EditText) findViewById(R.id.email);
         mPasswordView = (EditText) findViewById(R.id.password);
-
-        String mail= mEmailView.toString();
-        String pass= mPasswordView.toString();
-
 
         Button mSignInButton = (Button) findViewById(R.id.email_sign_in_button);
         mLoginFormView = findViewById(R.id.login_form);
@@ -115,6 +120,7 @@ public class LoginActivity extends AppCompatActivity implements Callback<Jugador
         });
 
     }
+
     private boolean isEmailValid(String email) {
         //TODO: Replace this with your own logic
         return email.contains("@");
@@ -125,11 +131,6 @@ public class LoginActivity extends AppCompatActivity implements Callback<Jugador
         return password.length() > 4;
     }
 
-    /**
-     * Attempts to sign in or register the account specified by the login form.
-     * If there are form errors (invalid email, missing fields, etc.), the
-     * errors are presented and no actual login attempt is made.
-     */
     private void attemptLogin() {
 
 
@@ -171,34 +172,24 @@ public class LoginActivity extends AppCompatActivity implements Callback<Jugador
             // perform the user login attempt.
             showProgress(true);
 
-            String mail= mEmailView.toString();
-            String pass= mPasswordView.toString();
-            Call<Jugador>  loginCall = ApiAdapter.getApiService().getLogin(mail, pass);
-            loginCall.enqueue(this);
+            String mail = mEmailView.toString();
+            String pass = mPasswordView.toString();
+            Call<Jugador>  loginCall = ApiAdapter.getApiService().getLogin(new LoginBody(mail,pass));
+            loginCall.enqueue(new Callback<Jugador>() {
+                @Override
+                public void onResponse(Call<Jugador> call, Response<Jugador> response) {
+                    
+                }
 
+                @Override
+                public void onFailure(Call<Jugador> call, Throwable t) {
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+                }
+            });
 
 
         }
     }
-
 
 
     @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
@@ -216,12 +207,14 @@ public class LoginActivity extends AppCompatActivity implements Callback<Jugador
         startActivity(new Intent(this, MainActivity.class));
         finish();
     }
+
     private void showLoginError(String error) {
         Toast.makeText(this, error, Toast.LENGTH_LONG).show();
     }
 
     //verificar connexió de xarxa
-    private boolean isOnline() {
+    private boolean isOnline()
+    {
         ConnectivityManager cm =
                 (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
 
@@ -229,21 +222,5 @@ public class LoginActivity extends AppCompatActivity implements Callback<Jugador
         return activeNetwork != null && activeNetwork.isConnected();
     }
 
-    //les ha de implementar per poder fer el callback de retrofit
-    @Override
-    public void onResponse(Call<Jugador> call, Response<Jugador> response) {
-        if (response.isSuccessful())
-        {
-            //amb això obtenim el cos de la resposta
-            response.body();
-            Log.d("login resposta", "la petició es "+response.body() );
-        }
-
-    }
-
-    @Override
-    public void onFailure(Call<Jugador> call, Throwable t) {
-
-    }
 }
 

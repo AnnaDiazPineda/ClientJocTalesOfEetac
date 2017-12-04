@@ -11,7 +11,7 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="dsa.eetac.upc.edu.clientjoc.LoginActivity">
 
-    <!-- Login progress -->
+
     <ImageView
         android:id="@+id/imageLogo"
         android:layout_width="wrap_content"
@@ -20,6 +20,7 @@
         android:layout_marginTop="8dp"
         app:srcCompat="@mipmap/ic_launcher" />
 
+    <!-- Login progress -->
     <ProgressBar
         android:id="@+id/login_progress"
         style="?android:attr/progressBarStyleLarge"
