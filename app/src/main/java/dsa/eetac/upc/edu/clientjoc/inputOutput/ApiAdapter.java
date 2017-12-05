@@ -14,17 +14,19 @@ public class ApiAdapter {
 
     public static ApiService getApiService() {
 
-        // Creamos un interceptor y le indicamos el log level a usar
-        HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
-        logging.setLevel(HttpLoggingInterceptor.Level.BODY);
 
-        // Asociamos el interceptor a las peticiones
-        OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
-        httpClient.addInterceptor(logging);
-
-        String baseUrl = "http://localhost:8080/myapp/json/";
 
         if (API_SERVICE == null) {
+
+            // Creamos un interceptor y le indicamos el log level a usar
+            HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
+            logging.setLevel(HttpLoggingInterceptor.Level.BODY);
+
+            // Asociamos el interceptor a las peticiones
+            OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
+            httpClient.addInterceptor(logging);
+
+            String baseUrl = "http://10.0.2.2:8080/myapp/json/";
             Retrofit retrofit = new Retrofit.Builder()
                     .baseUrl(baseUrl)
                     .addConverterFactory(GsonConverterFactory.create())

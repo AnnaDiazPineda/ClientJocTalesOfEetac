@@ -95,16 +95,18 @@ public class LoginActivity extends AppCompatActivity {
         mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
-                if (id == R.id.login_form || id == EditorInfo.IME_NULL) {
+               /* if (id == R.id.login_form || id == EditorInfo.IME_NULL) {
                     //atemposar resultat del online
                     if (!isOnline()) {
-                        showLoginError(getString(R.string.error_network));
+                        //showLoginError(getString(R.string.error_network));
+                        toast("You are not online");
                         return false;
                     }
                     attemptLogin();
                     return true;
                 }
-                return false;
+                return false;*/
+            return false;
             }
         });
 
@@ -129,6 +131,11 @@ public class LoginActivity extends AppCompatActivity {
     private boolean isPasswordValid(String password) {
         //TODO: Replace this with your own logic
         return password.length() > 4;
+    }
+
+    private void returnToInit(){
+        showProgress(false);
+        mEmailView.requestFocus();
     }
 
     private void attemptLogin() {
@@ -174,16 +181,23 @@ public class LoginActivity extends AppCompatActivity {
 
             String mail = mEmailView.toString();
             String pass = mPasswordView.toString();
-            Call<Jugador>  loginCall = ApiAdapter.getApiService().getLogin(new LoginBody(mail,pass));
+
+            Call<Jugador>  loginCall = ApiAdapter.getApiService().getLogin("martavivesluis@gmail.com","1234");
             loginCall.enqueue(new Callback<Jugador>() {
                 @Override
                 public void onResponse(Call<Jugador> call, Response<Jugador> response) {
-                    
+                    showLoginError("OOOOOLE");
+                    if(response.toString().length() == 0){
+                        showLoginError(getString(R.string.error_incorrect_password));
+                        returnToInit();
+                    }
                 }
 
                 @Override
                 public void onFailure(Call<Jugador> call, Throwable t) {
-
+                    showLoginError(getString(R.string.error_network));
+                    returnToInit();
+                    return;
                 }
             });
 
