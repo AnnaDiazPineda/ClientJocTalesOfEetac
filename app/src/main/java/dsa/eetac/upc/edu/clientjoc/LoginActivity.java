@@ -42,6 +42,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import dsa.eetac.upc.edu.clientjoc.ClassesClon.Jugador;
+import dsa.eetac.upc.edu.clientjoc.ClassesClon.Login;
 import dsa.eetac.upc.edu.clientjoc.inputOutput.ApiAdapter;
 import dsa.eetac.upc.edu.clientjoc.inputOutput.ApiService;
 import dsa.eetac.upc.edu.clientjoc.inputOutput.Response.LoginBody;
@@ -130,7 +131,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private boolean isPasswordValid(String password) {
         //TODO: Replace this with your own logic
-        return password.length() > 4;
+        return password.length() > 3;
     }
 
     private void returnToInit(){
@@ -179,18 +180,14 @@ public class LoginActivity extends AppCompatActivity {
             // perform the user login attempt.
             showProgress(true);
 
-            String mail = mEmailView.toString();
-            String pass = mPasswordView.toString();
+            String mail = mEmailView.getText().toString();
+            String pass = mPasswordView.getText().toString();
 
-            Call<Jugador>  loginCall = ApiAdapter.getApiService().getLogin("martavivesluis@gmail.com","1234");
+            Call<Jugador>  loginCall = ApiAdapter.getApiService().getLogin(mail,new Login(pass));
             loginCall.enqueue(new Callback<Jugador>() {
                 @Override
                 public void onResponse(Call<Jugador> call, Response<Jugador> response) {
-                    showLoginError("OOOOOLE");
-                    if(response.toString().length() == 0){
-                        showLoginError(getString(R.string.error_incorrect_password));
-                        returnToInit();
-                    }
+                    showLoginError("OOOOOLE"+response.code() );
                 }
 
                 @Override
