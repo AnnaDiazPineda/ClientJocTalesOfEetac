@@ -10,6 +10,8 @@
     <string name="action_sign_in_short">Iniciar Sessió</string>
     <string name="error_invalid_email">Aquest mail no es valid</string>
     <string name="error_invalid_password">Contrassenya es massa curta</string>
+    <string name="error_password">La contrassenya no es la correcta</string>
+    <string name="error_user">Aquest mail no pertany a cap usuari registrat</string>
     <string name="error_incorrect_password">Contrassenya Incorrecta</string>
     <string name="error_field_required">Ha d'emplenar el camp</string>
     <string name="error_network">Conexión de xarxa no disponible</string>

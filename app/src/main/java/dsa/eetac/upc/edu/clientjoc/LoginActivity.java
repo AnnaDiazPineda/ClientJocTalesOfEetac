@@ -187,9 +187,18 @@ public class LoginActivity extends AppCompatActivity {
             loginCall.enqueue(new Callback<Jugador>() {
                 @Override
                 public void onResponse(Call<Jugador> call, Response<Jugador> response) {
-                    showLoginError("OOOOOLE"+response.code() );
+                    switch (response.code()) {
+                        case 200:// tot correcte
+                            showLoginError(getString(R.string.error_network));
+                            break;
+                        case 204://la contrassenya esta malament
+                            showLoginError(getString(R.string.error_password));
+                            break;
+                        case 500://el email no existeix
+                            showLoginError(getString(R.string.error_user));
+                            break;
+                    }
                 }
-
                 @Override
                 public void onFailure(Call<Jugador> call, Throwable t) {
                     showLoginError(getString(R.string.error_network));
