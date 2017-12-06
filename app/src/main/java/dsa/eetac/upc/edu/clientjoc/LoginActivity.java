@@ -39,21 +39,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-
-import java.util.ArrayList;
-import java.util.List;
-
 import dsa.eetac.upc.edu.clientjoc.ClassesClon.Jugador;
-import dsa.eetac.upc.edu.clientjoc.ClassesClon.Login;
 import dsa.eetac.upc.edu.clientjoc.inputOutput.ApiAdapter;
 import dsa.eetac.upc.edu.clientjoc.inputOutput.ApiService;
-import dsa.eetac.upc.edu.clientjoc.inputOutput.Response.LoginBody;
+import dsa.eetac.upc.edu.clientjoc.inputOutput.Response.Login;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
 
-import static android.Manifest.permission.READ_CONTACTS;
+
 
 /**
  * A login screen that offers login via email/password.

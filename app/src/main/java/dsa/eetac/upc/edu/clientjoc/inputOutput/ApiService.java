@@ -1,10 +1,8 @@
 package dsa.eetac.upc.edu.clientjoc.inputOutput;
 
 import dsa.eetac.upc.edu.clientjoc.ClassesClon.Jugador;
-import dsa.eetac.upc.edu.clientjoc.ClassesClon.Login;
-import dsa.eetac.upc.edu.clientjoc.inputOutput.Response.LoginBody;
+import dsa.eetac.upc.edu.clientjoc.inputOutput.Response.Login;
 
-import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.POST;
@@ -19,6 +17,9 @@ public interface ApiService {
 
     @POST("Jugador/{email}")
     Call<Jugador> getLogin(@Path("email") String user, @Body Login loginBody);
+
+
+
 
 
 }

@@ -55,6 +55,9 @@ public class Jugador  {
         this.token = token;
     }
 
+    public String getToken() {
+        return token;
+    }
 
 
     @Override
