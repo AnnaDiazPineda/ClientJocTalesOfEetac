@@ -188,7 +188,7 @@ public class LoginActivity extends AppCompatActivity {
                     switch (response.code()) {
                         case 200:// tot correcte
                             showLoginError("login correcte");
-                            Intent myIntent = new Intent(LoginActivity.this, AccionesUser.class);
+                            Intent myIntent = new Intent(LoginActivity.this, DatosPersonales.class);
                             Jugador jug = response.body();
                             ObjectMapper mapper = new ObjectMapper();
                             try {
