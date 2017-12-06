@@ -1,5 +1,8 @@
 package dsa.eetac.upc.edu.clientjoc.ClassesClon;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.ArrayList;
 
 /**
@@ -9,7 +12,7 @@ import java.util.ArrayList;
 
 //aquest client representa els atribut jo obtindré del servei, per tant haig de saber la
 //classe a l'altre costat
-public class Jugador {
+public class Jugador  {
 
     private String nom;
     private String email;
@@ -62,4 +65,5 @@ public class Jugador {
                 ", contrasenya='" + contrasenya + '\'' +
                 '}';
     }
+
 }

@@ -38,6 +38,8 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -83,6 +85,9 @@ public class LoginActivity extends AppCompatActivity {
 
         mEmailView = (EditText) findViewById(R.id.email);
         mPasswordView = (EditText) findViewById(R.id.password);
+
+        mEmailView.setText("martavivesluis@gmail.com");
+        mPasswordView.setText("1234");
 
         Button mSignInButton = (Button) findViewById(R.id.email_sign_in_button);
         mLoginFormView = findViewById(R.id.login_form);
@@ -189,7 +194,21 @@ public class LoginActivity extends AppCompatActivity {
                 public void onResponse(Call<Jugador> call, Response<Jugador> response) {
                     switch (response.code()) {
                         case 200:// tot correcte
-                            showLoginError(getString(R.string.error_network));
+
+                            showLoginError("login correcte");
+
+                            Intent myIntent = new Intent(LoginActivity.this, DatosPersonales.class);
+                            Jugador jug = response.body();
+                            ObjectMapper mapper = new ObjectMapper();
+                            try {
+                                String jsonResult = mapper.writeValueAsString(jug);
+                                myIntent.putExtra("jugador", jsonResult); //Optional parameter
+                                LoginActivity.this.startActivity(myIntent);
+                            }catch (Exception e){
+                                showLoginError("no serializable");
+                            }
+
+                        //enviar jugador rebut nova activitat
                             break;
                         case 204://la contrassenya esta malament
                             showLoginError(getString(R.string.error_password));
