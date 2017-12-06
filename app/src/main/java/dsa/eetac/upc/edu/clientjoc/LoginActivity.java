@@ -187,27 +187,24 @@ public class LoginActivity extends AppCompatActivity {
 
             String mail = mEmailView.getText().toString();
             String pass = mPasswordView.getText().toString();
-
             Call<Jugador>  loginCall = ApiAdapter.getApiService().getLogin(mail,new Login(pass));
             loginCall.enqueue(new Callback<Jugador>() {
                 @Override
                 public void onResponse(Call<Jugador> call, Response<Jugador> response) {
                     switch (response.code()) {
                         case 200:// tot correcte
-
                             showLoginError("login correcte");
-
-                            Intent myIntent = new Intent(LoginActivity.this, DatosPersonales.class);
+                            Intent myIntent = new Intent(LoginActivity.this, AccionesUser.class);
                             Jugador jug = response.body();
                             ObjectMapper mapper = new ObjectMapper();
                             try {
                                 String jsonResult = mapper.writeValueAsString(jug);
-                                myIntent.putExtra("jugador", jsonResult); //Optional parameter
+                                myIntent.putExtra("jugador", jsonResult); //Optional parameters
+                                showProgress(false);
                                 LoginActivity.this.startActivity(myIntent);
                             }catch (Exception e){
                                 showLoginError("no serializable");
                             }
-
                         //enviar jugador rebut nova activitat
                             break;
                         case 204://la contrassenya esta malament
