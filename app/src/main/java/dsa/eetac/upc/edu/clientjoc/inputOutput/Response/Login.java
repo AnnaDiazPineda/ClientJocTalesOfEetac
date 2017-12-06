@@ -1,4 +1,4 @@
-package dsa.eetac.upc.edu.clientjoc.ClassesClon;
+package dsa.eetac.upc.edu.clientjoc.inputOutput.Response;
 
 public class Login {
     public Login(){

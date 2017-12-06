@@ -10,6 +10,8 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import dsa.eetac.upc.edu.clientjoc.Preferencies.SessionPreference;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -17,7 +19,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         //redirecció al Login
-        if (true) {
+        if (!SessionPreference.get(this).isLoggedIn()) {
+
             startActivity(new Intent(this, LoginActivity.class));
             finish();
             return;
