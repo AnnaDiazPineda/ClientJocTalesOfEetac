@@ -39,7 +39,7 @@ public class AccionesUser extends AppCompatActivity {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        EditText fab = (EditText) findViewById(R.id.welcomebox);
-        fab.setText(jugador.getNom());
+        //EditText fab = (EditText) findViewById(R.id.welcomebox);
+        //fab.setText(jugador.getNom());
     }
 }

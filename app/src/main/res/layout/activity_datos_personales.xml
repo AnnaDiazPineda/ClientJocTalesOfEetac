@@ -9,14 +9,6 @@
         android:orientation="vertical">
 
         <EditText
-            android:id="@+id/editText"
-            android:layout_width="281dp"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:text="Name" />
-
-        <EditText
             android:id="@+id/namebox"
             android:layout_width="283dp"
             android:layout_height="wrap_content"
