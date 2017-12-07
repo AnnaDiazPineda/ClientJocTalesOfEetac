@@ -19,7 +19,8 @@ public interface ApiService {
     Call<Jugador> getLogin(@Path("email") String user, @Body Login loginBody);
 
 
-
+    @POST("newJugador/{email}")
+    Call<Jugador> getNouJugador(@Path("email")String user, @Body Login loginBody);
 
 
 }

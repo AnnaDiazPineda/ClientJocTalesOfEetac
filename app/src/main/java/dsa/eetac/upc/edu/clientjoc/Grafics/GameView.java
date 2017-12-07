@@ -16,12 +16,12 @@ import dsa.eetac.upc.edu.clientjoc.R;
 
 public class GameView extends View{
 
-    private final Bitmap bmp;
+   // private final Bitmap bmp;
 
     public GameView(Context context) {
         super(context);
 
         //creació bitmap
-        bmp = BitmapFactory.decodeResource(getResources(), R.drawable.icon);
+        //bmp = BitmapFactory.decodeResource(getResources(), R.drawable.icon);
     }
 }

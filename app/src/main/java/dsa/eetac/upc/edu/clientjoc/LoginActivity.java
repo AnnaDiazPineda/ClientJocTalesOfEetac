@@ -42,6 +42,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import dsa.eetac.upc.edu.clientjoc.ClassesClon.Jugador;
 import dsa.eetac.upc.edu.clientjoc.inputOutput.ApiAdapter;
 import dsa.eetac.upc.edu.clientjoc.inputOutput.ApiService;
+import dsa.eetac.upc.edu.clientjoc.inputOutput.Registre;
 import dsa.eetac.upc.edu.clientjoc.inputOutput.Response.Login;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -49,9 +50,7 @@ import retrofit2.Response;
 
 
 
-/**
- * A login screen that offers login via email/password.
- */
+
 public class LoginActivity extends AppCompatActivity {
 
     // UI references.
@@ -62,6 +61,7 @@ public class LoginActivity extends AppCompatActivity {
     private TextInputLayout mFloatLabelPassword;
     private View mProgressView;
     private View mLoginFormView;
+    private Button bRegistrarse;
 
     //retrofit
     private ApiService mRestAdapter;
@@ -84,6 +84,8 @@ public class LoginActivity extends AppCompatActivity {
         mPasswordView.setText("1234");
 
         Button mSignInButton = (Button) findViewById(R.id.email_sign_in_button);
+
+
         mLoginFormView = findViewById(R.id.login_form);
 
         mFloatLabelUserId = (TextInputLayout) findViewById(R.id.float_label_user_id);
@@ -107,8 +109,14 @@ public class LoginActivity extends AppCompatActivity {
                 }
                 return false;*/
             return false;
+
+
+
+
             }
-        });
+        }
+
+        );
 
         mSignInButton.setOnClickListener(new OnClickListener() {
             @Override
@@ -118,6 +126,15 @@ public class LoginActivity extends AppCompatActivity {
                     return;
                 }
                 attemptLogin();
+            }
+        });
+
+        bRegistrarse = (Button) findViewById(R.id.bNouUsuari);
+        bRegistrarse.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intentRegistre = new Intent(LoginActivity.this, Registre.class);
+                startActivity(intentRegistre);
             }
         });
 
@@ -151,6 +168,7 @@ public class LoginActivity extends AppCompatActivity {
 
         boolean cancel = false;
         View focusView = null;
+
 
         // Check for a valid password, if the user entered one.
         if (!TextUtils.isEmpty(password) && !isPasswordValid(password)) {
@@ -220,6 +238,8 @@ public class LoginActivity extends AppCompatActivity {
 
         }
     }
+
+
 
 
     @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
