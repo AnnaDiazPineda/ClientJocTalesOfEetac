@@ -114,9 +114,7 @@ public class LoginActivity extends AppCompatActivity {
 
 
             }
-        }
-
-        );
+        });
 
         mSignInButton.setOnClickListener(new OnClickListener() {
             @Override
