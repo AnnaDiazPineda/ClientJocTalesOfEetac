@@ -94,17 +94,23 @@ public class ModificarJugador extends AppCompatActivity {
                     int duration = Toast.LENGTH_SHORT;
                     Toast toast = Toast.makeText(context, text, duration);
                     toast.show();
-                    if(response.body().equals("OK"))
+                    if (response.body().getResposta().equals("OK")){
+
                         mijugador.setContrasenya(contrassenyaActual);
-                        mijugador.setNom(nomActual);
-                        Intent myIntent = new Intent(ModificarJugador.this, DatosPersonales.class);
-                        ObjectMapper mapper = new ObjectMapper();
+                    mijugador.setNom(nomActual);
+                    Intent myIntent = new Intent(ModificarJugador.this, DatosPersonales.class);
+                    ObjectMapper mapper = new ObjectMapper();
                     try {
                         String jsonResult = mapper.writeValueAsString(mijugador);
                         myIntent.putExtra("jugador", jsonResult); //Optional parameters
                         ModificarJugador.this.startActivity(myIntent);
-                    }catch (Exception e){
+                    } catch (Exception e) {
 
+                    }
+                }
+                else{
+                        text="Les dades no s'han pogut actualitzar";
+                        toast.show();
                     }
 
                 }
