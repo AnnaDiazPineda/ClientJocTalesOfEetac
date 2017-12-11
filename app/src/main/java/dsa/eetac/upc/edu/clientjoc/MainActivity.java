@@ -10,7 +10,7 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import dsa.eetac.upc.edu.clientjoc.Preferencies.SessionPreference;
+import dsa.eetac.upc.edu.clientjoc.inputOutput.Preferencies.SessionPreference;
 
 public class MainActivity extends AppCompatActivity {
 

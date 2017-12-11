@@ -1,5 +1,6 @@
 package dsa.eetac.upc.edu.clientjoc.inputOutput;
 
+import dsa.eetac.upc.edu.clientjoc.ClassesClon.Answer;
 import dsa.eetac.upc.edu.clientjoc.ClassesClon.Jugador;
 import dsa.eetac.upc.edu.clientjoc.inputOutput.Response.Login;
 
@@ -14,17 +15,13 @@ import retrofit2.http.Path;
 
 public interface ApiService {
 
-    //login usuari
+
     @POST("Jugador/{email}")
     Call<Jugador> getLogin(@Path("email") String user, @Body Login loginBody);
-
-    //nou usuari
+    @POST("update/{email}")
+    Call<Answer> updateJugador(@Path("email") String user, @Body Login loginBody);//enviem email, nova contrassenya
     @POST("newJugador/{email}")
     Call<Jugador> getNouJugador(@Path("email")String user, @Body Login loginBody);
-
-    //modificar usuari
-    @POST("newJugador/{email}")
-    Call<Jugador> updateJugador(@Path("email") String user, @Body Login loginBody);
 
 
 }

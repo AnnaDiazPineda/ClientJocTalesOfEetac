@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import org.w3c.dom.Text;
@@ -26,6 +27,7 @@ public class DatosPersonales extends AppCompatActivity {
     // UI references.
     private Button tancarSessio;
     private Button modificarJugador;
+    private Jugador mijugador;
 
     //retrofit
     private ApiService mRestAdapter;
@@ -49,13 +51,16 @@ public class DatosPersonales extends AppCompatActivity {
         Jugador jugador = null;
         try {
             jugador = mapper.readValue(value, Jugador.class);
+            mijugador = jugador;
         } catch (IOException e) {
             e.printStackTrace();
         }
         EditText fab = (EditText) findViewById(R.id.namebox);
+        fab.setEnabled(false);
         fab.setText(jugador.getNom());
 
         fab = (EditText) findViewById(R.id.emailbox);
+        fab.setEnabled(false);
         fab.setText(jugador.getEmail());
 
         final String mail = ((EditText) findViewById(R.id.emailbox)).getText().toString();
@@ -71,7 +76,14 @@ public class DatosPersonales extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intentModificar = new Intent(DatosPersonales.this, ModificarJugador.class);
-                intentModificar.putExtra("mail", mail);
+                ObjectMapper mapper = new ObjectMapper();
+
+                try {
+                    String jsonResult = mapper.writeValueAsString(mijugador);
+                    intentModificar.putExtra("jugador",jsonResult);
+                } catch (JsonProcessingException e) {
+                    e.printStackTrace();
+                }
                 startActivity(intentModificar);
 
             }

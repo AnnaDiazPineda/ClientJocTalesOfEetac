@@ -1,4 +1,4 @@
-package dsa.eetac.upc.edu.clientjoc.Preferencies;
+package dsa.eetac.upc.edu.clientjoc.inputOutput.Preferencies;
 
 import android.content.Context;
 import android.content.SharedPreferences;
