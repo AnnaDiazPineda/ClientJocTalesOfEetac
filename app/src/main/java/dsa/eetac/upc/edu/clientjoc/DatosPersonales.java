@@ -2,8 +2,6 @@ package dsa.eetac.upc.edu.clientjoc;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -13,19 +11,17 @@ import android.widget.EditText;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import org.w3c.dom.Text;
-
 import java.io.IOException;
 
 import dsa.eetac.upc.edu.clientjoc.ClassesClon.Jugador;
+import dsa.eetac.upc.edu.clientjoc.Grafics.MapaView;
 import dsa.eetac.upc.edu.clientjoc.inputOutput.ApiAdapter;
 import dsa.eetac.upc.edu.clientjoc.inputOutput.ApiService;
-import dsa.eetac.upc.edu.clientjoc.inputOutput.Registre;
 
 public class DatosPersonales extends AppCompatActivity {
 
     // UI references.
-    private Button tancarSessio;
+    private Button iniciaJoc;
     private Button modificarJugador;
     private Jugador mijugador;
 
@@ -41,7 +37,7 @@ public class DatosPersonales extends AppCompatActivity {
 
         //servei rest, singleton
         mRestAdapter =  ApiAdapter.getApiService();
-        tancarSessio = (Button) findViewById(R.id.bTancarSessio);
+        iniciaJoc = (Button) findViewById(R.id.bIniciaJoc);
         modificarJugador= (Button) findViewById(R.id.bModificar);
 
         Intent intent = getIntent();
@@ -65,10 +61,11 @@ public class DatosPersonales extends AppCompatActivity {
 
         final String mail = ((EditText) findViewById(R.id.emailbox)).getText().toString();
 
-        tancarSessio.setOnClickListener(new View.OnClickListener() {
+        iniciaJoc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Intent myIntent = new Intent(DatosPersonales.this, MapaActivity.class);
+                DatosPersonales.this.startActivity(myIntent);
             }
         });
 

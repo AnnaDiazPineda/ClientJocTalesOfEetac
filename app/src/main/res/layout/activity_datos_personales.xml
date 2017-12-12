@@ -22,12 +22,12 @@
         app:layout_constraintVertical_bias="0.82" />
 
     <Button
-        android:id="@+id/bTancarSessio"
+        android:id="@+id/bIniciaJoc"
         android:layout_width="370dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:layout_marginTop="8dp"
-        android:text="Tancar sessió"
+        android:text="inicia joc"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -59,7 +59,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:text="Name"
-            app:layout_constraintBottom_toBottomOf="@+id/bTancarSessio"
+            app:layout_constraintBottom_toBottomOf="@+id/bIniciaJoc"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.123"
             app:layout_constraintStart_toStartOf="parent"

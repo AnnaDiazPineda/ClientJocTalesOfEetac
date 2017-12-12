@@ -5,6 +5,8 @@ import android.os.Parcelable;
 
 import java.util.ArrayList;
 
+import dsa.eetac.upc.edu.clientjoc.ClassesClon.mapa.Drawable;
+
 /**
  * Created by anita on 28/11/2017.
  */
@@ -12,7 +14,7 @@ import java.util.ArrayList;
 
 //aquest client representa els atribut jo obtindré del servei, per tant haig de saber la
 //classe a l'altre costat
-public class Jugador  {
+public class Jugador implements Drawable {
 
     private String nom;
     private String email;

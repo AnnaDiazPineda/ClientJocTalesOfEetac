@@ -36,6 +36,7 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".inputOutput.Registre" />
         <activity android:name=".ModificarJugador"></activity>
+        <activity android:name=".MapaActivity"></activity>
     </application>
 
 </manifest>

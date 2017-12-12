@@ -2,10 +2,12 @@ package dsa.eetac.upc.edu.clientjoc.inputOutput;
 
 import dsa.eetac.upc.edu.clientjoc.ClassesClon.Answer;
 import dsa.eetac.upc.edu.clientjoc.ClassesClon.Jugador;
+import dsa.eetac.upc.edu.clientjoc.ClassesClon.mapa.Mapa;
 import dsa.eetac.upc.edu.clientjoc.inputOutput.Response.Login;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
 
@@ -22,6 +24,9 @@ public interface ApiService {
     Call<Answer> updateJugador(@Path("email") String user, @Body Login loginBody);//enviem email, nova contrassenya
     @POST("newJugador/{email}")
     Call<Jugador> getNouJugador(@Path("email")String user, @Body Login loginBody);
+
+    @GET("Mapa")
+    Call<String> getMapa();
 
 
 }
