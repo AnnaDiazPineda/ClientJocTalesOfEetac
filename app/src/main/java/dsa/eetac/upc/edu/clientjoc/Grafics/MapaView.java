@@ -16,7 +16,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import dsa.eetac.upc.edu.clientjoc.ClassesClon.Jugador;
 import dsa.eetac.upc.edu.clientjoc.ClassesClon.mapa.Mapa;
 import dsa.eetac.upc.edu.clientjoc.DatosPersonales;
 import dsa.eetac.upc.edu.clientjoc.LoginActivity;
