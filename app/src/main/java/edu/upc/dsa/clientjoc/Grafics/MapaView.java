@@ -6,9 +6,11 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -41,13 +43,26 @@ public class MapaView extends SurfaceView {
 
     public MapaView(Context context) {
         super(context);
+        init(context);
+    }
+
+    public MapaView(Context context, AttributeSet attrs) {
+        super(context, attrs);
+        init(context);
+    }
+
+    public MapaView(Context context, AttributeSet attrs, int defStyle) {
+        super(context, attrs, defStyle);
+        init(context);
+    }
+
+    public void init(Context context) {
         holder = getHolder();
         sprites = new ArrayList<Sprite>();
         gameLoopThread = new GameLoopThread(this);
         holder.addCallback(new SurfaceHolder.Callback() {
             @Override
             public void surfaceCreated(SurfaceHolder surfaceHolder) {
-                getMapaFromServer();
                 gameLoopThread.setRunning(true);
                 gameLoopThread.start();
                 setWillNotDraw(false);
@@ -71,6 +86,7 @@ public class MapaView extends SurfaceView {
         }
         sprites = convertMapToSprites(mapa);
         canvas.drawColor(Color.BLACK);
+
         for (Sprite sprite : sprites) {
             sprite.onDraw(canvas);
         }
@@ -96,7 +112,7 @@ public class MapaView extends SurfaceView {
         for(int y = 0; y < m.doGetHeight(); y++){
             for(int x = 0; x < m.doGetWidth(); x++) {
                 Drawable dr =  m.doGetElement(x,y);
-                ans.add(this.getSprite(dr,y,x));
+                ans.add(this.getSprite(dr,x,y));
             }
         }
         return ans;
@@ -116,48 +132,12 @@ public class MapaView extends SurfaceView {
         return tmp;
     }
 
-    public void getMapaFromServer() {
-
-        Call<String> loginCall = ApiAdapter.getApiService().getMapa();
-        loginCall.enqueue(new Callback<String>() {
-            @Override
-            public void onResponse(Call<String> call, Response<String> response) {
-                switch (response.code()) {
-                    case 200:
-                        showLoginError("mapa correcte");
-                        String mapastr= response.body();
-                        System.out.println(mapastr);
-
-                        ObjectMapper mapper = new ObjectMapper();
-                        mapper.enableDefaultTyping(ObjectMapper.DefaultTyping.NON_FINAL);
-
-                        try {
-                           mapa = mapper.readValue(mapastr, Mapa.class);
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-
-                        //enviar jugador rebut nova activitat
-                        break;
-                    case 204://la contrassenya esta malament
-                        showLoginError("204");
-                        break;
-                    case 500://el email no existeix
-                        showLoginError("500");
-                        break;
-                }
-            }
-
-            public void onFailure(Call<String> call, Throwable t) {
-                showLoginError("error");
-                t.printStackTrace();
-                return;
-            }
-        });
-    }
 
     private void showLoginError(String error) {
         Toast.makeText(this.getContext(), error, Toast.LENGTH_LONG).show();
     }
 
+    public void setMap(Mapa map) {
+        this.mapa = map;
+    }
 }

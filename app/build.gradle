@@ -27,7 +27,7 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
 
-    //RETROFIT
+
     compile 'com.squareup.retrofit2:retrofit:+'
     compile 'com.squareup.retrofit2:converter-gson:+'
     compile 'com.squareup.okhttp3:logging-interceptor:+'
@@ -41,4 +41,5 @@ dependencies {
 
     //GRÀFICS
     compile 'com.squareup.picasso:picasso:2.5.2'
+
 }

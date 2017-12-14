@@ -28,6 +28,7 @@ public class GameLoopThread extends Thread {
                 c = view.getHolder().lockCanvas();
                 synchronized (view.getHolder()) {
                     view.onDraw(c);
+                    view.invalidate();
                 }
             } finally {
                 if (c != null) {

@@ -3,6 +3,9 @@ package edu.upc.dsa.beans.mapa;
 
 import java.util.ArrayList;
 
+import edu.upc.dsa.beans.Jugador;
+import edu.upc.dsa.beans.Personatge;
+
 public class Mapa {
 
     public ArrayList<Column> columns;
@@ -69,6 +72,17 @@ public class Mapa {
             }
         }
         return -1;
+    }
+
+    public Personatge findJugador() {
+        for(Column c:columns){
+            for(Drawable d : c.rows){
+                if(d instanceof Personatge){
+                    return (Personatge)d;
+                }
+            }
+        }
+        return null;
     }
     /*
 
