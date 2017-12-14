@@ -37,4 +37,8 @@ dependencies {
     compile 'com.fasterxml.jackson.core:jackson-databind:2.5.3'
 
     testCompile 'junit:junit:4.12'
+
+
+    //GRÀFICS
+    compile 'com.squareup.picasso:picasso:2.5.2'
 }

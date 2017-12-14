@@ -5,6 +5,7 @@ package edu.upc.dsa.clientjoc.Grafics;
  */
 
 
+import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Rect;
@@ -19,6 +20,9 @@ public class Sprite {
     private int currentFrame = 0;
     private int width;
     private int height;
+    private int unscaled_width;
+    private int unscaled_height;
+    private float factor = 4.5f;
 
     // direction = 0 up, 1 left, 2 down, 3 right,
     // animation = 3 back, 1 left, 0 front, 2 right
@@ -27,16 +31,22 @@ public class Sprite {
     public Sprite(MapaView gameView, Bitmap bmp, int fila, int columna) {
         this.gameView=gameView;
         this.bmp=bmp;
-        this.width = bmp.getWidth();
-        this.height = bmp.getHeight();
+        this.unscaled_width = bmp.getWidth();
+        this.unscaled_height = bmp.getHeight();
+
+        int widthpantalla = ((Activity)gameView.getContext()).getWindowManager().getDefaultDisplay().getWidth();
+        factor = widthpantalla /  (this.unscaled_width *8);
+
+        this.width = (int)(bmp.getWidth() * factor);
+        this.height = (int)(bmp.getHeight() * factor);
         Random rnd = new Random();
-        x = fila * 20;
-        y = columna * 20;
+        x = (int)(fila * width);
+        y = (int)(columna * height);
     }
 
 
     public void onDraw(Canvas canvas) {
-        Rect src = new Rect(0, 0, width, height);
+        Rect src = new Rect(0, 0, unscaled_width, unscaled_height);
         Rect dst = new Rect(x, y, x + width, y + height);
         canvas.drawBitmap(bmp, src, dst, null);
     }

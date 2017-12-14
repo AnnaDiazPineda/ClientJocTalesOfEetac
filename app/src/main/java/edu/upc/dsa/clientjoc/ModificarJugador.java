@@ -125,7 +125,7 @@ public class ModificarJugador extends AppCompatActivity {
 
     /*
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_modificar);
+        setContentView(R.mapa_layout.activity_modificar);
 
         //servei rest, singleton
         mRestAdapter =  ApiAdapter.getApiService();

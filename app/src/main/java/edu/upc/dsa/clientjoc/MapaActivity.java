@@ -3,8 +3,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Window;
 
-import edu.upc.dsa.clientjoc.Grafics.MapaView;
-
 /**
  * Created by Marta on 12/12/2017.
  */
@@ -14,7 +12,6 @@ public class MapaActivity extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-        setContentView(new MapaView(this));
-        //setContentView(R.layout.activity_main);
+        setContentView(R.layout.mapa_layout);
     }
 }

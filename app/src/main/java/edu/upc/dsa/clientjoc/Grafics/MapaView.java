@@ -37,14 +37,19 @@ public class MapaView extends SurfaceView {
     private SurfaceHolder holder;
     Mapa mapa;
     ArrayList<Sprite> sprites;
+    GameLoopThread gameLoopThread;
+
     public MapaView(Context context) {
         super(context);
         holder = getHolder();
         sprites = new ArrayList<Sprite>();
+        gameLoopThread = new GameLoopThread(this);
         holder.addCallback(new SurfaceHolder.Callback() {
             @Override
             public void surfaceCreated(SurfaceHolder surfaceHolder) {
                 getMapaFromServer();
+                gameLoopThread.setRunning(true);
+                gameLoopThread.start();
                 setWillNotDraw(false);
             }
 
@@ -61,6 +66,9 @@ public class MapaView extends SurfaceView {
 
     @Override
     protected void onDraw(Canvas canvas) {
+        if(mapa == null){
+            return;
+        }
         sprites = convertMapToSprites(mapa);
         canvas.drawColor(Color.BLACK);
         for (Sprite sprite : sprites) {
@@ -95,12 +103,12 @@ public class MapaView extends SurfaceView {
     }
 
     public Sprite getSprite(Drawable dr, int fila, int columna) {
-        int type = R.drawable.black;
+        int type = R.mipmap.black;
         if(dr instanceof EmptyCell){
-                type = R.drawable.empty;
+                type = R.mipmap.empty;
             }
         if(dr instanceof Personatge){
-            type = R.drawable.bad2;
+            type = R.mipmap.bad2;
         }
 
         Bitmap bmp = BitmapFactory.decodeResource(getResources(), type);
@@ -119,6 +127,7 @@ public class MapaView extends SurfaceView {
                         showLoginError("mapa correcte");
                         String mapastr= response.body();
                         System.out.println(mapastr);
+
                         ObjectMapper mapper = new ObjectMapper();
                         mapper.enableDefaultTyping(ObjectMapper.DefaultTyping.NON_FINAL);
 
