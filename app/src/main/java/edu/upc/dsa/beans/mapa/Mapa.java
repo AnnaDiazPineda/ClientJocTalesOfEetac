@@ -1,10 +1,16 @@
 package edu.upc.dsa.beans.mapa;
 //un mapa es una col·leció de sprites
 
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.Toast;
+
 import java.util.ArrayList;
 
 import edu.upc.dsa.beans.Jugador;
 import edu.upc.dsa.beans.Personatge;
+import edu.upc.dsa.clientjoc.R;
 
 public class Mapa {
 
@@ -46,21 +52,37 @@ public class Mapa {
 
         int x = this.doGetDrawableIndexX(element);
         int y = this.doGetDrawableIndexY(element);
-        if(amuntInc == 1 && esquerraInc == 0 ){
-            this.putElement(x,y+1,element);
+        if(amuntInc == 1 && esquerraInc == 0 ) {
+            if (comprobarSiguiente(x, y + 1)){
+                Log.d("myapp","personatge present");
+
+            } else {
+                this.putElement(x, y + 1, element);
+                this.putElement(x, y, new EmptyCell());
+            }
         }
         else if(amuntInc == -1 && esquerraInc == 0 ){
             this.putElement(x,y-1,element);
+            buidarCela(x,y);
         }
         else if(amuntInc == 0 && esquerraInc == 1 ){
             this.putElement(x-1,y,element);
+            buidarCela(x,y);
         }
         else if(amuntInc == 0 && esquerraInc == -1 ){
             this.putElement(x+1,y,element);
+            buidarCela(x,y);
         }
 
-        this.putElement(x,y,new EmptyCell());
+
     }
+private void buidarCela(int x, int y){
+        this.putElement(x,y,new EmptyCell());
+}
+    private boolean comprobarSiguiente(int x, int y) {
+        return this.doGetElement(x,y) instanceof Personatge;
+        }
+
     private int doGetDrawableIndexY(Drawable element) {
         int x = this.doGetDrawableIndexX(element);
         return columns.get(x).rows.indexOf(element);
@@ -73,6 +95,10 @@ public class Mapa {
         }
         return -1;
     }
+    private void showLoginError(String error) {
+        Log.d("Myapp","error");
+
+    }
 
     public Personatge findJugador() {
         for(Column c:columns){
@@ -84,6 +110,7 @@ public class Mapa {
         }
         return null;
     }
+
     /*
 
     protected void generarMapa() {

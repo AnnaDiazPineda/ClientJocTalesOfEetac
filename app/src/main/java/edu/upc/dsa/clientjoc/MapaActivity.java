@@ -38,14 +38,14 @@ public class MapaActivity extends AppCompatActivity{
         bt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mapa.moure(1,0,pers);
+                mapa.moure(-1,0,pers);
             }
         });
         Button bt2 = (Button) findViewById(R.id.down);
         bt2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mapa.moure(-1,0,pers);
+                mapa.moure(1,0,pers);
             }
         });
         Button bt3 = (Button) findViewById(R.id.left);
