@@ -5,8 +5,7 @@ import java.util.Collection;
 
 import edu.upc.dsa.beans.Answer;
 import edu.upc.dsa.beans.Jugador;
-import edu.upc.dsa.beans.Pedido;
-import edu.upc.dsa.beans.Producto;
+
 import edu.upc.dsa.clientjoc.inputOutput.Response.Login;
 
 import retrofit2.Call;
@@ -30,8 +29,6 @@ public interface ApiService {
     Call<Jugador> getNouJugador(@Path("email")String user, @Body Login loginBody);
     @GET("Mapa")
     Call<String> getMapa();
-    @GET("/ProductosPorPrecio/")
-    Call<ArrayList<Producto>> getProductosPrecio();
-    @GET("/Pedidos/")
-    Call<ArrayList<Pedido>> getPedidos();
+
+
 }

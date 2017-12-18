@@ -15,12 +15,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import edu.upc.dsa.beans.Jugador;
-import edu.upc.dsa.beans.Pedido;
-import edu.upc.dsa.beans.Producto;
+
 import edu.upc.dsa.clientjoc.Grafics.MapaView;
 import edu.upc.dsa.clientjoc.inputOutput.ApiAdapter;
 import edu.upc.dsa.clientjoc.inputOutput.ApiService;
-import edu.upc.dsa.clientjoc.inputOutput.ProductosActivity;
+
 import edu.upc.dsa.clientjoc.inputOutput.Response.Login;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -36,67 +35,11 @@ public class DatosPersonales extends AppCompatActivity {
 
     //retrofit
     private ApiService mRestAdapter;
-    public void llistarproductes(){
-        /*rebem la llista ordenada i la passem a la següent activitat*/
-        Call<ArrayList<Producto>> productcall = ApiAdapter.getApiService().getProductosPrecio();
-        productcall.enqueue(new Callback<ArrayList<Producto>>() {
-            @Override
-            public void onResponse(Call<ArrayList<Producto>> call, Response<ArrayList<Producto>> response) {
-                switch (response.code()) {
-                    case 200:// tot correcte
-                        Intent myIntent = new Intent(DatosPersonales.this, ProductosActivity.class);
-                        ArrayList<Producto> milista = response.body();
-                        ObjectMapper mapper = new ObjectMapper();
-                        try {
-                            String jsonResult = mapper.writeValueAsString(milista);
-                            myIntent.putExtra("milista", jsonResult); //Optional parameters
-                            DatosPersonales.this.startActivity(myIntent);
-                        }catch (Exception e){
-                            }
-
-                }
-            }
-            @Override
-            public void onFailure(Call<ArrayList<Producto>> call, Throwable t) {
-
-                return;
-            }
-
-        });
-
-
-    }
-    public void llistarComandes(){
-        Call<ArrayList<Pedido>> productcall = ApiAdapter.getApiService().getPedidos();
-        productcall.enqueue(new Callback<ArrayList<Pedido>>() {
-            @Override
-            public void onResponse(Call<ArrayList<Pedido>> call, Response<ArrayList<Pedido>> response) {
-                switch (response.code()) {
-                    case 200:// tot correcte
-                        Intent myIntent = new Intent(DatosPersonales.this, ProductosActivity.class);
-                        ArrayList<Pedido> milista = response.body();
-                        ObjectMapper mapper = new ObjectMapper();
-                        try {
-                            String jsonResult = mapper.writeValueAsString(milista);
-                            myIntent.putExtra("milista", jsonResult); //Optional parameters
-                            DatosPersonales.this.startActivity(myIntent);
-                        }catch (Exception e){
-                        }
-
-                }
-            }
-            @Override
-            public void onFailure(Call<ArrayList<Pedido>> call, Throwable t) {
-
-                return;
-            }
-
-        });
 
             
 
 
-}
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -109,7 +52,7 @@ public class DatosPersonales extends AppCompatActivity {
         mRestAdapter =  ApiAdapter.getApiService();
         iniciaJoc = (Button) findViewById(R.id.bIniciaJoc);
         modificarJugador= (Button) findViewById(R.id.bModificar);
-        listarOrdenados = (Button) findViewById(R.id.bListarOrdenado);
+
 
         Intent intent = getIntent();
         String value = intent.getStringExtra("jugador"); //if it's a string you stored.
@@ -141,13 +84,7 @@ public class DatosPersonales extends AppCompatActivity {
             }
         });
 
-        listarOrdenados.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                llistarproductes();
 
-            }
-        });
 
         modificarJugador.setOnClickListener(new View.OnClickListener() {
             @Override
