@@ -12,12 +12,15 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import edu.upc.dsa.beans.Jugador;
+import edu.upc.dsa.beans.Pedido;
 import edu.upc.dsa.beans.Producto;
 import edu.upc.dsa.clientjoc.Grafics.MapaView;
 import edu.upc.dsa.clientjoc.inputOutput.ApiAdapter;
 import edu.upc.dsa.clientjoc.inputOutput.ApiService;
+import edu.upc.dsa.clientjoc.inputOutput.ProductosActivity;
 import edu.upc.dsa.clientjoc.inputOutput.Response.Login;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -34,36 +37,66 @@ public class DatosPersonales extends AppCompatActivity {
     //retrofit
     private ApiService mRestAdapter;
     public void llistarproductes(){
-        Call productcall = ApiAdapter.getApiService().getProductosPrecio();
-        productcall.enqueue(new Callback() {
+        /*rebem la llista ordenada i la passem a la següent activitat*/
+        Call<ArrayList<Producto>> productcall = ApiAdapter.getApiService().getProductosPrecio();
+        productcall.enqueue(new Callback<ArrayList<Producto>>() {
             @Override
-            public void onResponse(Call call, Response<Producto> response) {
+            public void onResponse(Call<ArrayList<Producto>> call, Response<ArrayList<Producto>> response) {
                 switch (response.code()) {
                     case 200:// tot correcte
-
-                        Intent myIntent = new Intent(LoginActivity.this, DatosPersonales.class);
-                        Jugador jug = response.body();
+                        Intent myIntent = new Intent(DatosPersonales.this, ProductosActivity.class);
+                        ArrayList<Producto> milista = response.body();
                         ObjectMapper mapper = new ObjectMapper();
                         try {
-                            String jsonResult = mapper.writeValueAsString(jug);
-                            myIntent.putExtra("jugador", jsonResult); //Optional parameters
-                            showProgress(false);
-                            LoginActivity.this.startActivity(myIntent);
+                            String jsonResult = mapper.writeValueAsString(milista);
+                            myIntent.putExtra("milista", jsonResult); //Optional parameters
+                            DatosPersonales.this.startActivity(myIntent);
                         }catch (Exception e){
-                            showLoginError("no serializable");
-                        }
-                        //enviar jugador rebut nova activitat
-                        break;
-                    case 204://la contrassenya esta malament
-                        showLoginError(getString(R.string.error_password));
-                        break;
-                    case 500://el email no existeix
-                        showLoginError(getString(R.string.error_user));
-                        break;
+                            }
+
                 }
             }
-        }
+            @Override
+            public void onFailure(Call<ArrayList<Producto>> call, Throwable t) {
+
+                return;
+            }
+
+        });
+
+
     }
+    public void llistarComandes(){
+        Call<ArrayList<Pedido>> productcall = ApiAdapter.getApiService().getPedidos();
+        productcall.enqueue(new Callback<ArrayList<Pedido>>() {
+            @Override
+            public void onResponse(Call<ArrayList<Pedido>> call, Response<ArrayList<Pedido>> response) {
+                switch (response.code()) {
+                    case 200:// tot correcte
+                        Intent myIntent = new Intent(DatosPersonales.this, ProductosActivity.class);
+                        ArrayList<Pedido> milista = response.body();
+                        ObjectMapper mapper = new ObjectMapper();
+                        try {
+                            String jsonResult = mapper.writeValueAsString(milista);
+                            myIntent.putExtra("milista", jsonResult); //Optional parameters
+                            DatosPersonales.this.startActivity(myIntent);
+                        }catch (Exception e){
+                        }
+
+                }
+            }
+            @Override
+            public void onFailure(Call<ArrayList<Pedido>> call, Throwable t) {
+
+                return;
+            }
+
+        });
+
+            
+
+
+}
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

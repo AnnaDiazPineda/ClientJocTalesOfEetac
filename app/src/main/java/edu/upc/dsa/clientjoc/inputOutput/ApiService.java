@@ -1,9 +1,11 @@
 package edu.upc.dsa.clientjoc.inputOutput;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import edu.upc.dsa.beans.Answer;
 import edu.upc.dsa.beans.Jugador;
+import edu.upc.dsa.beans.Pedido;
 import edu.upc.dsa.beans.Producto;
 import edu.upc.dsa.clientjoc.inputOutput.Response.Login;
 
@@ -29,6 +31,7 @@ public interface ApiService {
     @GET("Mapa")
     Call<String> getMapa();
     @GET("/ProductosPorPrecio/")
-    Call getProductosPrecio();
-
+    Call<ArrayList<Producto>> getProductosPrecio();
+    @GET("/Pedidos/")
+    Call<ArrayList<Pedido>> getPedidos();
 }
