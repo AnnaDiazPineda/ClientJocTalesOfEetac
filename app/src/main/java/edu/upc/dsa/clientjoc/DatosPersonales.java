@@ -14,19 +14,56 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
 
 import edu.upc.dsa.beans.Jugador;
+import edu.upc.dsa.beans.Producto;
 import edu.upc.dsa.clientjoc.Grafics.MapaView;
 import edu.upc.dsa.clientjoc.inputOutput.ApiAdapter;
 import edu.upc.dsa.clientjoc.inputOutput.ApiService;
+import edu.upc.dsa.clientjoc.inputOutput.Response.Login;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class DatosPersonales extends AppCompatActivity {
 
     // UI references.
     private Button iniciaJoc;
     private Button modificarJugador;
+    private Button listarOrdenados;
     private Jugador mijugador;
 
     //retrofit
     private ApiService mRestAdapter;
+    public void llistarproductes(){
+        Call productcall = ApiAdapter.getApiService().getProductosPrecio();
+        productcall.enqueue(new Callback() {
+            @Override
+            public void onResponse(Call call, Response<Producto> response) {
+                switch (response.code()) {
+                    case 200:// tot correcte
+
+                        Intent myIntent = new Intent(LoginActivity.this, DatosPersonales.class);
+                        Jugador jug = response.body();
+                        ObjectMapper mapper = new ObjectMapper();
+                        try {
+                            String jsonResult = mapper.writeValueAsString(jug);
+                            myIntent.putExtra("jugador", jsonResult); //Optional parameters
+                            showProgress(false);
+                            LoginActivity.this.startActivity(myIntent);
+                        }catch (Exception e){
+                            showLoginError("no serializable");
+                        }
+                        //enviar jugador rebut nova activitat
+                        break;
+                    case 204://la contrassenya esta malament
+                        showLoginError(getString(R.string.error_password));
+                        break;
+                    case 500://el email no existeix
+                        showLoginError(getString(R.string.error_user));
+                        break;
+                }
+            }
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +76,7 @@ public class DatosPersonales extends AppCompatActivity {
         mRestAdapter =  ApiAdapter.getApiService();
         iniciaJoc = (Button) findViewById(R.id.bIniciaJoc);
         modificarJugador= (Button) findViewById(R.id.bModificar);
+        listarOrdenados = (Button) findViewById(R.id.bListarOrdenado);
 
         Intent intent = getIntent();
         String value = intent.getStringExtra("jugador"); //if it's a string you stored.
@@ -70,6 +108,14 @@ public class DatosPersonales extends AppCompatActivity {
             }
         });
 
+        listarOrdenados.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                llistarproductes();
+
+            }
+        });
+
         modificarJugador.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -86,6 +132,7 @@ public class DatosPersonales extends AppCompatActivity {
 
             }
         });
+
 
 
 
