@@ -18,6 +18,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import edu.upc.dsa.beans.Monstruo;
+import edu.upc.dsa.beans.Objeto;
 import edu.upc.dsa.beans.Personatge;
 import edu.upc.dsa.beans.mapa.Drawable;
 import edu.upc.dsa.beans.mapa.EmptyCell;
@@ -125,6 +127,12 @@ public class MapaView extends SurfaceView {
             }
         if(dr instanceof Personatge){
             type = R.mipmap.bad2;
+        }
+        if(dr instanceof Monstruo){
+            type = R.mipmap.black;
+        }
+        if(dr instanceof Objeto){
+            type = R.mipmap.espasa;
         }
 
         Bitmap bmp = BitmapFactory.decodeResource(getResources(), type);
