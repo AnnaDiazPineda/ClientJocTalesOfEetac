@@ -30,7 +30,7 @@ public class DatosPersonales extends AppCompatActivity {
     // UI references.
     private Button iniciaJoc;
     private Button modificarJugador;
-    private Button listarOrdenados;
+    private Button personajes;
     private Jugador mijugador;
 
     //retrofit
@@ -52,7 +52,7 @@ public class DatosPersonales extends AppCompatActivity {
         mRestAdapter =  ApiAdapter.getApiService();
         iniciaJoc = (Button) findViewById(R.id.bIniciaJoc);
         modificarJugador= (Button) findViewById(R.id.bModificar);
-
+        personajes =(Button) findViewById(R.id.personajesb);
 
         Intent intent = getIntent();
         String value = intent.getStringExtra("jugador"); //if it's a string you stored.
@@ -81,6 +81,21 @@ public class DatosPersonales extends AppCompatActivity {
             public void onClick(View view) {
                 Intent myIntent = new Intent(DatosPersonales.this, MapaActivity.class);
                 DatosPersonales.this.startActivity(myIntent);
+            }
+        });
+        personajes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent myIntent = new Intent(DatosPersonales.this, PersonajesActivity.class);
+                ObjectMapper mapper = new ObjectMapper();
+
+                try {
+                    String jsonResult = mapper.writeValueAsString(mijugador);
+                    myIntent.putExtra("jugador",jsonResult);
+                } catch (JsonProcessingException e) {
+                    e.printStackTrace();
+                }
+                startActivity(myIntent);
             }
         });
 
