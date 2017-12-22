@@ -82,7 +82,7 @@ public class PersonajesActivity extends AppCompatActivity {
 
                 @Override
                 public void onClick(View v) {
-                    // TODO Auto-generated method stub
+                    
                     final TableLayout tableview2 = (TableLayout) findViewById(R.id.objetos);
                     final TableRow tr2 = new TableRow(PersonajesActivity.this);
                     tr2.setLayoutParams(new TableLayout.LayoutParams(TableLayout.LayoutParams.FILL_PARENT, TableLayout.LayoutParams.WRAP_CONTENT));
