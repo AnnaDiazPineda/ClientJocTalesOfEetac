@@ -98,7 +98,7 @@ public class PersonajesActivity extends AppCompatActivity {
                             {
                                 TextView text = new TextView(PersonajesActivity.this);
                                 ImageView mi = new ImageView(PersonajesActivity.this);
-                                mi.setImageResource(R.mipmap.helmet);
+                                //mi.setImageResource(R.mipmap.helmet);
                                 tr2.addView(mi);
                             }
                             TableLayout.LayoutParams mis = new TableLayout.LayoutParams(100,250);

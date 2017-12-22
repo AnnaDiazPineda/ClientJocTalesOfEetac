@@ -20,7 +20,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 /**
- * Created by Marta on 12/12/2017.
+ * Created by Anna on 12/12/2017.
  */
 
 public class MapaActivity extends AppCompatActivity{
@@ -68,8 +68,8 @@ public class MapaActivity extends AppCompatActivity{
 
     public void getMapaFromServer() {
 
-        Call<String> loginCall = ApiAdapter.getApiService().getMapa();
-        loginCall.enqueue(new Callback<String>() {
+        Call<String> mapaCall = ApiAdapter.getApiService().getMapa();
+        mapaCall.enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
                 switch (response.code()) {

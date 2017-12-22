@@ -32,6 +32,7 @@ public class DatosPersonales extends AppCompatActivity {
     private Button modificarJugador;
     private Button personajes;
     private Jugador mijugador;
+    private Button veureRanking;
 
     //retrofit
     private ApiService mRestAdapter;
@@ -52,7 +53,8 @@ public class DatosPersonales extends AppCompatActivity {
         mRestAdapter =  ApiAdapter.getApiService();
         iniciaJoc = (Button) findViewById(R.id.bIniciaJoc);
         modificarJugador= (Button) findViewById(R.id.bModificar);
-        personajes =(Button) findViewById(R.id.personajesb);
+       // personajes =(Button) findViewById(R.id.personajesb);
+        veureRanking = (Button) findViewById(R.id.btnRanking) ;
 
         Intent intent = getIntent();
         String value = intent.getStringExtra("jugador"); //if it's a string you stored.
@@ -83,7 +85,7 @@ public class DatosPersonales extends AppCompatActivity {
                 DatosPersonales.this.startActivity(myIntent);
             }
         });
-        personajes.setOnClickListener(new View.OnClickListener() {
+       /* personajes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent myIntent = new Intent(DatosPersonales.this, PersonajesActivity.class);
@@ -97,7 +99,7 @@ public class DatosPersonales extends AppCompatActivity {
                 }
                 startActivity(myIntent);
             }
-        });
+        });*/
 
 
 
@@ -115,6 +117,14 @@ public class DatosPersonales extends AppCompatActivity {
                 }
                 startActivity(intentModificar);
 
+            }
+        });
+
+        veureRanking.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intentRanking = new Intent(DatosPersonales.this, Ranking.class);
+                startActivity(intentRanking);
             }
         });
 
