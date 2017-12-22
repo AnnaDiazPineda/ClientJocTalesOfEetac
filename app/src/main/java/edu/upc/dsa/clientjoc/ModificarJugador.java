@@ -45,11 +45,11 @@ public class ModificarJugador extends AppCompatActivity {
         setContentView(R.layout.activity_modificar);
         mRestAdapter =  ApiAdapter.getApiService();
         Intent intent = getIntent();
-        String value = intent.getStringExtra("jugador"); //if it's a string you stored.
+        String valueJugador = intent.getStringExtra("jugador"); //if it's a string you stored.
         ObjectMapper mapper = new ObjectMapper();
         Jugador jugador = null;
         try {
-            jugador = mapper.readValue(value, Jugador.class);
+            jugador = mapper.readValue(valueJugador, Jugador.class);
             mijugador = jugador;
             } catch (IOException e) {
             e.printStackTrace();
@@ -65,7 +65,24 @@ public class ModificarJugador extends AppCompatActivity {
                 attempUpdate();
             }
         });
+        cancelar = (Button) findViewById(R.id.bCancelar);
+        cancelar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                attempCancel();
+            }
+        });
     }
+
+    private void attempCancel() {
+        Intent intent = getIntent();
+        String valueJugador = intent.getStringExtra("jugador"); //if it's a string you stored.
+        Intent myIntent = new Intent(ModificarJugador.this, DatosPersonales.class);
+        myIntent.putExtra("jugador", valueJugador); //Optional parameters
+        ModificarJugador.this.startActivity(myIntent);
+
+    }
+
     private void attempUpdate() {
         final String contrassenyaActual = mcanviContraView.getText().toString();
         final String nomActual = mcanviNomView.getText().toString();
@@ -96,7 +113,7 @@ public class ModificarJugador extends AppCompatActivity {
                     toast.show();
                     if (response.body().getResposta().equals("OK")){
 
-                        mijugador.setContrasenya(contrassenyaActual);
+                    mijugador.setContrasenya(contrassenyaActual);
                     mijugador.setNom(nomActual);
                     Intent myIntent = new Intent(ModificarJugador.this, DatosPersonales.class);
                     ObjectMapper mapper = new ObjectMapper();
@@ -120,6 +137,7 @@ public class ModificarJugador extends AppCompatActivity {
 
                 }
             });
+
         }
     }
 
