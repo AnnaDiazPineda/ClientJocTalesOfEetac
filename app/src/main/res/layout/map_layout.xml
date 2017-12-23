@@ -9,12 +9,37 @@
         class="edu.upc.dsa.clientjoc.Grafics.MapaView"
         android:layout_width="fill_parent"
         android:layout_height="699dp"
-        android:layout_weight="1" />
+        android:layout_margin="5dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginEnd="3dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_weight="1"
+        android:elevation="2dp"
+        android:padding="2dp"
+        android:paddingBottom="2dp"
+        android:paddingEnd="2dp"
+        android:paddingLeft="2dp"
+        android:paddingRight="2dp"
+        android:paddingStart="2dp"
+        android:paddingTop="2dp" />
 
     <TableLayout
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_weight="1">
+        android:layout_margin="5dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_weight="1"
+        android:padding="0dp"
+        >
+
 
         <TableRow
             android:layout_width="match_parent"
@@ -81,9 +106,6 @@
                 android:text="Button" />
         </TableRow>
 
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="96dp" />
     </TableLayout>
 
 </LinearLayout>

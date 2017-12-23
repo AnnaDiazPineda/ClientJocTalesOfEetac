@@ -19,4 +19,5 @@
         completions."
     </string>
     <string name="title_activity_datos_personales">DatosPersonales</string>
+    <string name="title_activity_baixa_jugador">BaixaJugador</string>
 </resources>

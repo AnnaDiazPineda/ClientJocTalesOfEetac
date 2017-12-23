@@ -27,8 +27,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".PersonajesActivity"/>
+        <activity android:name=".PersonajesActivity" />
         <activity
             android:name=".LoginActivity"
             android:label="@string/title_activity_login" />
@@ -37,8 +36,10 @@
             android:label="@string/title_activity_datos_personales"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".inputOutput.Registre" />
-        <activity android:name=".ModificarJugador"></activity>
-        <activity android:name=".MapaActivity"></activity>
+        <activity android:name=".ModificarJugador" />
+        <activity android:name=".MapaActivity" />
+        <activity android:name=".Ranking" />
+        <activity android:name=".BaixaJugador"></activity>
     </application>
 
 </manifest>

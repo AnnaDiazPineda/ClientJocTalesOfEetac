@@ -20,6 +20,7 @@
         android:elevation="4dp"
         android:src="@mipmap/ic_launcher"
         android:visibility="visible"
+        android:background="@color/colorAccent"
         app:srcCompat="@mipmap/ic_launcher" />
 
     <!-- Login progress -->
@@ -83,14 +84,18 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
+                android:elevation="0dp"
                 android:text="Iniciar sessió"
                 android:textStyle="bold" />
 
             <Button
                 android:id="@+id/bNouUsuari"
+
+                style="?android:textAppearanceSmall"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Nou Usuari" />
+                android:text="Nou Usuari"
+                android:textStyle="bold" />
 
         </LinearLayout>
     </ScrollView>

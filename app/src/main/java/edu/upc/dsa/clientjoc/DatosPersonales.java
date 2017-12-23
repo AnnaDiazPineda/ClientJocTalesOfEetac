@@ -30,6 +30,7 @@ public class DatosPersonales extends AppCompatActivity {
     // UI references.
     private Button iniciaJoc;
     private Button modificarJugador;
+    private Button donarseBaixa;
     private Button personajes;
 
     private Jugador mijugador;
@@ -57,6 +58,8 @@ public class DatosPersonales extends AppCompatActivity {
         mRestAdapter =  ApiAdapter.getApiService();
         iniciaJoc = (Button) findViewById(R.id.bIniciaJoc);
         modificarJugador= (Button) findViewById(R.id.bModificar);
+        donarseBaixa = (Button) findViewById(R.id.btnBaixaJugador);
+
        // personajes =(Button) findViewById(R.id.personajesb);
         veureRanking = (Button) findViewById(R.id.btnRanking) ;
 
@@ -115,6 +118,21 @@ public class DatosPersonales extends AppCompatActivity {
                     e.printStackTrace();
                 }
                 startActivity(intentRanking);
+            }
+        });
+
+        donarseBaixa.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intentEliminar = new Intent(DatosPersonales.this, BaixaJugador.class);
+                try {
+                   intentEliminar.putExtra("jugador", value);
+
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+                startActivity(intentEliminar);
+
             }
         });
 

@@ -20,15 +20,21 @@ import retrofit2.http.Path;
 
 public interface ApiService {
 
-
+    //calls relacionats amb la gestió d'usuaris
     @POST("Jugador/{email}")
     Call<Jugador> getLogin(@Path("email") String user, @Body Login loginBody);
     @POST("update/{email}")
     Call<Answer> updateJugador(@Path("email") String user, @Body Login loginBody);//enviem email, nova contrassenya
     @POST("newJugador/{email}")
     Call<Jugador> getNouJugador(@Path("email")String user, @Body Login loginBody);
+    @POST("delete/{email}")
+    Call<Answer> deleteJugador(@Path("email") String user, @Body Login loginBody);
+
+
+
     @GET("Mapa")
     Call<String> getMapa();
+
 
 
 
