@@ -220,9 +220,15 @@ public class LoginActivity extends AppCompatActivity {
                             break;
                         case 204://la contrassenya esta malament
                             showLoginError(getString(R.string.error_password));
+                            Intent myIntent2 = new Intent(LoginActivity.this, MainActivity.class);
+                            LoginActivity.this.startActivity(myIntent2);
+                            finish();
+
                             break;
                         case 500://el email no existeix
                             showLoginError(getString(R.string.error_user));
+                            Intent myIntent3 = new Intent(LoginActivity.this, MainActivity.class);
+                            LoginActivity.this.startActivity(myIntent3);
                             break;
                     }
                 }
