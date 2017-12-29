@@ -32,10 +32,7 @@ public class Ranking extends AppCompatActivity {
         try {
             jugador = mapper.readValue(value, Jugador.class);
             EditText posicio = (EditText) findViewById(R.id.posJugador);
-
-            posicio.setText(jugador.getId());
-
-        } catch (Exception e) {
+            posicio.setText(jugador.getId());}catch (Exception e) {
             e.printStackTrace();
         }
 

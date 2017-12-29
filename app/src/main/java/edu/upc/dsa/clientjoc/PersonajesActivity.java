@@ -36,6 +36,7 @@ import edu.upc.dsa.clientjoc.inputOutput.ApiService;
 public class PersonajesActivity extends AppCompatActivity {
     private ApiService mRestAdapter;
     public Jugador mijugador;
+    public Personatge actual;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,12 +83,11 @@ public class PersonajesActivity extends AppCompatActivity {
 
                 @Override
                 public void onClick(View v) {
-                    
+
                     final TableLayout tableview2 = (TableLayout) findViewById(R.id.objetos);
                     final TableRow tr2 = new TableRow(PersonajesActivity.this);
                     tr2.setLayoutParams(new TableLayout.LayoutParams(TableLayout.LayoutParams.FILL_PARENT, TableLayout.LayoutParams.WRAP_CONTENT));
                     tableview2.removeAllViews();
-
                     for(int i =0;i<mijugador.getPersonatges().size();i++)
                     {
                         if(mijugador.getPersonatges().get(i).getId()==v.getId())
@@ -95,11 +95,17 @@ public class PersonajesActivity extends AppCompatActivity {
                             List<Objeto> milista =mijugador.getPersonatges().get(i).getArrMisObjetos();
 
                             for(int j=0;j<milista.size();j++)
-                            {
-                                TextView text = new TextView(PersonajesActivity.this);
-                                ImageView mi = new ImageView(PersonajesActivity.this);
-                                //mi.setImageResource(R.mipmap.helmet);
-                                tr2.addView(mi);
+                            {//añadir type en objetos y contruir switch
+                                if(milista.get(j).getNombre().equals("casco")) {
+                                    ImageView mi = new ImageView(PersonajesActivity.this);
+                                    mi.setImageResource(R.mipmap.helmet);
+                                    tr2.addView(mi);
+                                }
+                                if(milista.get(j).getNombre().equals("espada")) {
+                                    ImageView mi = new ImageView(PersonajesActivity.this);
+                                    mi.setImageResource(R.mipmap.espada);
+                                    tr2.addView(mi);
+                                }
                             }
                             TableLayout.LayoutParams mis = new TableLayout.LayoutParams(100,250);
                             tableview2.setLayoutParams(mis);

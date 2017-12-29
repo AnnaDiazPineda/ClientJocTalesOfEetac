@@ -24,6 +24,7 @@ import edu.upc.dsa.beans.Personatge;
 import edu.upc.dsa.beans.mapa.Drawable;
 import edu.upc.dsa.beans.mapa.EmptyCell;
 import edu.upc.dsa.beans.mapa.Mapa;
+import edu.upc.dsa.beans.mapa.ParedCell;
 import edu.upc.dsa.clientjoc.DatosPersonales;
 import edu.upc.dsa.clientjoc.LoginActivity;
 import edu.upc.dsa.clientjoc.R;
@@ -83,7 +84,7 @@ public class MapaView extends SurfaceView {
 
     @Override
     protected void onDraw(Canvas canvas) {
-        if(mapa == null){
+        if(mapa == null || canvas == null){
             return;
         }
         sprites = convertMapToSprites(mapa);
@@ -98,7 +99,7 @@ public class MapaView extends SurfaceView {
     public boolean onTouchEvent(MotionEvent event) {
         synchronized (getHolder()) {
             /*for (int i = sprites.size() - 1; i >= 0; i--) {
-                Sprite sprite = sprites.get(i);
+                SpriteTest sprite = sprites.get(i);
                 if (sprite.isCollition(event.getX(), event.getY())) {
                     sprites.remove(sprite);
                     break;
@@ -124,16 +125,29 @@ public class MapaView extends SurfaceView {
         int type = R.mipmap.black;
         if(dr instanceof EmptyCell){
                 type = R.mipmap.empty;
+
             }
         if(dr instanceof Personatge){
-            type = R.mipmap.bad2;
+            type = R.mipmap.bad1;
         }
         if(dr instanceof Monstruo){
             type = R.mipmap.black;
         }
         if(dr instanceof Objeto){
-            type = R.mipmap.espasa;
+            Objeto obj = (Objeto )dr;
+            if(obj.getTipo().equals("espada")) {
+                type = R.mipmap.espasa;
+            }
+            if(obj.getTipo().equals("casco")) {
+                type = R.mipmap.helmet;
+            }
         }
+        if(dr instanceof ParedCell){
+            type = R.mipmap.pared;
+        }
+
+
+
 
         Bitmap bmp = BitmapFactory.decodeResource(getResources(), type);
         Sprite tmp = new Sprite(this,bmp,fila,columna);

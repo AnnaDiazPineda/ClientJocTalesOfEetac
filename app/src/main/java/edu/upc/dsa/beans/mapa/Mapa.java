@@ -9,6 +9,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 import edu.upc.dsa.beans.Jugador;
+import edu.upc.dsa.beans.Objeto;
 import edu.upc.dsa.beans.Personatge;
 import edu.upc.dsa.clientjoc.R;
 
@@ -48,14 +49,24 @@ public class Mapa {
     public Drawable doGetElement(int x, int y) {
         return this.columns.get(x).rows.get(y);
     }
+
+
+
     public void moure(int amuntInc, int esquerraInc, Drawable element) {
+//TODO: treure la logica de colisions a una funcio fora de moure  30min
+//TODO: Llogica de combat/ cambiar coses quant es fa colisió amb monstre o objecte  1h
+//TODO: toasts(bocadillos de texto) a sobre del jugador   2h
 
         int x = this.doGetDrawableIndexX(element);
         int y = this.doGetDrawableIndexY(element);
         if(amuntInc == 1 && esquerraInc == 0 ) {
-            if (comprobarSiguiente(x, y + 1)){
-                Log.d("myapp","personatge present");
-
+            if (comprobarSiguiente(x, y + 1)<1){
+               Drawable colided = this.doGetElement(x,y+1);
+               if(element instanceof Objeto && element instanceof Personatge){
+                   ((Personatge)element).getArrMisObjetos().add((Objeto) colided);
+                   this.putElement(x, y+1, new EmptyCell());
+                   //post personaje a JSONSEVICE
+               }
             } else {
                 this.putElement(x, y + 1, element);
                 this.putElement(x, y, new EmptyCell());
@@ -79,9 +90,15 @@ public class Mapa {
 private void buidarCela(int x, int y){
         this.putElement(x,y,new EmptyCell());
 }
-    private boolean comprobarSiguiente(int x, int y) {
-        return this.doGetElement(x,y) instanceof Personatge;
+    private int comprobarSiguiente(int x, int y) {
+        if(this.doGetElement(x,y) instanceof EmptyCell){
+            return 1;
         }
+        if(this.doGetElement(x,y) instanceof ParedCell){
+            return -1;
+        }
+        return 0;
+    }
 
     private int doGetDrawableIndexY(Drawable element) {
         int x = this.doGetDrawableIndexX(element);

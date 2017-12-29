@@ -41,28 +41,19 @@ public class DatosPersonales extends AppCompatActivity {
     private Jugador jugador= null;
     //retrofit
     private ApiService mRestAdapter;
-
-            
-
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_datos_personales);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
         //servei rest, singleton
         mRestAdapter =  ApiAdapter.getApiService();
         iniciaJoc = (Button) findViewById(R.id.bIniciaJoc);
         modificarJugador= (Button) findViewById(R.id.bModificar);
         donarseBaixa = (Button) findViewById(R.id.btnBaixaJugador);
-
-       // personajes =(Button) findViewById(R.id.personajesb);
+        personajes =(Button) findViewById(R.id.personajesb);
         veureRanking = (Button) findViewById(R.id.btnRanking) ;
-
         Intent intent = getIntent();
         value = intent.getStringExtra("jugador"); //if it's a string you stored.
 
@@ -135,6 +126,21 @@ public class DatosPersonales extends AppCompatActivity {
 
             }
         });
+        personajes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent myIntent = new Intent(DatosPersonales.this, PersonajesActivity.class);
+                ObjectMapper mapper = new ObjectMapper();
+
+                try {
+                    String jsonResult = mapper.writeValueAsString(mijugador);
+                    myIntent.putExtra("jugador",jsonResult);
+                } catch (JsonProcessingException e) {
+                    e.printStackTrace();
+                }
+                startActivity(myIntent);
+            }
+        });
 
 
 
@@ -152,21 +158,7 @@ public class DatosPersonales extends AppCompatActivity {
 
 
 
-        /* personajes.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent myIntent = new Intent(DatosPersonales.this, PersonajesActivity.class);
-                ObjectMapper mapper = new ObjectMapper();
 
-                try {
-                    String jsonResult = mapper.writeValueAsString(mijugador);
-                    myIntent.putExtra("jugador",jsonResult);
-                } catch (JsonProcessingException e) {
-                    e.printStackTrace();
-                }
-                startActivity(myIntent);
-            }
-        });*/
     }
 
 
