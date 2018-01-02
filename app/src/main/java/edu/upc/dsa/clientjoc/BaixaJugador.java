@@ -37,13 +37,6 @@ public class BaixaJugador extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_baixa_jugador);
 
-        tornar = (Button) findViewById(R.id.btnTornar);
-        eliminar = (Button) findViewById(R.id.btnBaixaJugador);
-        mail = (EditText) findViewById(R.id.edMail);
-        contra1 = (EditText) findViewById(R.id.edContrauno);
-        contra2 = (EditText) findViewById(R.id.edContrados);
-        usuariMarxant = (TextView) findViewById(R.id.userMarxant);
-
         //servei rest, singleton
         mRestAdapter =  ApiAdapter.getApiService();
 
@@ -52,12 +45,26 @@ public class BaixaJugador extends AppCompatActivity {
 
         try {
             jugador = mapper.readValue(value, Jugador.class);
+
             usuariMarxant.setText("Segu que vols marxar? " +jugador.getNom() + ".");
 
 
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+
+        tornar = (Button) findViewById(R.id.btnTornar);
+        eliminar = (Button) findViewById(R.id.btnBaixaJugador);
+        mail = (EditText) findViewById(R.id.edMail);
+        contra1 = (EditText) findViewById(R.id.edContrauno);
+        contra2 = (EditText) findViewById(R.id.edContrados);
+        usuariMarxant = (TextView) findViewById(R.id.userMarxant);
+
+
+
+
+
 
         tornar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,7 +77,7 @@ public class BaixaJugador extends AppCompatActivity {
         eliminar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                
+
             }
         });
 

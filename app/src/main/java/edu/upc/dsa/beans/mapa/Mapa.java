@@ -2,17 +2,13 @@ package edu.upc.dsa.beans.mapa;
 //un mapa es una col·leció de sprites
 
 import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
-import edu.upc.dsa.beans.Jugador;
+import edu.upc.dsa.beans.InteractuaConInteractivos;
 import edu.upc.dsa.beans.Monstruo;
 import edu.upc.dsa.beans.Objeto;
 import edu.upc.dsa.beans.Personatge;
-import edu.upc.dsa.clientjoc.R;
 
 public class Mapa {
 
@@ -44,7 +40,6 @@ public class Mapa {
         return this.columns.get(0).rows.size();
     }
     public void putElement(int x, int y, Drawable drawable1) {
-
         columns.get(x).rows.set(y,drawable1);
     }
     public Drawable doGetElement(int x, int y) {
@@ -53,52 +48,46 @@ public class Mapa {
 
 
 
-    public void moure(int amuntInc, int esquerraInc, Drawable element) {
-//TODO: treure la logica de colisions a una funcio fora de moure  30min
+    public void moure(int amuntInc, int esquerraInc, Drawable amover) {
 //TODO: Llogica de combat/ cambiar coses quant es fa colisió amb monstre o objecte  1h
 //TODO: toasts(bocadillos de texto) a sobre del jugador   2h
 
-        int x = this.doGetDrawableIndexX(element);
-        int y = this.doGetDrawableIndexY(element);
-        if(amuntInc == 1 && esquerraInc == 0 ) {
-            if (comprobarSiguiente(x, y + 1)<1){
-               Drawable colided = this.doGetElement(x,y+1);
-               if(element instanceof Objeto && element instanceof Personatge){
-                   ((Personatge)element).getArrMisObjetos().add((Objeto) colided);
-                   this.putElement(x, y+1, new EmptyCell());
-                   //post personaje a JSONSEVICE
-               }
-            } else {
-                this.putElement(x, y + 1, element);
-                this.putElement(x, y, new EmptyCell());
-            }
+        int x = this.doGetDrawableIndexX(amover);
+        int y = this.doGetDrawableIndexY(amover);
+        if (puedePasarACoordenada(x +esquerraInc, y + amuntInc)) {
+            return;
         }
-        else if(amuntInc == -1 && esquerraInc == 0 ){
-            this.putElement(x,y-1,element);
-            buidarCela(x,y);
+        if(encuentroObjetoInteractivo(x +esquerraInc, y + amuntInc) && amover instanceof InteractuaConInteractivos){
+            Drawable cosaConLaQueHaColisionadoAmover = this.doGetElement(x +esquerraInc, y + amuntInc);
+            ((InteractuaConInteractivos)amover).interactua((Objeto)cosaConLaQueHaColisionadoAmover);
+            //TODO: post personaje con nuevo objeto o nueva vida/defensa ... al servidor
         }
-        else if(amuntInc == 0 && esquerraInc == 1 ){
-            this.putElement(x-1,y,element);
-            buidarCela(x,y);
-        }
-        else if(amuntInc == 0 && esquerraInc == -1 ){
-            this.putElement(x+1,y,element);
-            buidarCela(x,y);
-        }
+        this.putElement( x+esquerraInc,y+amuntInc,amover);
+        buidarCela(x,y);
 
-
+           /*
+       */
+        //post personaje a JSONSEVICE
     }
-private void buidarCela(int x, int y){
+
+    private boolean encuentroObjetoInteractivo(int x, int y) {
+        if(this.doGetElement(x,y) instanceof  Objeto){
+            return true;
+        }
+        return false;
+    }
+
+    private void buidarCela(int x, int y){
         this.putElement(x,y,new EmptyCell());
 }
-    private int comprobarSiguiente(int x, int y) {
-        if(this.doGetElement(x,y) instanceof EmptyCell){
-            return 1;
+    private boolean puedePasarACoordenada(int x, int y) {
+        if( x <0 || y <0  || x >7 || y >7 || this.doGetElement(x,y) instanceof ParedCell  ){
+            return false;
         }
-        if(this.doGetElement(x,y) instanceof ParedCell){
-            return -1;
+        if(this.doGetElement(x,y) instanceof Monstruo){
+            return false;
         }
-        return 0;
+        return true;
     }
     private void iniciarCombate(Monstruo m){
     //hacer combate con monstruo/iniciar dialogo/logica combat

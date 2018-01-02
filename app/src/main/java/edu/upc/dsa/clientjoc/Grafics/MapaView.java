@@ -78,6 +78,7 @@ public class MapaView extends SurfaceView {
 
             @Override
             public void surfaceDestroyed(SurfaceHolder surfaceHolder) {
+                gameLoopThread.interrupt();
             }
         });
     }
@@ -87,9 +88,8 @@ public class MapaView extends SurfaceView {
         if(mapa == null || canvas == null){
             return;
         }
-        sprites = convertMapToSprites(mapa);
         canvas.drawColor(Color.BLACK);
-
+        sprites = convertMapToSprites(mapa);
         for (Sprite sprite : sprites) {
             sprite.onDraw(canvas);
         }
@@ -125,8 +125,7 @@ public class MapaView extends SurfaceView {
         int type = R.mipmap.black;
         if(dr instanceof EmptyCell){
                 type = R.mipmap.empty;
-
-            }
+        }
         if(dr instanceof Personatge){
             type = R.mipmap.bad1;
         }
@@ -145,9 +144,6 @@ public class MapaView extends SurfaceView {
         if(dr instanceof ParedCell){
             type = R.mipmap.pared;
         }
-
-
-
 
         Bitmap bmp = BitmapFactory.decodeResource(getResources(), type);
         Sprite tmp = new Sprite(this,bmp,fila,columna);

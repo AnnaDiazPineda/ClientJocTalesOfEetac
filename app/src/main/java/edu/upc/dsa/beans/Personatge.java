@@ -6,7 +6,7 @@ import edu.upc.dsa.beans.mapa.Drawable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Personatge extends DAO implements Drawable {
+public class Personatge extends DAO implements Drawable, InteractuaConInteractivos {
     public String nombre;
     public int nivel;
     public int ataque;
@@ -96,5 +96,10 @@ public class Personatge extends DAO implements Drawable {
 
     public void setTipo(int tipo) {
         this.tipo = tipo;
+    }
+
+    @Override
+    public void interactua(Objeto obj) {
+        arrMisObjetos.add(obj);
     }
 }

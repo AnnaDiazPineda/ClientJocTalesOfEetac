@@ -103,7 +103,6 @@ public class DatosPersonales extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intentRanking = new Intent(DatosPersonales.this, Ranking.class);
                 try {
-
                   intentRanking.putExtra("jugador",value);
                 } catch ( Exception e) {
                     e.printStackTrace();
@@ -120,7 +119,7 @@ public class DatosPersonales extends AppCompatActivity {
                    intentEliminar.putExtra("jugador", value);
 
                 }catch (Exception e){
-                    e.printStackTrace();
+                    e.getCause();
                 }
                 startActivity(intentEliminar);
 
