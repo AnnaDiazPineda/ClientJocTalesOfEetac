@@ -9,6 +9,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 import edu.upc.dsa.beans.Jugador;
+import edu.upc.dsa.beans.Monstruo;
 import edu.upc.dsa.beans.Objeto;
 import edu.upc.dsa.beans.Personatge;
 import edu.upc.dsa.clientjoc.R;
@@ -98,6 +99,10 @@ private void buidarCela(int x, int y){
             return -1;
         }
         return 0;
+    }
+    private void iniciarCombate(Monstruo m){
+    //hacer combate con monstruo/iniciar dialogo/logica combat
+
     }
 
     private int doGetDrawableIndexY(Drawable element) {
