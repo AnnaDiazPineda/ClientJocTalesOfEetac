@@ -1,75 +1,55 @@
 package edu.upc.dsa.beans;
 
-import java.io.Serializable;
-
 import edu.upc.dsa.DAOG.DAO;
 import edu.upc.dsa.beans.mapa.Drawable;
 
-public class Objeto implements Serializable {
-    private String Nombre;
-    private String Tipo;
-    private String Descripcion;
-    private int Valor;
-    private int Coste;
+public class Objeto extends DAO implements Drawable{
+    private String nombre;
+    private String tipo;
+    private String descripcion;
+    private int valor;
 
-    //Añadido para la parte de android
-    private String urlIcon;
 
-    public Objeto(){
+    public Objeto() {
 
     }
 
-    public Objeto(String nombre, String t, String d, int v, int c, String urlIcon)
-    {
-        this.Nombre = nombre;
-        this.Tipo = t;
-        this.Descripcion = d;
-        this.Valor = v;
-        this.Coste = c;
-        this.urlIcon = urlIcon;
+    public Objeto(String nombre, String tipo, String descripcion, int valor) {
+        this.nombre = nombre;
+        this.tipo = tipo;
+        this.descripcion = descripcion;
+        this.valor = valor;
     }
 
     public String getNombre() {
-        return Nombre;
+        return nombre;
     }
 
     public void setNombre(String nombre) {
-        Nombre = nombre;
+        this.nombre = nombre;
     }
 
     public String getTipo() {
-        return Tipo;
+        return tipo;
     }
 
     public void setTipo(String tipo) {
-        Tipo = tipo;
+        this.tipo = tipo;
     }
 
     public String getDescripcion() {
-        return Descripcion;
+        return descripcion;
     }
 
     public void setDescripcion(String descripcion) {
-        Descripcion = descripcion;
+        this.descripcion = descripcion;
     }
 
     public int getValor() {
-        return Valor;
+        return valor;
     }
 
     public void setValor(int valor) {
-        Valor = valor;
+        this.valor = valor;
     }
-
-    public int getCoste() {
-        return Coste;
-    }
-
-    public void setCoste(int coste) {
-        Coste = coste;
-    }
-
-    public String getUrlIcon() {return urlIcon;}
-
-    public void setUrlIcon(String urlIcon) {this.urlIcon = urlIcon;}
 }

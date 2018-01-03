@@ -1,16 +1,23 @@
 package edu.upc.dsa.clientjoc;
 
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+
+import org.w3c.dom.Text;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -52,7 +59,7 @@ public class PersonajesActivity extends AppCompatActivity {
 
     public void rellenar()
     {
-    //taula personatges
+        //taula personatges
         final TableLayout tableview = (TableLayout) findViewById(R.id.personatges);
         final TableRow tr1 = new TableRow(this);
         tr1.setLayoutParams(new TableLayout.LayoutParams(TableLayout.LayoutParams.FILL_PARENT, TableLayout.LayoutParams.WRAP_CONTENT));
@@ -61,12 +68,12 @@ public class PersonajesActivity extends AppCompatActivity {
         tr1.addView(textview);
         ArrayList<Personatge> mis = new ArrayList<Personatge>();
         mis = mijugador.getPersonatges();
-    //taula dels objectes
+        //taula dels objectes
 
         final TableRow tr3 = new TableRow(this);
 
         int characteres = 0;
-    for(int i = 0; i<mijugador.getPersonatges().size(); i++)
+        for(int i=0;i<mijugador.getPersonatges().size();i++)
         { characteres++;
             Button btn = new Button(this);
             btn.setText(mis.get(i).getNombre());
@@ -81,7 +88,7 @@ public class PersonajesActivity extends AppCompatActivity {
                     final TableRow tr2 = new TableRow(PersonajesActivity.this);
                     tr2.setLayoutParams(new TableLayout.LayoutParams(TableLayout.LayoutParams.FILL_PARENT, TableLayout.LayoutParams.WRAP_CONTENT));
                     tableview2.removeAllViews();
-                    for(int i = 0; i<mijugador.getPersonatges().size(); i++)
+                    for(int i =0;i<mijugador.getPersonatges().size();i++)
                     {
                         if(mijugador.getPersonatges().get(i).getId()==v.getId())
                         {
@@ -118,8 +125,8 @@ public class PersonajesActivity extends AppCompatActivity {
                 tr1.addView(btn);
             }
         }
-    tableview.addView(tr1);
-    tableview.addView(tr3);
+        tableview.addView(tr1);
+        tableview.addView(tr3);
 
 
     }

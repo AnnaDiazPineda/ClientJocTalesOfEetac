@@ -1,6 +1,7 @@
 package edu.upc.dsa.clientjoc.Grafics;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -9,8 +10,12 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import java.io.IOException;
 import java.util.ArrayList;
 
 import edu.upc.dsa.beans.Monstruo;
@@ -20,7 +25,14 @@ import edu.upc.dsa.beans.mapa.Drawable;
 import edu.upc.dsa.beans.mapa.EmptyCell;
 import edu.upc.dsa.beans.mapa.Mapa;
 import edu.upc.dsa.beans.mapa.ParedCell;
+import edu.upc.dsa.clientjoc.DatosPersonales;
+import edu.upc.dsa.clientjoc.LoginActivity;
 import edu.upc.dsa.clientjoc.R;
+import edu.upc.dsa.clientjoc.inputOutput.ApiAdapter;
+import edu.upc.dsa.clientjoc.inputOutput.Response.Login;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * Created by Marta on 12/12/2017.
@@ -112,7 +124,7 @@ public class MapaView extends SurfaceView {
     public Sprite getSprite(Drawable dr, int fila, int columna) {
         int type = R.mipmap.black;
         if(dr instanceof EmptyCell){
-                type = R.mipmap.empty;
+            type = R.mipmap.empty;
         }
         if(dr instanceof Personatge){
             type = R.mipmap.bad1;

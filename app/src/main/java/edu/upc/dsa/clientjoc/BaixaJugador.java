@@ -69,7 +69,7 @@ public class BaixaJugador extends AppCompatActivity {
         tornar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intentPerfil = new Intent(BaixaJugador.this, Juego.class);
+                Intent intentPerfil = new Intent(BaixaJugador.this, MapaActivity.class);
                 intentPerfil.putExtra("jugador", value);
                 startActivity(intentPerfil);
             }
@@ -80,5 +80,7 @@ public class BaixaJugador extends AppCompatActivity {
 
             }
         });
+
+
     }
 }

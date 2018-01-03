@@ -15,7 +15,7 @@ public class Mapa {
     public ArrayList<Column> columns;
 
     public Mapa(){
-       }
+    }
     public ArrayList<Column> getColumns() {
         return columns;
     }
@@ -79,7 +79,7 @@ public class Mapa {
 
     private void buidarCela(int x, int y){
         this.putElement(x,y,new EmptyCell());
-}
+    }
     private boolean puedePasarACoordenada(int x, int y) {
         if( x <0 || y <0  || x >7 || y >7 || this.doGetElement(x,y) instanceof ParedCell  ){
             return false;
@@ -90,7 +90,7 @@ public class Mapa {
         return true;
     }
     private void iniciarCombate(Monstruo m){
-    //hacer combate con monstruo/iniciar dialogo/logica combat
+        //hacer combate con monstruo/iniciar dialogo/logica combat
 
     }
 
