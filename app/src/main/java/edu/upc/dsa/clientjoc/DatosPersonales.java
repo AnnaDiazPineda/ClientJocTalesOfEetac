@@ -7,6 +7,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -68,6 +69,7 @@ public class DatosPersonales extends AppCompatActivity {
         iniciaJoc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 Intent intentMapa = new Intent(DatosPersonales.this, MapaActivity.class);
                 DatosPersonales.this.startActivity(intentMapa);
             }
@@ -155,6 +157,7 @@ public class DatosPersonales extends AppCompatActivity {
 
     public void iniciarJuegoBueno(View view) {
         Intent intentMapa = new Intent(DatosPersonales.this, Juego.class);
+        intentMapa.putExtra("jugador", value);
         DatosPersonales.this.startActivity(intentMapa);
     }
 }
