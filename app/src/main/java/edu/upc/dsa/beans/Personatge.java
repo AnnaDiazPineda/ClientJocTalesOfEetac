@@ -1,52 +1,53 @@
 package edu.upc.dsa.beans;
 
 import edu.upc.dsa.DAOG.DAO;
+import edu.upc.dsa.DAOG.DAO_InterfaceUserImp;
 import edu.upc.dsa.beans.mapa.Drawable;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Personatge extends DAO implements Drawable {
-    public String nombre;
-    public int nivel;
-    public int ataque;
-    public int resistencia;
-    public int tipo;
-    public ArrayList<Objeto> arrMisObjetos;
+public class Personatge extends DAO_InterfaceUserImp implements Serializable, Drawable {
+    //Cambiados a private...
+    private String nombre;
+    private int nivel;
+    private int ataque;
+    private int defensa;
+    private int resistencia;
+    private ArrayList<Objeto> arrMisObjetos;
 
-    public void setArrMisObjetos(ArrayList<Objeto> arrMisObjetos) {
-        this.arrMisObjetos = arrMisObjetos;
-    }
+    //Agregados por mi en android
+    private int experiencia;
 
-    public List<Objeto> getArrMisObjetos() {
-        return arrMisObjetos;
-    }
 
-    public int defensa;
-
-    public Personatge(String nombre, int n, int a, int d, int r,int tipo)//constructor
+    public Personatge(String nombre, int n, int a, int d, int r, int exp)
     {
         this.nombre = nombre;
         this.nivel = n;
         this.ataque = a;
         this.resistencia = d;
         this.defensa = r;
-        this.tipo = tipo;
+        //añadido
+        this.experiencia = exp;
         arrMisObjetos = new ArrayList<Objeto>();
 
     }
 
-    public Personatge()//constructor
+    public Personatge()
     {
         this.nombre = null;
         this.nivel = 0;
         this.ataque = 0;
         this.resistencia = 0;
         this.defensa = 0;
-        this.tipo = 0;
         arrMisObjetos = new ArrayList<Objeto>();
 
     }
+
+    public ArrayList<Objeto> getArrMisObjetos() {return arrMisObjetos;}
+
+    public void setArrMisObjetos(ArrayList<Objeto> arrMisObjetos) {this.arrMisObjetos = arrMisObjetos;}
 
     public String getNombre() {
         return nombre;
@@ -89,12 +90,7 @@ public class Personatge extends DAO implements Drawable {
         this.resistencia = resistencia;
     }
 
+    public int getExperiencia() {return experiencia;}
 
-    public int getTipo() {
-        return tipo;
-    }
-
-    public void setTipo(int tipo) {
-        this.tipo = tipo;
-    }
+    public void setExperiencia(int experiencia) {this.experiencia = experiencia;}
 }

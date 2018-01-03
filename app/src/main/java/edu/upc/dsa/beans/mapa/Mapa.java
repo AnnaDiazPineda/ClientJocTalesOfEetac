@@ -2,17 +2,12 @@ package edu.upc.dsa.beans.mapa;
 //un mapa es una col·leció de sprites
 
 import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
-import edu.upc.dsa.beans.Jugador;
 import edu.upc.dsa.beans.Monstruo;
 import edu.upc.dsa.beans.Objeto;
 import edu.upc.dsa.beans.Personatge;
-import edu.upc.dsa.clientjoc.R;
 
 public class Mapa {
 

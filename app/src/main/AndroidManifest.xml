@@ -37,8 +37,9 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".inputOutput.Registre" />
         <activity android:name=".ModificarJugador" />
-        <activity android:name=".MapaActivity" />
         <activity android:name=".Ranking" />
+        <activity android:name=".Juego" />
+        <activity android:name=".MapaActivity"/>
         <activity android:name=".BaixaJugador"></activity>
     </application>
 
