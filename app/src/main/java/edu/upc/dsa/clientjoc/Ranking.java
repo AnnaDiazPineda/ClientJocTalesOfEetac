@@ -53,7 +53,7 @@ public class Ranking extends AppCompatActivity {
         btnJugar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intentJugar = new Intent(Ranking.this, MapaActivity.class);
+                Intent intentJugar = new Intent(Ranking.this, Juego.class);
                 intentJugar.putExtra("jugador", value);
                 startActivity(intentJugar);
 

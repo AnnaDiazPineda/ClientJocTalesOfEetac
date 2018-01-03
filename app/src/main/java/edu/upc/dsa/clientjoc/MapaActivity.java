@@ -1,6 +1,4 @@
 package edu.upc.dsa.clientjoc;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -10,7 +8,6 @@ import android.widget.Toast;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import edu.upc.dsa.beans.Jugador;
 import edu.upc.dsa.beans.Personatge;
 import edu.upc.dsa.beans.mapa.Mapa;
 import edu.upc.dsa.clientjoc.Grafics.MapaView;

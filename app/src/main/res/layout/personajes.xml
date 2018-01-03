@@ -12,7 +12,7 @@
         tools:layout_editor_absoluteX="522dp">
 
         <TableLayout
-            android:id="@+id/personajes"
+            android:id="@+id/personatges"
             android:layout_width="329dp"
             android:layout_height="294dp"
             app:layout_constraintStart_toStartOf="parent"

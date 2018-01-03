@@ -7,23 +7,15 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import java.io.IOException;
-import java.util.ArrayList;
-
 import edu.upc.dsa.beans.Jugador;
 
-import edu.upc.dsa.clientjoc.Grafics.MapaView;
 import edu.upc.dsa.clientjoc.inputOutput.ApiAdapter;
 import edu.upc.dsa.clientjoc.inputOutput.ApiService;
-
-import edu.upc.dsa.clientjoc.inputOutput.Response.Login;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class DatosPersonales extends AppCompatActivity {
 
@@ -77,6 +69,7 @@ public class DatosPersonales extends AppCompatActivity {
         iniciaJoc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 Intent intentMapa = new Intent(DatosPersonales.this, MapaActivity.class);
                 DatosPersonales.this.startActivity(intentMapa);
             }
@@ -161,4 +154,9 @@ public class DatosPersonales extends AppCompatActivity {
     }
 
 
+    public void iniciarJuegoBueno(View view) {
+        Intent intentMapa = new Intent(DatosPersonales.this, Juego.class);
+        intentMapa.putExtra("jugador", value);
+        DatosPersonales.this.startActivity(intentMapa);
+    }
 }
