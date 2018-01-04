@@ -37,20 +37,41 @@
                 android:inputType="textPersonName"
                 android:text="Name" />
 
-            <TextView
-                android:id="@+id/textView13"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="TextView" />
         </TableRow>
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent" >
+
+            <TextView
+                android:id="@+id/textView13"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="predeterminado" />
+        </TableRow>
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent" >
+
+            <Button
+                android:id="@+id/button"
+                android:layout_width="220dp"
+                android:layout_height="match_parent"
+                android:text="START" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <Button
+                android:id="@+id/button2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="RETURN" />
+
+        </TableRow>
     </TableLayout>
 
     <TableLayout
@@ -64,25 +85,25 @@
             android:layout_height="match_parent">
 
             <ImageView
-                android:id="@+id/imageView4"
+                android:id="@+id/imageViewType2"
                 android:layout_width="87dp"
                 android:layout_height="match_parent"
                 app:srcCompat="@mipmap/type2" />
 
             <ImageView
-                android:id="@+id/imageView3"
+                android:id="@+id/imageViewtype1"
                 android:layout_width="95dp"
                 android:layout_height="match_parent"
                 app:srcCompat="@mipmap/type1" />
 
             <ImageView
-                android:id="@+id/imageView6"
+                android:id="@+id/imageViewType4"
                 android:layout_width="96dp"
                 android:layout_height="match_parent"
                 app:srcCompat="@mipmap/type4" />
 
             <ImageView
-                android:id="@+id/imageView5"
+                android:id="@+id/imageViewType3"
                 android:layout_width="96dp"
                 android:layout_height="wrap_content"
                 app:srcCompat="@mipmap/type3" />
