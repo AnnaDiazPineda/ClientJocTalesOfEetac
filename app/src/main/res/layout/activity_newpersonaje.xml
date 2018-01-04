@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TableLayout
+        android:layout_width="368dp"
+        android:layout_height="443dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:layout_editor_absoluteY="52dp">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <EditText
+                android:id="@+id/editText7"
+                android:layout_width="355dp"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:text="            SELECCCIONA EL PERSONAJE " />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <EditText
+                android:id="@+id/editText10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:text="Name" />
+
+            <TextView
+                android:id="@+id/textView13"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TextView" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </TableLayout>
+
+    <TableLayout
+        android:layout_width="378dp"
+        android:layout_height="47dp"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="8dp">
+
+        <TableRow
+            android:layout_width="1000dp"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/imageView4"
+                android:layout_width="87dp"
+                android:layout_height="match_parent"
+                app:srcCompat="@mipmap/type2" />
+
+            <ImageView
+                android:id="@+id/imageView3"
+                android:layout_width="95dp"
+                android:layout_height="match_parent"
+                app:srcCompat="@mipmap/type1" />
+
+            <ImageView
+                android:id="@+id/imageView6"
+                android:layout_width="96dp"
+                android:layout_height="match_parent"
+                app:srcCompat="@mipmap/type4" />
+
+            <ImageView
+                android:id="@+id/imageView5"
+                android:layout_width="96dp"
+                android:layout_height="wrap_content"
+                app:srcCompat="@mipmap/type3" />
+        </TableRow>
+
+    </TableLayout>
+</android.support.constraint.ConstraintLayout>

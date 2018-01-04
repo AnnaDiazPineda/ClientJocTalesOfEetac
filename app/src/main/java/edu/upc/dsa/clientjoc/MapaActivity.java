@@ -1,4 +1,5 @@
 package edu.upc.dsa.clientjoc;
+import android.content.Context;
 import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -95,8 +96,6 @@ public class MapaActivity extends AppCompatActivity{
                     case 200:
                         showLoginError("mapa correcte");
                         String mapastr= response.body();
-                        System.out.println(mapastr);
-
                         ObjectMapper mapper = new ObjectMapper();
                         mapper.enableDefaultTyping(ObjectMapper.DefaultTyping.NON_FINAL);
 
@@ -112,8 +111,13 @@ public class MapaActivity extends AppCompatActivity{
 
                         //enviar jugador rebut nova activitat
                         break;
-                    case 204://la contrassenya esta malament
-                        showLoginError("204");
+                    case 204://cas de no hi ha partida desada
+                        Context context = getApplicationContext();
+                        CharSequence text = "Actualment no tens ninguna partida desada";
+                        int duration = Toast.LENGTH_SHORT;
+                        Toast toast = Toast.makeText(context, text, duration);
+                        toast.show();
+                        finish();
                         break;
                     case 500://el email no existeix
                         showLoginError("500");

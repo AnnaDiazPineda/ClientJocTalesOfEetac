@@ -39,6 +39,7 @@
         <activity android:name=".ModificarJugador" />
         <activity android:name=".Ranking" />
         <activity android:name=".MapaActivity"/>
+        <activity android:name=".NewPersonaje"/>
         <activity android:name=".BaixaJugador"></activity>
     </application>
 

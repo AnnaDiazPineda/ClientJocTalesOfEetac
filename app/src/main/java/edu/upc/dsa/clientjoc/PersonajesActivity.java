@@ -40,6 +40,7 @@ public class PersonajesActivity extends AppCompatActivity {
     public TextView defensaview;
     public ImageView miimagen;
     public Button initBtn;
+    public Button newBtn;
     public int limitCharacters;
  @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +52,7 @@ public class PersonajesActivity extends AppCompatActivity {
         ObjectMapper mapper = new ObjectMapper();
         associatedViews();
         initBtn.setEnabled(false);
+        newBtn.setEnabled(true);
         Jugador jugador = null;
         try {
             jugador = mapper.readValue(value, Jugador.class);
@@ -70,6 +72,7 @@ public void associatedViews(){
     defensaview = (TextView)findViewById(R.id.defensaview);
     miimagen = (ImageView)findViewById(R.id.charactericon);
     initBtn = (Button)findViewById(R.id.initBtn);
+    newBtn = (Button)findViewById(R.id.newbtn);
 }
 public void setCharacterPicture(){
     switch (actual.getTipo())
@@ -175,7 +178,7 @@ public void rellenar(){
             }
             if(limitCharacters==3)
             {
-                //botó creació de nou personatge deshabilitat
+                newBtn.setEnabled(false);
             }
         }
         tableview.addView(tr1);
