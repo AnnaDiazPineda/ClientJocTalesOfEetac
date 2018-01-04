@@ -100,6 +100,7 @@ public class Personatge extends DAO implements Drawable, InteractuaConInteractiv
 
     @Override
     public void interactua(Objeto obj) {
+
         arrMisObjetos.add(obj);
     }
 }

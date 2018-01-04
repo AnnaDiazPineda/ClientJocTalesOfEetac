@@ -14,13 +14,10 @@
         <TableLayout
             android:id="@+id/personatges"
             android:layout_width="329dp"
-            android:layout_height="294dp"
+            android:layout_height="100dp"
             app:layout_constraintStart_toStartOf="parent"
             tools:layout_editor_absoluteX="55dp"
             tools:layout_editor_absoluteY="217dp">
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
 
             <TableRow
                 android:layout_width="match_parent"
@@ -33,6 +30,129 @@
             <TableRow
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </TableLayout>
+
+        <ImageView
+            android:id="@+id/charactericon"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/ic_launcher_foreground" />
+
+        <TableLayout
+            android:id="@+id/datos"
+            android:layout_width="329dp"
+            android:layout_height="294dp">
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" >
+
+                <Button
+                    android:id="@+id/initBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="INICIAR PARTIDA" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <EditText
+                    android:id="@+id/editText6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="textPersonName"
+                    android:text="nombre:" />
+
+                <TextView
+                    android:id="@+id/nombreview"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="nombrepersonaje" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="textPersonName"
+                    android:text="nivel:" />
+
+                <TextView
+                    android:id="@+id/nivelview"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="TextView" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <EditText
+                    android:id="@+id/editText8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="textPersonName"
+                    android:text="ataque:" />
+
+                <TextView
+                    android:id="@+id/ataqueview"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="TextView" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <EditText
+                    android:id="@+id/editText9"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="textPersonName"
+                    android:text="resistencia" />
+
+                <TextView
+                    android:id="@+id/resistenciaview"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="TextView" />
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="textPersonName"
+                    android:text="defensa" />
+
+                <TextView
+                    android:id="@+id/defensaview"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="TextView" />
+
+            </TableRow>
+
         </TableLayout>
 
         <EditText
@@ -53,25 +173,15 @@
 
             <TableRow
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent" >
+
+            </TableRow>
 
             <TableRow
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent" >
 
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-            <ImageView
-
-                android:layout_width="200000dip"
-                android:layout_height="20000dip">
-                </ImageView>
-
+            </TableRow>
         </TableLayout>
 
     </LinearLayout>

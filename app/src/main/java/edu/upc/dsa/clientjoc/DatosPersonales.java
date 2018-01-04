@@ -78,6 +78,7 @@ public class DatosPersonales extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intentMapa = new Intent(DatosPersonales.this, MapaActivity.class);
+                intentMapa.putExtra("jugador", value);
                 DatosPersonales.this.startActivity(intentMapa);
             }
         });

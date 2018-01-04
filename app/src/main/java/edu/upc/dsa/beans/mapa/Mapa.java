@@ -33,7 +33,6 @@ public class Mapa {
         }
     }
     public int doGetWidth() {
-        System.out.println(this.columns.size());
         return this.columns.size();
     }
     public int doGetHeight() {
@@ -54,7 +53,7 @@ public class Mapa {
 
         int x = this.doGetDrawableIndexX(amover);
         int y = this.doGetDrawableIndexY(amover);
-        if (puedePasarACoordenada(x +esquerraInc, y + amuntInc)) {
+        if (!puedePasarACoordenada(x +esquerraInc, y + amuntInc)) {
             return;
         }
         if(encuentroObjetoInteractivo(x +esquerraInc, y + amuntInc) && amover instanceof InteractuaConInteractivos){

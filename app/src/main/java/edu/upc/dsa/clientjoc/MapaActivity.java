@@ -1,4 +1,5 @@
 package edu.upc.dsa.clientjoc;
+import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -10,10 +11,16 @@ import android.widget.Toast;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+
+import java.io.IOException;
+import java.util.ArrayList;
+
 import edu.upc.dsa.beans.Jugador;
 import edu.upc.dsa.beans.Personatge;
+import edu.upc.dsa.beans.mapa.Drawable;
 import edu.upc.dsa.beans.mapa.Mapa;
 import edu.upc.dsa.clientjoc.Grafics.MapaView;
+import edu.upc.dsa.clientjoc.Grafics.Sprite;
 import edu.upc.dsa.clientjoc.inputOutput.ApiAdapter;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -26,13 +33,23 @@ import retrofit2.Response;
 public class MapaActivity extends AppCompatActivity{
     Mapa mapa;
     Personatge pers;
+    private String value;
+    private ObjectMapper mapper = new ObjectMapper();
+    private Jugador mijugador;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.map_layout);
-        getMapaFromServer();
+        Intent intent = getIntent();
+        value = intent.getStringExtra("jugador");
+        try {
+            mijugador = mapper.readValue(value, Jugador.class);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        getMapaFromServer();//if it's a string you stored.
 
         Button bt = (Button) findViewById(R.id.upButton);
         bt.setOnClickListener(new View.OnClickListener() {
@@ -66,9 +83,11 @@ public class MapaActivity extends AppCompatActivity{
     }
 
 
-    public void getMapaFromServer() {
 
-        Call<String> mapaCall = ApiAdapter.getApiService().getMapa();
+
+    public void getMapaFromServer() {
+/**** de moment id de manera estatica**/
+        Call<String> mapaCall = ApiAdapter.getApiService().getMapa(mijugador.getId());
         mapaCall.enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {

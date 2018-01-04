@@ -34,8 +34,10 @@ public interface ApiService {
     Call<Integer> addNewPartida(@Body Partida nueva);//1 correctamente creada
     @GET ("/Ranking")
     Call<ArrayList<Partida>> getRanking();//llistat 5 partides ranking
-    @GET("Mapa")
-    Call<String> getMapa();
+    @GET("Mapa/{idJugador}")
+    Call<String> getMapa(@Path("idJugador")int id);
+
+
 
 
 
