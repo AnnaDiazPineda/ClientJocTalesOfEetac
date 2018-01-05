@@ -6,7 +6,7 @@ import edu.upc.dsa.beans.mapa.Drawable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Personatge extends DAO implements Drawable, InteractuaConInteractivos {
+public class Personatge extends DAO implements Drawable, Interactuador {
     public String nombre;
     public int nivel;
     public int ataque;
@@ -100,8 +100,18 @@ public class Personatge extends DAO implements Drawable, InteractuaConInteractiv
     }
 
     @Override
-    public void interactua(Objeto obj) {
+    public void interactua(Interactivo interactivo) {
+        if (interactivo instanceof  Objeto){
+            arrMisObjetos.add((Objeto) interactivo);
+            return;
+        }
+        if (interactivo instanceof  Monstruo){
+            Monstruo m = (Monstruo) interactivo;
+            if(Math.random()>0.5) {
+                this.setDefensa(0);
+            }
+            return;
+        }
 
-        arrMisObjetos.add(obj);
     }
 }

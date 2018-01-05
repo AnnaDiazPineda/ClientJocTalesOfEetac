@@ -2,14 +2,14 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
+    android:orientation="horizontal"
     android:padding="5dp">
 
     <edu.upc.dsa.clientjoc.Grafics.MapaView
         android:id="@+id/surfaceView1"
         class="edu.upc.dsa.clientjoc.Grafics.MapaView"
-        android:layout_width="fill_parent"
-        android:layout_height="699dp"
+        android:layout_width="411dp"
+        android:layout_height="411dp"
         android:layout_gravity="center_horizontal"
         android:layout_margin="5dp"
         android:layout_marginBottom="10dp"
@@ -29,8 +29,8 @@
         android:paddingTop="20dp" />
 
     <TableLayout
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
+        android:layout_width="375dp"
+        android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_margin="5dp"
         android:layout_marginBottom="5dp"
@@ -54,22 +54,18 @@
                 android:id="@+id/button3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="return"
-                android:textAppearance="@style/TextAppearance.AppCompat" />
+                android:text="return" />
 
             <Button
                 android:id="@+id/upButton"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@android:drawable/arrow_up_float"
-                android:elevation="24dp" />
+                android:layout_height="wrap_content" />
 
             <Button
                 android:id="@+id/save"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="save"
-                android:textAppearance="@style/TextAppearance.AppCompat" />
+                android:text="save" />
         </TableRow>
 
         <TableRow
@@ -79,22 +75,17 @@
             <Button
                 android:id="@+id/left"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/arrow_left_float"
-                android:elevation="24dp" />
+                android:layout_height="wrap_content" />
 
             <Button
                 android:id="@+id/button5"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@color/colorAccent" />
+                android:layout_height="wrap_content" />
 
             <Button
                 android:id="@+id/right"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/arrow_right_float"
-                android:elevation="24dp" />
+                android:layout_height="wrap_content" />
         </TableRow>
 
         <TableRow
@@ -105,22 +96,18 @@
                 android:id="@+id/button9"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="datos"
-                android:textAppearance="@style/TextAppearance.AppCompat" />
+                android:text="datos" />
 
             <Button
                 android:id="@+id/down"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@android:drawable/arrow_down_float"
-                android:elevation="24dp" />
+                android:layout_height="wrap_content" />
 
             <Button
                 android:id="@+id/button7"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="EXIT"
-                android:textAppearance="@style/TextAppearance.AppCompat" />
+                android:text="EXIT" />
         </TableRow>
 
     </TableLayout>

@@ -3,7 +3,7 @@ package edu.upc.dsa.beans;
 import edu.upc.dsa.DAOG.DAO;
 import edu.upc.dsa.beans.mapa.Drawable;
 
-public class Objeto extends DAO implements Drawable{
+public class Objeto extends DAO implements Drawable, Interactivo{
     private String nombre;
     private String tipo;
     private String descripcion;

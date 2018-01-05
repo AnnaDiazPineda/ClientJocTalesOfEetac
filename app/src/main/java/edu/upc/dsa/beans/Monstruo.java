@@ -7,7 +7,7 @@ import edu.upc.dsa.beans.mapa.Drawable;
  * Created by Marta on 18/12/2017.
  */
 
-public class Monstruo extends DAO implements Drawable {
+public class Monstruo extends DAO implements Drawable, Interactivo {
     public String nomMonstruo;
     public int defensaMonstruo;
     public int atacMonstruo;

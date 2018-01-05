@@ -5,7 +5,8 @@ import android.util.Log;
 
 import java.util.ArrayList;
 
-import edu.upc.dsa.beans.InteractuaConInteractivos;
+import edu.upc.dsa.beans.Interactivo;
+import edu.upc.dsa.beans.Interactuador;
 import edu.upc.dsa.beans.Monstruo;
 import edu.upc.dsa.beans.Objeto;
 import edu.upc.dsa.beans.Personatge;
@@ -56,9 +57,9 @@ public class Mapa {
         if (!puedePasarACoordenada(x +esquerraInc, y + amuntInc)) {
             return;
         }
-        if(encuentroObjetoInteractivo(x +esquerraInc, y + amuntInc) && amover instanceof InteractuaConInteractivos){
+        if(encuentroObjetoInteractivo(x +esquerraInc, y + amuntInc) && amover instanceof Interactuador){
             Drawable cosaConLaQueHaColisionadoAmover = this.doGetElement(x +esquerraInc, y + amuntInc);
-            ((InteractuaConInteractivos)amover).interactua((Objeto)cosaConLaQueHaColisionadoAmover);
+            ((Interactuador)amover).interactua((Interactivo)cosaConLaQueHaColisionadoAmover);
             //TODO: post personaje con nuevo objeto o nueva vida/defensa ... al servidor
         }
         this.putElement( x+esquerraInc,y+amuntInc,amover);
@@ -70,7 +71,7 @@ public class Mapa {
     }
 
     private boolean encuentroObjetoInteractivo(int x, int y) {
-        if(this.doGetElement(x,y) instanceof  Objeto){
+        if(this.doGetElement(x,y) instanceof Interactivo){
             return true;
         }
         return false;
@@ -81,9 +82,6 @@ public class Mapa {
     }
     private boolean puedePasarACoordenada(int x, int y) {
         if( x <0 || y <0  || x >7 || y >7 || this.doGetElement(x,y) instanceof ParedCell  ){
-            return false;
-        }
-        if(this.doGetElement(x,y) instanceof Monstruo){
             return false;
         }
         return true;

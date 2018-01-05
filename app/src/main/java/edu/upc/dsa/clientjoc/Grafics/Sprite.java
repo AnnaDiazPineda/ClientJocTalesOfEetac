@@ -35,7 +35,7 @@ public class Sprite {
         this.unscaled_height = bmp.getHeight();
 
         int widthpantalla = ((Activity)gameView.getContext()).getWindowManager().getDefaultDisplay().getWidth();
-        factor = widthpantalla /  (this.unscaled_width *8);
+        factor = widthpantalla /  (this.unscaled_width *10);
 
         this.width = (int)(bmp.getWidth() * factor);
         this.height = (int)(bmp.getHeight() * factor);

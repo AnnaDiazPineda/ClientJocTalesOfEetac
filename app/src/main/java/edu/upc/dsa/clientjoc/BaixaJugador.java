@@ -54,7 +54,7 @@ public class BaixaJugador extends AppCompatActivity {
         }
 
 
-        tornar = (Button) findViewById(R.id.btnTornar);
+     /*   tornar = (Button) findViewById(R.id.btnTornar);
         eliminar = (Button) findViewById(R.id.btnBaixaJugador);
         mail = (EditText) findViewById(R.id.edMail);
         contra1 = (EditText) findViewById(R.id.edContrauno);
@@ -79,7 +79,7 @@ public class BaixaJugador extends AppCompatActivity {
             public void onClick(View view) {
 
             }
-        });
+        });*/
 
 
     }
