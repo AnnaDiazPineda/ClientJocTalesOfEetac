@@ -14,6 +14,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import edu.upc.dsa.MiniJoc.MiniJoc;
+import edu.upc.dsa.beans.Interactivo;
 import edu.upc.dsa.beans.Jugador;
 
 import edu.upc.dsa.clientjoc.Grafics.MapaView;
@@ -32,6 +34,8 @@ public class DatosPersonales extends AppCompatActivity {
     private Button modificarJugador;
     private Button donarseBaixa;
     private Button personajes;
+
+    private Button provarMiniJoc;
 
     private Jugador mijugador;
     private Button veureRanking;
@@ -56,6 +60,8 @@ public class DatosPersonales extends AppCompatActivity {
         veureRanking = (Button) findViewById(R.id.btnRanking) ;
         Intent intent = getIntent();
         value = intent.getStringExtra("jugador"); //if it's a string you stored.
+
+        provarMiniJoc = (Button) findViewById(R.id.provarminijoc);
 
         try {
             jugador = mapper.readValue(value, Jugador.class);
@@ -143,7 +149,13 @@ public class DatosPersonales extends AppCompatActivity {
         });
 
 
-
+        provarMiniJoc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intentMinijoc = new Intent(DatosPersonales.this, MiniJoc.class);
+                startActivity(intentMinijoc);
+            }
+        });
 
 
 /*

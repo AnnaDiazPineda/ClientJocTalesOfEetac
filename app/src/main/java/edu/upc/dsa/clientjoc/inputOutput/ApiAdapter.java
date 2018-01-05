@@ -1,5 +1,6 @@
 package edu.upc.dsa.clientjoc.inputOutput;
 
+import edu.upc.dsa.beans.Jugador;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
@@ -35,6 +36,7 @@ public class ApiAdapter {
                     .client(httpClient.build()) // <-- usamos el log level
                     .build();
             API_SERVICE = retrofit.create(ApiService.class);
+
         }
 
         return API_SERVICE;

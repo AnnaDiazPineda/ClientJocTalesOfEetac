@@ -1,5 +1,8 @@
 package edu.upc.dsa.beans;
 
+import android.content.Context;
+import android.widget.Toast;
+
 import edu.upc.dsa.DAOG.DAO;
 import edu.upc.dsa.beans.mapa.Drawable;
 
@@ -107,11 +110,21 @@ public class Personatge extends DAO implements Drawable, Interactuador {
         }
         if (interactivo instanceof  Monstruo){
             Monstruo m = (Monstruo) interactivo;
-            if(Math.random()>0.5) {
-                this.setDefensa(0);
+            if(m.getNomMonstruo()== "trump")
+            {
+                Toast toastMonstruo = Toast.makeText(getAppContext(),"Has trobat al trump, A lluitar!", Toast.LENGTH_LONG);
+                toastMonstruo.show();
             }
+            /*if(Math.random()>0.5) {
+                this.setDefensa(0);
+            }*/
+
             return;
         }
 
+
+    }
+    public static Context getAppContext() {
+        return Personatge.getAppContext();
     }
 }

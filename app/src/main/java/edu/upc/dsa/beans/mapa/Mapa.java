@@ -58,10 +58,19 @@ public class Mapa {
             return;
         }
         if(encuentroObjetoInteractivo(x +esquerraInc, y + amuntInc) && amover instanceof Interactuador){
+
             Drawable cosaConLaQueHaColisionadoAmover = this.doGetElement(x +esquerraInc, y + amuntInc);
+            //interactua es la funció que es troba dins personatge
             ((Interactuador)amover).interactua((Interactivo)cosaConLaQueHaColisionadoAmover);
+
             //TODO: post personaje con nuevo objeto o nueva vida/defensa ... al servidor
         }
+
+
+
+
+
+
         this.putElement( x+esquerraInc,y+amuntInc,amover);
         buidarCela(x,y);
 
@@ -80,10 +89,13 @@ public class Mapa {
     private void buidarCela(int x, int y){
         this.putElement(x,y,new EmptyCell());
     }
+
     private boolean puedePasarACoordenada(int x, int y) {
-        if( x <0 || y <0  || x >7 || y >7 || this.doGetElement(x,y) instanceof ParedCell || this.doGetElement(x,y) instanceof PedraCell ){
+        if( x <0 || y <0  || x >9 || y >9 ||
+                this.doGetElement(x,y) instanceof ParedCell || this.doGetElement(x,y) instanceof PedraCell ){
             return false;
         }
+
         return true;
     }
     private void iniciarCombate(Monstruo m){

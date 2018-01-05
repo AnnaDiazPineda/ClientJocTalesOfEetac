@@ -131,16 +131,16 @@ public class MapaView extends SurfaceView {
             }
         }
         if(dr instanceof Monstruo){
-            if(((Personatge)dr).nivel ==0){
+
+            if(((Monstruo)dr).getNomMonstruo() == "trump"){
                 type = R.mipmap.trump;
             }
-            if(((Personatge)dr).nivel ==1){
-                type = R.mipmap.putin;
-            }
-            if(((Personatge)dr).nivel ==2){
+            if(((Monstruo)dr).getNomMonstruo() == "king"){
                 type = R.mipmap.kinjonkin;
             }
-
+            if(((Monstruo)dr).getNomMonstruo() == "putin"){
+                type = R.mipmap.putin;
+            }
         }
         if(dr instanceof Objeto){
             Objeto obj = (Objeto )dr;
@@ -162,7 +162,7 @@ public class MapaView extends SurfaceView {
             type = R.mipmap.porta;
         }
         if (dr instanceof FocCell){
-            type = R.mipmap.FocCell;
+            type = R.mipmap.foccell;
         }
         if (dr instanceof AiguaCell){
             type = R.mipmap.aigua;
