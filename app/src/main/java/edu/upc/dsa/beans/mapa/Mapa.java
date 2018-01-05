@@ -81,7 +81,7 @@ public class Mapa {
         this.putElement(x,y,new EmptyCell());
     }
     private boolean puedePasarACoordenada(int x, int y) {
-        if( x <0 || y <0  || x >7 || y >7 || this.doGetElement(x,y) instanceof ParedCell  ){
+        if( x <0 || y <0  || x >7 || y >7 || this.doGetElement(x,y) instanceof ParedCell || this.doGetElement(x,y) instanceof PedraCell ){
             return false;
         }
         return true;

@@ -16,10 +16,14 @@ import java.util.ArrayList;
 import edu.upc.dsa.beans.Monstruo;
 import edu.upc.dsa.beans.Objeto;
 import edu.upc.dsa.beans.Personatge;
+import edu.upc.dsa.beans.mapa.AiguaCell;
 import edu.upc.dsa.beans.mapa.Drawable;
 import edu.upc.dsa.beans.mapa.EmptyCell;
+import edu.upc.dsa.beans.mapa.FocCell;
 import edu.upc.dsa.beans.mapa.Mapa;
 import edu.upc.dsa.beans.mapa.ParedCell;
+import edu.upc.dsa.beans.mapa.PedraCell;
+import edu.upc.dsa.beans.mapa.PortaCell;
 import edu.upc.dsa.clientjoc.R;
 
 /**
@@ -114,15 +118,29 @@ public class MapaView extends SurfaceView {
         if(dr instanceof EmptyCell){
             type = R.mipmap.empty;
         }
+        //TODO: posar-nos d'accord en com fer els personatges i quins utilitzar depenent el nivell
         if(dr instanceof Personatge){
-            if(((Personatge)dr).defensa >0) {
-                type = R.mipmap.d1;
-            }else{
+            if((((Personatge)dr).defensa == 0) || (((Personatge)dr).nivel == 0)) {
+                type = R.mipmap.pers_indefens;
+            }
+            if(((Personatge)dr).nivel == 1){
+                type = R.mipmap.pers_indefens;
+            }
+            if(((Personatge)dr).nivel == 2){
                 type = R.mipmap.pers_indefens;
             }
         }
         if(dr instanceof Monstruo){
-            type = R.mipmap.black;
+            if(((Personatge)dr).nivel ==0){
+                type = R.mipmap.trump;
+            }
+            if(((Personatge)dr).nivel ==1){
+                type = R.mipmap.putin;
+            }
+            if(((Personatge)dr).nivel ==2){
+                type = R.mipmap.kinjonkin;
+            }
+
         }
         if(dr instanceof Objeto){
             Objeto obj = (Objeto )dr;
@@ -136,6 +154,21 @@ public class MapaView extends SurfaceView {
         if(dr instanceof ParedCell){
             type = R.mipmap.pared;
         }
+        if(dr instanceof PedraCell)
+        {
+            type = R.mipmap.pedra;
+        }
+        if(dr instanceof PortaCell) {
+            type = R.mipmap.porta;
+        }
+        if (dr instanceof FocCell){
+            type = R.mipmap.FocCell;
+        }
+        if (dr instanceof AiguaCell){
+            type = R.mipmap.aigua;
+        }
+
+
 
         Bitmap bmp = BitmapFactory.decodeResource(getResources(), type);
         Sprite tmp = new Sprite(this,bmp,fila,columna);
