@@ -8,10 +8,6 @@ import android.util.AttributeSet;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
-import java.util.jar.Attributes;
-
-import edu.upc.dsa.clientjoc.Grafics.GameLoopThread;
-
 /**
  * Created by anita on 05/01/2018.
  */
@@ -23,11 +19,19 @@ public class MiniJocView extends SurfaceView{
     private Paint paint = new Paint();
     private MiniJocThread miniJocThread;
 
-    private int playerSize = 40;
+
+
+    //pilota
+    private int pilotaSize = 40;
     private int x=0, y=0;
     private int xSpeed, ySpeed;
     private int xMax,yMax;
-    private int speed=1;
+    private int speed=3;
+
+    //sticks
+    private int stickLength = 75, stickHeight = 10, stickSpeed = 4;
+    private static int  monstruoTopY , monstruoTopX;
+    private static int personatgeBottomY , personatgeBottomX;
 
 
 
@@ -60,9 +64,18 @@ public class MiniJocView extends SurfaceView{
                 xMax = getWidth();
                 yMax = getHeight();
 
+                monstruoTopX = (xMax/2) - (stickLength/2);
+                //monstruoTopY = (yMax/2) - (stickHeight/2);
+                monstruoTopY = 20;
+
+                personatgeBottomX = (xMax/2) - (stickLength/2);
+                //personatgeBottomY = (yMax/2) - (stickHeight/2);
+                personatgeBottomY = yMax -20;
+
                 //això ho faig perque la pilota baixa en diagonal
                 xSpeed = speed;
                 ySpeed = speed;
+
 
 
                 miniJocThread.setRunning(true);
@@ -91,22 +104,46 @@ public class MiniJocView extends SurfaceView{
         paint.setColor(Color.GREEN);
 
         //lògica de parets de la pilota
-        if(x+playerSize >= xMax)
+        if(x+ pilotaSize >= xMax)
             xSpeed = -speed;
         if (x <= 0)
             xSpeed = speed;
-        if (y+playerSize >= yMax)
+        if (y+ pilotaSize >= yMax)
             ySpeed = -speed;
         if (y<=0)
             ySpeed = speed;
+            //col·lisio amb els sticks
+        if(x > monstruoTopX && x < monstruoTopX + stickLength && y < monstruoTopY )
+            ySpeed *=-1;
+        if(x > personatgeBottomX && x < personatgeBottomX + stickLength && y < personatgeBottomY)
+            ySpeed *=-1;
 
-        //canvi de x i y del personatge
+        //canvi de x i y,  pilota
         x= x+ xSpeed;
         y= y+ ySpeed;
 
-        //dibuixo
-        canvas.drawRect(x,y,x+playerSize,y+playerSize,paint);
+        //dibuixo pilota
+        canvas.drawRect(x,y,x+ pilotaSize,y+ pilotaSize,paint);
 
+        //dibuixo jugadors, sticks
+        canvas.drawRect(monstruoTopX,
+                        monstruoTopY,
+                        monstruoTopX + stickLength,
+                        monstruoTopY + stickHeight,
+                        paint
+                        );
+
+        canvas.drawRect(personatgeBottomX,
+                        personatgeBottomY,
+                        personatgeBottomX + stickLength,
+                        personatgeBottomY + stickHeight,
+                        paint
+                        );
+
+    }
+    public static int mourePersonatge(int x){
+
+        return personatgeBottomX = personatgeBottomX + x;
 
     }
 }
