@@ -41,7 +41,8 @@
         <activity android:name=".MapaActivity" />
         <activity android:name=".NewPersonaje" />
         <activity android:name=".BaixaJugador" />
-        <activity android:name="edu.upc.dsa.MiniJoc.MiniJoc"></activity>
+        <activity android:name="edu.upc.dsa.MiniJoc.MiniJoc" />
+        <activity android:name=".popUps.popUpUno"></activity>
     </application>
 
 </manifest>
