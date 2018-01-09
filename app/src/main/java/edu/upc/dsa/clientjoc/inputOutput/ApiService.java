@@ -7,9 +7,12 @@ import edu.upc.dsa.beans.Answer;
 import edu.upc.dsa.beans.Jugador;
 
 import edu.upc.dsa.beans.Partida;
+import edu.upc.dsa.beans.Personatge;
 import edu.upc.dsa.clientjoc.inputOutput.Response.Login;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
+import retrofit2.Response;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
@@ -36,7 +39,10 @@ public interface ApiService {
     Call<ArrayList<Partida>> getRanking();//llistat 5 partides ranking
     @GET("Mapa/{idJugador}")
     Call<String> getMapa(@Path("idJugador")int id);
-
+    @POST("Jugador/{nomPersonatge}/{tipus}/{idjugador}")
+    Call<Personatge> newPersonaje(@Path("nomPersonatge") String nomPersonatge, @Path("tipus") String type, @Path("idjugador") String id);
+    @POST("NewMapa/{idJugador}")
+    Call<String>getNewMapa(Personatge personatgeEnviatPelClient, @Path("idJugador")int idJugador);
 
 
 

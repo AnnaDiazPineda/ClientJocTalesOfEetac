@@ -51,7 +51,69 @@ public class Personatge extends DAO implements Drawable, Interactuador {
         arrMisObjetos = new ArrayList<Objeto>();
 
     }
+    public Personatge(int tipus, String nombre){
 
+        switch(tipus){
+            case 0://personatge defensiu
+            {
+                this.nombre = nombre;
+                this.nivel = 0;
+                this.ataque = 0;
+                this.resistencia = 0;
+                this.defensa = 3;
+                this.tipo = 0;
+                arrMisObjetos = new ArrayList<Objeto>();
+            }
+            break;
+            case 1://personatge resistiu
+            {
+                this.nombre = nombre;
+                this.nivel = 0;
+                this.ataque = 0;
+                this.resistencia = 2;
+                this.defensa = 0;
+                this.tipo = 1;
+                arrMisObjetos = new ArrayList<Objeto>();
+            }
+            break;
+            case 2://personatge atacant
+            {
+                this.nombre = nombre;
+                this.nivel = 0;
+                this.ataque = 3;
+                this.resistencia = 0;
+                this.defensa = 0;
+                this.tipo = 2;
+                arrMisObjetos = new ArrayList<Objeto>();
+            }
+            break;
+            case 3:
+            {
+                this.nombre = nombre;
+                this.nivel = 0;
+                this.ataque = 1;
+                this.resistencia = 2;
+                this.defensa = 0;
+                this.tipo = 3;
+                arrMisObjetos = new ArrayList<Objeto>();
+            }
+            break;
+            case 4:
+            {
+                this.nombre = nombre;
+                this.nivel = 0;
+                this.ataque = 0;
+                this.resistencia = 1;
+                this.defensa = 2;
+                this.tipo = 4;
+                arrMisObjetos = new ArrayList<Objeto>();
+            }
+            break;
+
+        }
+
+
+    }//constructor bytype
     public String getNombre() {
         return nombre;
     }
@@ -115,9 +177,9 @@ public class Personatge extends DAO implements Drawable, Interactuador {
                 Toast toastMonstruo = Toast.makeText(getAppContext(),"Has trobat al trump, A lluitar!", Toast.LENGTH_LONG);
                 toastMonstruo.show();
             }
-            /*if(Math.random()>0.5) {
+            if(Math.random()>0.5) {
                 this.setDefensa(0);
-            }*/
+            }
 
             return;
         }

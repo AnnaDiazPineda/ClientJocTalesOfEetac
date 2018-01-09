@@ -122,12 +122,15 @@ public class MapaView extends SurfaceView {
         if(dr instanceof Personatge){
             if((((Personatge)dr).defensa == 0) || (((Personatge)dr).nivel == 0)) {
                 type = R.mipmap.pers_indefens;
-            }
-            if(((Personatge)dr).nivel == 1){
+            } else
+            /*if(((Personatge)dr).nivel == 1){
                 type = R.mipmap.pers_indefens;
-            }
+            } else
             if(((Personatge)dr).nivel == 2){
                 type = R.mipmap.pers_indefens;
+            } else */
+            {
+                type = R.mipmap.d1;
             }
         }
         if(dr instanceof Monstruo){
@@ -135,7 +138,7 @@ public class MapaView extends SurfaceView {
             if(((Monstruo)dr).getNomMonstruo() == "trump"){
                 type = R.mipmap.trump;
             }
-            if(((Monstruo)dr).getNomMonstruo() == "king"){
+            if(((Monstruo)dr).getNomMonstruo() == "kim"){
                 type = R.mipmap.kinjonkin;
             }
             if(((Monstruo)dr).getNomMonstruo() == "putin"){

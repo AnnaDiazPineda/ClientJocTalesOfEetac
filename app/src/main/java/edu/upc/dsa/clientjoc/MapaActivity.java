@@ -37,6 +37,8 @@ public class MapaActivity extends AppCompatActivity{
     private String value;
     private ObjectMapper mapper = new ObjectMapper();
     private Jugador mijugador;
+    private String mapaString;
+    private Mapa mimapa=null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,7 +105,7 @@ public class MapaActivity extends AppCompatActivity{
                             mapa = mapper.readValue(mapastr, Mapa.class);
                             MapaView v = (MapaView)findViewById(R.id.surfaceView1);
                             v.setMap(mapa);
-                            pers = mapa.findJugador();
+                            //pers = mapa.findJugador();
 
                         } catch (Exception e) {
                             e.printStackTrace();

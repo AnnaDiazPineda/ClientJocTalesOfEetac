@@ -52,16 +52,17 @@
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent" >
-
+            android:layout_height="wrap_content" >
             <Button
-                android:id="@+id/button"
-                android:layout_width="220dp"
-                android:layout_height="match_parent"
-                android:text="START" />
+                android:id="@+id/button4"
+                style="@style/Widget.AppCompat.Button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Button"
+                android:textStyle="bold" />
         </TableRow>
 
-        <TableRow
+         <TableRow
             android:layout_width="match_parent"
             android:layout_height="match_parent" >
 

@@ -18,6 +18,7 @@ import edu.upc.dsa.MiniJoc.MiniJoc;
 import edu.upc.dsa.beans.Interactivo;
 import edu.upc.dsa.beans.Jugador;
 
+import edu.upc.dsa.beans.mapa.Mapa;
 import edu.upc.dsa.clientjoc.Grafics.MapaView;
 import edu.upc.dsa.clientjoc.inputOutput.ApiAdapter;
 import edu.upc.dsa.clientjoc.inputOutput.ApiService;
@@ -43,6 +44,7 @@ public class DatosPersonales extends AppCompatActivity {
     private ObjectMapper mapper = new ObjectMapper();
     private String value;
     private Jugador jugador= null;
+
     //retrofit
     private ApiService mRestAdapter;
     @Override
@@ -51,6 +53,7 @@ public class DatosPersonales extends AppCompatActivity {
         setContentView(R.layout.activity_datos_personales);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        ObjectMapper mapper = new ObjectMapper();
         //servei rest, singleton
         mRestAdapter =  ApiAdapter.getApiService();
         iniciaJoc = (Button) findViewById(R.id.bIniciaJoc);

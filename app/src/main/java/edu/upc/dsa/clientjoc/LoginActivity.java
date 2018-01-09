@@ -81,7 +81,7 @@ public class LoginActivity extends AppCompatActivity {
         mEmailView = (EditText) findViewById(R.id.email);
         mPasswordView = (EditText) findViewById(R.id.password);
 
-        mEmailView.setText("martavivesluis@gmail.com");
+        mEmailView.setText("s@hola.com");
         mPasswordView.setText("1234");
 
         Button mSignInButton = (Button) findViewById(R.id.email_sign_in_button);

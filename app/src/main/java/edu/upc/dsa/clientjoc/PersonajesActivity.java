@@ -12,6 +12,7 @@ import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.IOException;
@@ -24,6 +25,7 @@ import edu.upc.dsa.beans.Objeto;
 import edu.upc.dsa.beans.Personatge;
 import edu.upc.dsa.clientjoc.inputOutput.ApiAdapter;
 import edu.upc.dsa.clientjoc.inputOutput.ApiService;
+import edu.upc.dsa.clientjoc.inputOutput.Registre;
 
 /**
  * Created by Marta on 21/12/2017.
@@ -42,6 +44,7 @@ public class PersonajesActivity extends AppCompatActivity {
     public Button initBtn;
     public Button newBtn;
     public int limitCharacters;
+    public ObjectMapper mapper;
  @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,7 +52,7 @@ public class PersonajesActivity extends AppCompatActivity {
         mRestAdapter = ApiAdapter.getApiService();
         Intent intent = getIntent();
         String value = intent.getStringExtra("jugador"); //if it's a string you stored.
-        ObjectMapper mapper = new ObjectMapper();
+        mapper = new ObjectMapper();
         associatedViews();
         initBtn.setEnabled(false);
         newBtn.setEnabled(true);
@@ -61,6 +64,21 @@ public class PersonajesActivity extends AppCompatActivity {
         } catch (IOException e) {
             e.printStackTrace();
         }
+     newBtn.setOnClickListener(new View.OnClickListener() {
+         @Override
+         public void onClick(View view) {
+             Intent intentRegistre = new Intent(PersonajesActivity.this, NewPersonaje.class);
+             String jsonResult = null;
+             try {
+                 jsonResult = mapper.writeValueAsString(mijugador);
+             } catch (JsonProcessingException e) {
+                 e.printStackTrace();
+             }
+             intentRegistre.putExtra("jugador", jsonResult); //O
+             startActivity(intentRegistre);
+         }
+     });
+
 
 
     }

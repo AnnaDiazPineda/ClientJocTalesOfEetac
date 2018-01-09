@@ -1,159 +1,122 @@
 package edu.upc.dsa.beans.mapa;
 //un mapa es una col·leció de sprites
 
-import android.util.Log;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import edu.upc.dsa.DAOG.DAOMapa;
+import edu.upc.dsa.beans.*;
 
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
-
-import edu.upc.dsa.beans.Interactivo;
-import edu.upc.dsa.beans.Interactuador;
-import edu.upc.dsa.beans.Monstruo;
-import edu.upc.dsa.beans.Objeto;
-import edu.upc.dsa.beans.Personatge;
 
 public class Mapa {
 
     public ArrayList<Column> columns;
 
-    public Mapa(){
+
+    public Mapa() {
+
     }
+
     public ArrayList<Column> getColumns() {
         return columns;
     }
+
     public void setColumns(ArrayList<Column> columns) {
         this.columns = columns;
     }
+
     public Mapa(int amplada, int alcada) {
         columns = new ArrayList<Column>();
-        for(int i=0; i< amplada;i++){
-            Column columna = new Column();
-            for(int j = 0; j < alcada; j++){
-                columna.rows.add(new EmptyCell());
-            }
-            columns.add(columna);
+
+        for (int i = 0; i < amplada; i++) {
+                Column columna = new Column();
+                for (int j = 0; j < alcada; j++) {
+                    columna.rows.add(new EmptyCell());
+                }
+                columns.add(columna);
         }
     }
+
     public int doGetWidth() {
-        return this.columns.size();
+        return columns.size();
     }
+
     public int doGetHeight() {
-        return this.columns.get(0).rows.size();
+        return columns.get(0).rows.size();
     }
+
     public void putElement(int x, int y, Drawable drawable1) {
-        columns.get(x).rows.set(y,drawable1);
+
+        columns.get(x).rows.set(y, drawable1);
     }
+
     public Drawable doGetElement(int x, int y) {
-        return this.columns.get(x).rows.get(y);
+        return columns.get(x).rows.get(y);
     }
 
 
+    public void moure(int amuntInc, int esquerraInc, Drawable element) {
 
-    public void moure(int amuntInc, int esquerraInc, Drawable amover) {
-//TODO: Llogica de combat/ cambiar coses quant es fa colisió amb monstre o objecte  1h
-//TODO: toasts(bocadillos de texto) a sobre del jugador   2h
-
-        int x = this.doGetDrawableIndexX(amover);
-        int y = this.doGetDrawableIndexY(amover);
-        if (!puedePasarACoordenada(x +esquerraInc, y + amuntInc)) {
-            return;
-        }
-        if(encuentroObjetoInteractivo(x +esquerraInc, y + amuntInc) && amover instanceof Interactuador){
-
-            Drawable cosaConLaQueHaColisionadoAmover = this.doGetElement(x +esquerraInc, y + amuntInc);
-            //interactua es la funció que es troba dins personatge
-            ((Interactuador)amover).interactua((Interactivo)cosaConLaQueHaColisionadoAmover);
-
-            //TODO: post personaje con nuevo objeto o nueva vida/defensa ... al servidor
+        int x = this.doGetDrawableIndexX(element);
+        int y = this.doGetDrawableIndexY(element);
+        if (amuntInc == 1 && esquerraInc == 0) {
+            this.putElement(x, y + 1, element);
+        } else if (amuntInc == -1 && esquerraInc == 0) {
+            this.putElement(x, y - 1, element);
+        } else if (amuntInc == 0 && esquerraInc == 1) {
+            this.putElement(x - 1, y, element);
+        } else if (amuntInc == 0 && esquerraInc == -1) {
+            this.putElement(x + 1, y, element);
         }
 
-
-
-
-
-
-        this.putElement( x+esquerraInc,y+amuntInc,amover);
-        buidarCela(x,y);
-
-           /*
-       */
-        //post personaje a JSONSEVICE
-    }
-
-    private boolean encuentroObjetoInteractivo(int x, int y) {
-        if(this.doGetElement(x,y) instanceof Interactivo){
-            return true;
-        }
-        return false;
-    }
-
-    private void buidarCela(int x, int y){
-        this.putElement(x,y,new EmptyCell());
-    }
-
-    private boolean puedePasarACoordenada(int x, int y) {
-        if( x <0 || y <0  || x >9 || y >9 ||
-                this.doGetElement(x,y) instanceof ParedCell || this.doGetElement(x,y) instanceof PedraCell ){
-            return false;
-        }
-
-        return true;
-    }
-    private void iniciarCombate(Monstruo m){
-        //hacer combate con monstruo/iniciar dialogo/logica combat
-
+        this.putElement(x, y, new EmptyCell());
     }
 
     private int doGetDrawableIndexY(Drawable element) {
         int x = this.doGetDrawableIndexX(element);
         return columns.get(x).rows.indexOf(element);
     }
+
     private int doGetDrawableIndexX(Drawable element) {
-        for(int x = 0; x < this.doGetWidth(); x++){
-            if(columns.get(x).rows.contains(element)){
+        for (int x = 0; x < this.doGetWidth(); x++) {
+            if (columns.get(x).rows.contains(element)) {
                 return x;
             }
         }
         return -1;
     }
-    private void showLoginError(String error) {
-        Log.d("Myapp","error");
 
+    /****************************Mapas*******************/
+    //TODO: com podem fer que el personatge no sempre estigui al mateix lloc
+    public static DAOMapa miMapa(Personatge mipersonaje) {
+        DAOMapa mimapa = readMapFromile(mipersonaje.getNivel());
+        mimapa.putElement(0,1,mipersonaje);
+        return mimapa;
     }
 
-    public Personatge findJugador() {
-        for(Column c:columns){
-            for(Drawable d : c.rows){
-                if(d instanceof Personatge){
-                    return (Personatge)d;
-                }
+    public static DAOMapa readMapFromile(int level) {
+        try {
+            File file = new File("mapas/"+level+".txt");
+            FileReader fileReader = new FileReader(file);
+            StringBuffer stringBuffer = new StringBuffer();
+            int numCharsRead;
+            char[] charArray = new char[1024];
+            while ((numCharsRead = fileReader.read(charArray)) > 0) {
+                stringBuffer.append(charArray, 0, numCharsRead);
             }
+            fileReader.close();
+            ObjectMapper mapper = new ObjectMapper();
+            mapper.enableDefaultTyping(ObjectMapper.DefaultTyping.NON_FINAL);
+            DAOMapa mapa = mapper.readValue(stringBuffer.toString(), DAOMapa.class);
+            return mapa;
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         return null;
     }
 
-    /*
 
-    protected void generarMapa() {
-    }
-
-    private void Mapa(String ruta)
-    {
-        carregarMapa(ruta);
-    }
-
-    private void carregarMapa(String ruta) {
-    }
-    public void actualitzar()
-    {
-
-    }
-    public void mostrar(int compensacioX, int compensacioY, Pantalla pantalla)
-    {
-        //investigar sobre bitShifting
-        int adalt= compensacioY/32;
-        int abaix= (compensacioY + pantalla.getAlcada())/32;
-        int dreta = compensacioX / 32; //així només camina un pixel i no un quadre
-        int esquerra = (compensacioX + pantalla.getAmplada())/32;
-    }*/
 }
     
