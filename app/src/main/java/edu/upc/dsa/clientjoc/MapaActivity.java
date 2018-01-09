@@ -115,10 +115,12 @@ public class MapaActivity extends AppCompatActivity{
                         break;
                     case 204://cas de no hi ha partida desada
                         Context context = getApplicationContext();
-                        CharSequence text = "Actualment no tens ninguna partida desada";
+                        CharSequence text = "Actualment no tens ninguna partida desada, CREEM UNA";
                         int duration = Toast.LENGTH_SHORT;
                         Toast toast = Toast.makeText(context, text, duration);
                         toast.show();
+
+                        crearNewMapaPerPrimerPersonatge();
                         finish();
                         break;
                     case 500://el email no existeix
@@ -137,6 +139,56 @@ public class MapaActivity extends AppCompatActivity{
 
     private void showLoginError(String error) {
         Toast.makeText(this.getApplicationContext(), error, Toast.LENGTH_LONG).show();
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    private void crearNewMapaPerPrimerPersonatge(){
+
+        // If jugador no te personatge , dir que es crei un al menu android corresponent i interrompre la crida a NewMapa
+
+        Call<String> mapaCall = ApiAdapter.getApiService().newMapa(mijugador.getId(),mijugador.getPersonatges().get(4));
+
+        mapaCall.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                switch (response.code()) {
+                    case 200:
+                        showLoginError("mapa creat !");
+                        //enviar jugador rebut nova activitat
+                        break;
+                    case 204://cas de no hi ha partida desada
+                        Context context = getApplicationContext();
+                        CharSequence text = "ERROR CREANT UNA";
+                        int duration = Toast.LENGTH_SHORT;
+                        Toast toast = Toast.makeText(context, text, duration);
+                        toast.show();
+                        finish();
+                        break;
+                    case 500://el email no existeix
+                        showLoginError("500");
+                        break;
+                }
+            }
+
+            public void onFailure(Call<String> call, Throwable t) {
+                showLoginError("error");
+                t.printStackTrace();
+                return;
+            }
+        });
     }
 
 }

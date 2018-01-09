@@ -39,14 +39,14 @@ public interface ApiService {
     Call<ArrayList<Partida>> getRanking();//llistat 5 partides ranking
     @GET("Mapa/{idJugador}")
     Call<String> getMapa(@Path("idJugador")int id);
+
+    @POST("NewMapa/{idJugador}")
+    Call<String> newMapa(@Path("idJugador")int id, @Body Personatge personatge);
+
     @POST("Jugador/{nomPersonatge}/{tipus}/{idjugador}")
     Call<Personatge> newPersonaje(@Path("nomPersonatge") String nomPersonatge, @Path("tipus") String type, @Path("idjugador") String id);
     @POST("NewMapa/{idJugador}")
     Call<String>getNewMapa(Personatge personatgeEnviatPelClient, @Path("idJugador")int idJugador);
-
-
-
-
 
 
 }
