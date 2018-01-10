@@ -105,7 +105,8 @@ public class MapaActivity extends AppCompatActivity{
                             mapa = mapper.readValue(mapastr, Mapa.class);
                             MapaView v = (MapaView)findViewById(R.id.surfaceView1);
                             v.setMap(mapa);
-                            //pers = mapa.findJugador();
+
+                            pers = mapa.findPersonatge();
 
                         } catch (Exception e) {
                             e.printStackTrace();

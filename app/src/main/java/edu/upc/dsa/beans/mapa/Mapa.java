@@ -31,11 +31,11 @@ public class Mapa {
         columns = new ArrayList<Column>();
 
         for (int i = 0; i < amplada; i++) {
-                Column columna = new Column();
-                for (int j = 0; j < alcada; j++) {
-                    columna.rows.add(new EmptyCell());
-                }
-                columns.add(columna);
+            Column columna = new Column();
+            for (int j = 0; j < alcada; j++) {
+                columna.rows.add(new EmptyCell());
+            }
+            columns.add(columna);
         }
     }
 
@@ -58,7 +58,10 @@ public class Mapa {
 
 
     public void moure(int amuntInc, int esquerraInc, Drawable element) {
-
+        if(element == null){
+            (new Exception("Drawable null intentant moure")).printStackTrace();
+            return;
+        }
         int x = this.doGetDrawableIndexX(element);
         int y = this.doGetDrawableIndexY(element);
         if (amuntInc == 1 && esquerraInc == 0) {
@@ -92,13 +95,13 @@ public class Mapa {
     //TODO: com podem fer que el personatge no sempre estigui al mateix lloc
     public static DAOMapa miMapa(Personatge mipersonaje) {
         DAOMapa mimapa = readMapFromile(mipersonaje.getNivel());
-        mimapa.putElement(0,1,mipersonaje);
+        mimapa.putElement(0, 1, mipersonaje);
         return mimapa;
     }
 
     public static DAOMapa readMapFromile(int level) {
         try {
-            File file = new File("mapas/"+level+".txt");
+            File file = new File("mapas/" + level + ".txt");
             FileReader fileReader = new FileReader(file);
             StringBuffer stringBuffer = new StringBuffer();
             int numCharsRead;
@@ -118,5 +121,15 @@ public class Mapa {
     }
 
 
+    public Personatge findPersonatge() {
+        for (int x = 0; x < this.doGetWidth(); x++) {
+            for (int y = 0; x < columns.get(x).getRows().size(); y++) {
+                if (columns.get(x).rows.get(y) instanceof Personatge) {
+                    return (Personatge) columns.get(x).rows.get(y);
+                }
+            }
+        }
+        return null;
+    }
 }
     
