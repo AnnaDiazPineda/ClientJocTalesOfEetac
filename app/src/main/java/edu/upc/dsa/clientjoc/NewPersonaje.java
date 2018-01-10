@@ -55,18 +55,14 @@ public class NewPersonaje extends AppCompatActivity {
         Intent intent = getIntent();
         mRestAdapter =  ApiAdapter.getApiService();
         ObjectMapper mapper = new ObjectMapper();
-        value = intent.getStringExtra("jugador"); //if it's a string you stored.
 
-        try {
-            jugador = mapper.readValue(value, Jugador.class);
+            jugador = SingletonDades.getInstancia().getJugador();
             Context context = getApplicationContext();
             int duration = Toast.LENGTH_SHORT;
             CharSequence text ="nom:"+jugador.getNom()+" id:"+jugador.getId()+"";
             Toast toast = Toast.makeText(context, text, duration);
             toast.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+
         //TODO:AFEGIR QUAN BORREM JUGADOR BORREM TOTS ELS PERSONATGES, OBJECTES
         associatedViews();
         created = new Personatge();
@@ -171,7 +167,6 @@ public class NewPersonaje extends AppCompatActivity {
             public void onResponse(Call<String> call, Response<String> response) {
                 if(response.body()!=null){
                     Intent intentMapa = new Intent(NewPersonaje.this, MapaActivity.class);
-                    intentMapa.putExtra("jugador", value);
                     intentMapa.putExtra("mapa",response.body());
 
 

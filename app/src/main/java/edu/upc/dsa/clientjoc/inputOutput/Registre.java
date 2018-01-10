@@ -17,6 +17,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.upc.dsa.beans.Jugador;
 import edu.upc.dsa.clientjoc.DatosPersonales;
 import edu.upc.dsa.clientjoc.R;
+import edu.upc.dsa.clientjoc.SingletonDades;
 import edu.upc.dsa.clientjoc.inputOutput.Response.Login;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -103,10 +104,9 @@ public class Registre extends AppCompatActivity {
                             showLoginError("login correcte");
                             Intent myIntent = new Intent(Registre.this, DatosPersonales.class);
                             Jugador jug = response.body();
-                            ObjectMapper mapper = new ObjectMapper();
                             try {
-                                String jsonResult = mapper.writeValueAsString(jug);
-                                myIntent.putExtra("jugador", jsonResult); //Optional parameters
+
+                                SingletonDades.getInstancia().setJugador(jug);//Optional parameters
                                 Registre.this.startActivity(myIntent);
                             } catch (Exception e) {
                                 showLoginError("no serializable");

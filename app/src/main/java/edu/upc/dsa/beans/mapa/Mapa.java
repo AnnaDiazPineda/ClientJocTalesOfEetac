@@ -55,26 +55,53 @@ public class Mapa {
     public Drawable doGetElement(int x, int y) {
         return columns.get(x).rows.get(y);
     }
+    public void moure(int amuntInc, int esquerraInc, Drawable amover) {
+//TODO: Llogica de combat/ cambiar coses quant es fa colisió amb monstre o objecte  1h
+//TODO: toasts(bocadillos de texto) a sobre del jugador   2h
 
-
-    public void moure(int amuntInc, int esquerraInc, Drawable element) {
-        if(element == null){
-            (new Exception("Drawable null intentant moure")).printStackTrace();
+        int x = this.doGetDrawableIndexX(amover);
+        int y = this.doGetDrawableIndexY(amover);
+        if (!puedePasarACoordenada(x +esquerraInc, y + amuntInc)) {
             return;
         }
-        int x = this.doGetDrawableIndexX(element);
-        int y = this.doGetDrawableIndexY(element);
-        if (amuntInc == 1 && esquerraInc == 0) {
-            this.putElement(x, y + 1, element);
-        } else if (amuntInc == -1 && esquerraInc == 0) {
-            this.putElement(x, y - 1, element);
-        } else if (amuntInc == 0 && esquerraInc == 1) {
-            this.putElement(x - 1, y, element);
-        } else if (amuntInc == 0 && esquerraInc == -1) {
-            this.putElement(x + 1, y, element);
+        if(encuentroObjetoInteractivo(x +esquerraInc, y + amuntInc) && amover instanceof Interactuador){
+
+            Drawable cosaConLaQueHaColisionadoAmover = this.doGetElement(x +esquerraInc, y + amuntInc);
+            //interactua es la funció que es troba dins personatge
+            ((Interactuador)amover).interactua((Interactivo)cosaConLaQueHaColisionadoAmover);
+
+            //TODO: post personaje con nuevo objeto o nueva vida/defensa ... al servidor
+        }
+        this.putElement( x+esquerraInc,y+amuntInc,amover);
+        buidarCela(x,y);
+
+           /*
+       */
+        //post personaje a JSONSEVICE
+    }
+
+    private boolean encuentroObjetoInteractivo(int x, int y) {
+        if(this.doGetElement(x,y) instanceof Interactivo){
+            return true;
+        }
+        return false;
+    }
+
+    private void buidarCela(int x, int y){
+        this.putElement(x,y,new EmptyCell());
+    }
+
+    private boolean puedePasarACoordenada(int x, int y) {
+        if( x <0 || y <0  || x >9 || y >9 ||
+                this.doGetElement(x,y) instanceof ParedCell || this.doGetElement(x,y) instanceof PedraCell ){
+            return false;
         }
 
-        this.putElement(x, y, new EmptyCell());
+        return true;
+    }
+    private void iniciarCombate(Monstruo m){
+        //hacer combate con monstruo/iniciar dialogo/logica combat
+
     }
 
     private int doGetDrawableIndexY(Drawable element) {

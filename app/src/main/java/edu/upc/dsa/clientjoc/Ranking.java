@@ -28,13 +28,10 @@ public class Ranking extends AppCompatActivity {
 
         //convertint el jugador
         Intent intent = getIntent();
-        value = intent.getStringExtra("jugador");
-        try {
-            jugador = mapper.readValue(value, Jugador.class);
-            EditText posicio = (EditText) findViewById(R.id.posJugador);
-            posicio.setText(jugador.getId());}catch (Exception e) {
-            e.printStackTrace();
-        }
+        jugador =  SingletonDades.getInstancia().getJugador();
+
+        EditText posicio = (EditText) findViewById(R.id.posJugador);
+        posicio.setText(jugador.getId());
 
         btnPersonal = (Button) findViewById(R.id.btnDatosPers);
         btnJugar = (Button) findViewById(R.id.btnJoc);
@@ -44,7 +41,6 @@ public class Ranking extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intentDades = new Intent(Ranking.this, DatosPersonales.class);
-                intentDades.putExtra("jugador", value);
                 startActivity(intentDades);
 
             }
@@ -54,7 +50,6 @@ public class Ranking extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intentJugar = new Intent(Ranking.this, MapaActivity.class);
-                intentJugar.putExtra("jugador", value);
                 startActivity(intentJugar);
 
             }

@@ -43,7 +43,6 @@ public class DatosPersonales extends AppCompatActivity {
 
     private ObjectMapper mapper = new ObjectMapper();
     private String value;
-    private Jugador jugador= null;
 
     //retrofit
     private ApiService mRestAdapter;
@@ -62,20 +61,20 @@ public class DatosPersonales extends AppCompatActivity {
         personajes =(Button) findViewById(R.id.personajesb);
         veureRanking = (Button) findViewById(R.id.btnRanking) ;
         Intent intent = getIntent();
-        value = intent.getStringExtra("jugador"); //if it's a string you stored.
+        ; //if it's a string you stored.
 
         provarMiniJoc = (Button) findViewById(R.id.provarminijoc);
 
         try {
-            jugador = mapper.readValue(value, Jugador.class);
-            mijugador = jugador;
+
+            mijugador = SingletonDades.getInstancia().getJugador();
             EditText fab = (EditText) findViewById(R.id.namebox);
             fab.setEnabled(false);
-            fab.setText(jugador.getNom());
+            fab.setText(mijugador.getNom());
 
             fab = (EditText) findViewById(R.id.emailbox);
             fab.setEnabled(false);
-            fab.setText(jugador.getEmail());
+            fab.setText(mijugador.getEmail());
 
             final String mail = ((EditText) findViewById(R.id.emailbox)).getText().toString();
 
@@ -87,7 +86,6 @@ public class DatosPersonales extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intentMapa = new Intent(DatosPersonales.this, MapaActivity.class);
-                intentMapa.putExtra("jugador", value);
                 DatosPersonales.this.startActivity(intentMapa);
             }
         });
@@ -96,13 +94,6 @@ public class DatosPersonales extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intentModificar = new Intent(DatosPersonales.this, ModificarJugador.class);
-
-                try {
-
-                    intentModificar.putExtra("jugador",value);
-                } catch ( Exception e) {
-                    e.printStackTrace();
-                }
                 startActivity(intentModificar);
 
             }
@@ -112,11 +103,6 @@ public class DatosPersonales extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intentRanking = new Intent(DatosPersonales.this, Ranking.class);
-                try {
-                    intentRanking.putExtra("jugador",value);
-                } catch ( Exception e) {
-                    e.printStackTrace();
-                }
                 startActivity(intentRanking);
             }
         });
@@ -125,12 +111,6 @@ public class DatosPersonales extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intentEliminar = new Intent(DatosPersonales.this, BaixaJugador.class);
-                try {
-                    intentEliminar.putExtra("jugador", value);
-
-                }catch (Exception e){
-                    e.getCause();
-                }
                 startActivity(intentEliminar);
 
             }
@@ -140,13 +120,6 @@ public class DatosPersonales extends AppCompatActivity {
             public void onClick(View view) {
                 Intent myIntent = new Intent(DatosPersonales.this, PersonajesActivity.class);
                 ObjectMapper mapper = new ObjectMapper();
-
-                try {
-                    String jsonResult = mapper.writeValueAsString(mijugador);
-                    myIntent.putExtra("jugador",jsonResult);
-                } catch (JsonProcessingException e) {
-                    e.printStackTrace();
-                }
                 startActivity(myIntent);
             }
         });

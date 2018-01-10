@@ -31,7 +31,6 @@ public class BaixaJugador extends AppCompatActivity {
     private ApiService mRestAdapter;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,19 +38,9 @@ public class BaixaJugador extends AppCompatActivity {
 
         //servei rest, singleton
         mRestAdapter =  ApiAdapter.getApiService();
-
-        Intent intent = getIntent();
-        value = intent.getStringExtra("jugador"); //if it's a string you stored.
-
-        try {
-            jugador = mapper.readValue(value, Jugador.class);
-
-            usuariMarxant.setText("Segu que vols marxar? " +jugador.getNom() + ".");
+       jugador = SingletonDades.getInstancia().getJugador();
 
 
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
 
 
      /*   tornar = (Button) findViewById(R.id.btnTornar);

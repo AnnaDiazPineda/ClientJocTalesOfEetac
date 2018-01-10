@@ -205,15 +205,10 @@ public class LoginActivity extends AppCompatActivity {
                             showLoginError("login correcte");
                             Intent myIntent = new Intent(LoginActivity.this, DatosPersonales.class);
                             Jugador jug = response.body();
-                            ObjectMapper mapper = new ObjectMapper();
-                            try {
-                                String jsonResult = mapper.writeValueAsString(jug);
-                                myIntent.putExtra("jugador", jsonResult); //Optional parameters
-                                showProgress(false);
-                                LoginActivity.this.startActivity(myIntent);
-                            }catch (Exception e){
-                                showLoginError("no serializable");
-                            }
+                            SingletonDades.getInstancia().setJugador(jug);
+                            showProgress(false);
+                            LoginActivity.this.startActivity(myIntent);
+
                         //enviar jugador rebut nova activitat
                             break;
                         case 204://la contrassenya esta malament
