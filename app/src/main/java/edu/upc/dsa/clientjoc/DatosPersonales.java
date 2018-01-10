@@ -8,25 +8,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import java.io.IOException;
-import java.util.ArrayList;
-
 import edu.upc.dsa.MiniJoc.MiniJoc;
-import edu.upc.dsa.beans.Interactivo;
 import edu.upc.dsa.beans.Jugador;
 
-import edu.upc.dsa.beans.mapa.Mapa;
-import edu.upc.dsa.clientjoc.Grafics.MapaView;
 import edu.upc.dsa.clientjoc.inputOutput.ApiAdapter;
 import edu.upc.dsa.clientjoc.inputOutput.ApiService;
-
-import edu.upc.dsa.clientjoc.inputOutput.Response.Login;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class DatosPersonales extends AppCompatActivity {
 

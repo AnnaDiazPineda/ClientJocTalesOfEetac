@@ -5,7 +5,11 @@ public class Login {
         nom ="";
         password="";
     }
-//****
+
+    public Login(String nom, String pass){
+        password = pass;
+        this.nom = nom;
+    }
     public Login(String pass){
         password = pass;
     }

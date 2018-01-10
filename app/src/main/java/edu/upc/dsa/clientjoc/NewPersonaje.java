@@ -1,13 +1,11 @@
 package edu.upc.dsa.clientjoc;
 
-import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -16,16 +14,10 @@ import android.widget.Toast;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import java.io.IOException;
-
-import edu.upc.dsa.beans.Answer;
 import edu.upc.dsa.beans.Jugador;
 import edu.upc.dsa.beans.Personatge;
 import edu.upc.dsa.clientjoc.inputOutput.ApiAdapter;
 import edu.upc.dsa.clientjoc.inputOutput.ApiService;
-import edu.upc.dsa.clientjoc.inputOutput.Registre;
-import edu.upc.dsa.clientjoc.inputOutput.Response.Login;
-import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;

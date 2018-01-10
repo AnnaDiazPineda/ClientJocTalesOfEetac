@@ -1,18 +1,15 @@
 package edu.upc.dsa.clientjoc.inputOutput;
 
 import java.util.ArrayList;
-import java.util.Collection;
 
 import edu.upc.dsa.beans.Answer;
 import edu.upc.dsa.beans.Jugador;
 
+import edu.upc.dsa.beans.Login;
 import edu.upc.dsa.beans.Partida;
 import edu.upc.dsa.beans.Personatge;
-import edu.upc.dsa.clientjoc.inputOutput.Response.Login;
 
-import okhttp3.ResponseBody;
 import retrofit2.Call;
-import retrofit2.Response;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
