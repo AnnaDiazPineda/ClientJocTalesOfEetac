@@ -6,53 +6,42 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import java.util.ArrayList;
+
 import edu.upc.dsa.beans.Jugador;
+import edu.upc.dsa.beans.Partida;
+import edu.upc.dsa.clientjoc.inputOutput.ApiAdapter;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class Ranking extends AppCompatActivity {
 
     private Button btnPersonal;
-    private  Button btnJugar;
-
+    private Button btnJugar;
+    private ListView miRankingList;
     private Jugador jugador = null;
     private String value;
     private ObjectMapper mapper = new ObjectMapper();
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ranking);
-
-        //convertint el jugador
         Intent intent = getIntent();
-        jugador =  SingletonDades.getInstancia().getJugador();
-
-        EditText posicio = (EditText) findViewById(R.id.posJugador);
-        posicio.setText(jugador.getId());
-
-        btnPersonal = (Button) findViewById(R.id.btnDatosPers);
-        btnJugar = (Button) findViewById(R.id.btnJoc);
-
-
-        btnPersonal.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intentDades = new Intent(Ranking.this, DatosPersonales.class);
-                startActivity(intentDades);
-
-            }
-        });
-
-        btnJugar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intentJugar = new Intent(Ranking.this, MapaActivity.class);
-                startActivity(intentJugar);
-
-            }
-        });
+        miRankingList = (ListView) findViewById(R.id.ranking);
+        ArrayList<Partida> miranking = getRankingFromServer();
+        ListAdapter adapter = new ListAdapter(Ranking.this, miranking);
+        miRankingList.setAdapter(adapter);
+    }
+    private ArrayList<Partida> getRankingFromServer() {
+        ArrayList<Partida> miranking = new ArrayList<Partida>();
+        Partida mipartida = new Partida(45, 200, "fefe");
+        miranking.add(mipartida);
+        return miranking;
     }
 }

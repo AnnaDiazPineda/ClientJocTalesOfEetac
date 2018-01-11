@@ -52,4 +52,28 @@ public class Objeto extends DAO implements Drawable, Interactivo{
     public void setValor(int valor) {
         this.valor = valor;
     }
+
+    public void dialegTrobat(final Personatge personatgeQueHaTrobat) {
+        final Dialogador dialeg =  ContexteDelJoc.getDialogador();
+        if(nombre.equals("excalibur")) {
+            dialeg.globus("Parece que has encontrado la famosa espada de Arturo....");
+            /*dialeg.globus("Si no respondes correctamente atente a la consecuencias....");
+
+            Decisio decisionBajaDefensaSiFalse= new Decisio() {
+                @Override
+                public void dotrue() {
+                    dialeg.globus("Parece que tienes la defensa tan baja que por el momento no te ha afectado....");
+                    personatgeQueHaTrobat.setDefensa(personatgeQueHaTrobat.getDefensa() + 10);
+                }
+
+                @Override
+                public void dofalse() {
+                    dialeg.globus("Vaya ahora eres más vulnerable....");
+                    personatgeQueHaTrobat.setDefensa(personatgeQueHaTrobat.getDefensa() - 10);
+                }
+            };
+            boolean answer = dialeg.siNoQuestion("De que pais seras rey si sacas la espada?","Inglaterra","Hawaii", decisionBajaDefensaSiFalse);
+        */
+        }
+    }
 }

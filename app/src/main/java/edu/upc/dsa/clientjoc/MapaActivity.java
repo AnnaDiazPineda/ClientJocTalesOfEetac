@@ -1,4 +1,6 @@
 package edu.upc.dsa.clientjoc;
+
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
@@ -16,6 +18,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import edu.upc.dsa.beans.ContexteDelJoc;
 import edu.upc.dsa.beans.Jugador;
 import edu.upc.dsa.beans.Personatge;
 import edu.upc.dsa.beans.mapa.Drawable;
@@ -31,7 +34,7 @@ import retrofit2.Response;
  * Created by Anna on 12/12/2017.
  */
 
-public class MapaActivity extends AppCompatActivity{
+public class MapaActivity extends AppCompatActivity {
     Mapa mapa;
     Personatge pers;
     private String value;
@@ -78,6 +81,8 @@ public class MapaActivity extends AppCompatActivity{
                 mapa.moure(0,+1,pers);
             }
         });
+
+        ContexteDelJoc.setDialogador(new DialogadorImplAndroid(this,getApplicationContext()));
 
     }
 

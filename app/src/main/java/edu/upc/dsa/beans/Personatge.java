@@ -1,6 +1,9 @@
 package edu.upc.dsa.beans;
 
 import android.content.Context;
+import android.content.DialogInterface;
+import android.support.v7.app.AlertDialog;
+import android.view.Gravity;
 import android.widget.Toast;
 
 import edu.upc.dsa.DAOG.DAO;
@@ -10,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Personatge extends DAO implements Drawable, Interactuador {
+    private boolean response;
     public String nombre;
     public int nivel;
     public int ataque;
@@ -117,16 +121,12 @@ public class Personatge extends DAO implements Drawable, Interactuador {
     public String getNombre() {
         return nombre;
     }
-
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-
-
     public int getNivel() {
         return nivel;
     }
-
     public void setNivel(int nivel) {
         this.nivel = nivel;
     }
@@ -167,7 +167,8 @@ public class Personatge extends DAO implements Drawable, Interactuador {
     @Override
     public void interactua(Interactivo interactivo) {
         if (interactivo instanceof  Objeto){
-            arrMisObjetos.add((Objeto) interactivo);
+            ((Objeto) interactivo).dialegTrobat(this);
+            this.arrMisObjetos.add((Objeto) interactivo);
             return;
         }
         if (interactivo instanceof  Monstruo){
@@ -186,6 +187,36 @@ public class Personatge extends DAO implements Drawable, Interactuador {
 
 
     }
+
+    public void restarDefensa(){
+        if(this.getDefensa()==0){
+            Toast toast = Toast.makeText(getAppContext(), "Parece que tienes la defensa tan baja que por el momento no te ha afectado....", Toast.LENGTH_SHORT);
+            toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+            toast.show();
+        }
+        else{Toast toast = Toast.makeText(getAppContext(), "Vaya ahora eres más vulnerable....", Toast.LENGTH_SHORT);
+            toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+            toast.show();
+            this.setDefensa(this.getDefensa()-1);
+        }
+    }
+    public void message(Context context){
+
+
+        }
+    public void aumentarDefensa(){
+        if(this.getDefensa()==0){
+            Toast toast = Toast.makeText(getAppContext(), "Parece que tienes la defensa tan baja que por el momento no te ha afectado....", Toast.LENGTH_SHORT);
+            toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+            toast.show();
+        }
+        else{Toast toast = Toast.makeText(getAppContext(), "Vaya ahora eres más vulnerable....", Toast.LENGTH_SHORT);
+            toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+            toast.show();
+            this.setDefensa(this.getDefensa()-1);
+        }
+    }
+
     public static Context getAppContext() {
         return Personatge.getAppContext();
     }

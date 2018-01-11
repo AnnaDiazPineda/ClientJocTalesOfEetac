@@ -1,6 +1,8 @@
 package edu.upc.dsa.beans.mapa;
 //un mapa es una col·leció de sprites
 
+import android.content.Context;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.upc.dsa.DAOG.DAOMapa;
 import edu.upc.dsa.beans.*;
