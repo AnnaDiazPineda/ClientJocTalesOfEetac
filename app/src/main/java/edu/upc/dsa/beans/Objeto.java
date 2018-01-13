@@ -57,7 +57,7 @@ public class Objeto extends DAO implements Drawable, Interactivo{
         final Dialogador dialeg =  ContexteDelJoc.getDialogador();
         if(nombre.equals("excalibur")) {
             dialeg.globus("Parece que has encontrado la famosa espada de Arturo....");
-            /*dialeg.globus("Si no respondes correctamente atente a la consecuencias....");
+            dialeg.globus("Si no respondes correctamente atente a la consecuencias....");
 
             Decisio decisionBajaDefensaSiFalse= new Decisio() {
                 @Override
@@ -73,7 +73,7 @@ public class Objeto extends DAO implements Drawable, Interactivo{
                 }
             };
             boolean answer = dialeg.siNoQuestion("De que pais seras rey si sacas la espada?","Inglaterra","Hawaii", decisionBajaDefensaSiFalse);
-        */
+
         }
     }
 }

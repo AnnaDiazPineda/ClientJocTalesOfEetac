@@ -20,9 +20,7 @@ public class DialogadorImplAndroid implements Dialogador {
         this.appcontext = appcontext;
     }
     public void globus(String missatge){
-        Toast toast = Toast.makeText(appcontext, missatge, Toast.LENGTH_SHORT);
-        toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
-        toast.show();
+        Toast.makeText(context, missatge, Toast.LENGTH_LONG).show();
     }
 
     @Override

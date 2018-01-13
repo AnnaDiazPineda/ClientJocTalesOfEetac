@@ -79,9 +79,9 @@ public class MapaActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 mapa.moure(0,+1,pers);
+
             }
         });
-
         ContexteDelJoc.setDialogador(new DialogadorImplAndroid(this,getApplicationContext()));
 
     }
@@ -97,7 +97,7 @@ public class MapaActivity extends AppCompatActivity {
             public void onResponse(Call<String> call, Response<String> response) {
                 switch (response.code()) {
                     case 200:
-                        showLoginError("mapa correcte");
+                        //showLoginError("mapa correcte");
                         String mapastr= response.body();
                         ObjectMapper mapper = new ObjectMapper();
                         mapper.enableDefaultTyping(ObjectMapper.DefaultTyping.NON_FINAL);
