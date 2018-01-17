@@ -6,6 +6,8 @@ import java.util.TimerTask;
 /**
  * Created by Marta on 12/1/2018.
  */
+//TODO: el mès important es afegir consola amb dialegs per poder treballar en el joc
+//TODO: falta també adapter del ranking estàtic de partides
 
 public class MyConsole {
     // cada cop que avança un tic agafem una nova paraula i l'afegim al text box anomenat consola nostre
@@ -29,10 +31,12 @@ public class MyConsole {
                 doStuff(parts,message.length());
                         }
         },0,3);
+
         if(i==message.length()){
             timer.cancel();
             //finalitza agregacio nova frase
         }
+
 
 
     }

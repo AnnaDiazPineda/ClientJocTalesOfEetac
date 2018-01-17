@@ -53,16 +53,21 @@ public class Objeto extends DAO implements Drawable, Interactivo{
         this.valor = valor;
     }
 
-    public void dialegTrobat(final Personatge personatgeQueHaTrobat) {
+    public boolean dialegTrobat(final Personatge personatgeQueHaTrobat) {
         final Dialogador dialeg =  ContexteDelJoc.getDialogador();
         if(nombre.equals("excalibur")) {
             dialeg.globus("Parece que has encontrado la famosa espada de Arturo....");
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
             dialeg.globus("Si no respondes correctamente atente a la consecuencias....");
 
             Decisio decisionBajaDefensaSiFalse= new Decisio() {
                 @Override
                 public void dotrue() {
-                    dialeg.globus("Parece que tienes la defensa tan baja que por el momento no te ha afectado....");
+                    dialeg.globus("Parece que conoces bien la espada, es toda tuya....");
                     personatgeQueHaTrobat.setDefensa(personatgeQueHaTrobat.getDefensa() + 10);
                 }
 
@@ -73,7 +78,8 @@ public class Objeto extends DAO implements Drawable, Interactivo{
                 }
             };
             boolean answer = dialeg.siNoQuestion("De que pais seras rey si sacas la espada?","Inglaterra","Hawaii", decisionBajaDefensaSiFalse);
-
+            return answer;
         }
+       return false;
     }
 }

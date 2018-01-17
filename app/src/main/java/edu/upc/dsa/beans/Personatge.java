@@ -167,8 +167,9 @@ public class Personatge extends DAO implements Drawable, Interactuador {
     @Override
     public void interactua(Interactivo interactivo) {
         if (interactivo instanceof  Objeto){
-            ((Objeto) interactivo).dialegTrobat(this);
-            this.arrMisObjetos.add((Objeto) interactivo);
+            if(((Objeto) interactivo).dialegTrobat(this))
+            {
+            this.arrMisObjetos.add((Objeto) interactivo);}
             return;
         }
         if (interactivo instanceof  Monstruo){

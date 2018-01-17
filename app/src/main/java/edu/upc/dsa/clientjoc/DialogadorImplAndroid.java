@@ -1,10 +1,15 @@
 package edu.upc.dsa.clientjoc;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.support.v7.app.AlertDialog;
 import android.view.Gravity;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 import edu.upc.dsa.beans.Decisio;
 import edu.upc.dsa.beans.Dialogador;
@@ -15,13 +20,20 @@ import edu.upc.dsa.beans.Dialogador;
 public class DialogadorImplAndroid implements Dialogador {
     Context context;
     Context appcontext;
+    int i;
+    String[]parts;
+
     public DialogadorImplAndroid(Context ctxt, Context appcontext){
         context = ctxt;
         this.appcontext = appcontext;
     }
     public void globus(String missatge){
-        Toast.makeText(context, missatge, Toast.LENGTH_LONG).show();
+        i=0;
+        String[]parts = missatge.split(" ");
+        TextView txtView = (TextView) ((Activity)context).findViewById(R.id.textView16);
+        txtView.append(missatge);
     }
+
 
     @Override
     public boolean siNoQuestion(String missatge, String trueStr, String falseStr, final Decisio decision) {
