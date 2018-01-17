@@ -6,6 +6,7 @@ import edu.upc.dsa.beans.Answer;
 import edu.upc.dsa.beans.Jugador;
 
 import edu.upc.dsa.beans.Login;
+import edu.upc.dsa.beans.Objeto;
 import edu.upc.dsa.beans.Partida;
 import edu.upc.dsa.beans.Personatge;
 
@@ -39,7 +40,8 @@ public interface ApiService {
 
     @POST("NewMapa/{idJugador}")
     Call<String> newMapa(@Path("idJugador")int id, @Body Personatge personatge);
-
+    @POST("addObject/{idpersonatge}")
+    Call<String> addNewObject(@Path("idpersonatge")int id, @Body Objeto myobject);
     @POST("Jugador/{nomPersonatge}/{tipus}/{idjugador}")
     Call<Personatge> newPersonaje(@Path("nomPersonatge") String nomPersonatge, @Path("tipus") String type, @Path("idjugador") String id);
     @POST("NewMapa/{idJugador}")

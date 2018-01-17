@@ -42,7 +42,12 @@
         <activity android:name=".NewPersonaje" />
         <activity android:name=".BaixaJugador" />
         <activity android:name="edu.upc.dsa.MiniJoc.MiniJoc" />
-        <activity android:name=".popUps.popUpUno"></activity>
+        <activity android:name="edu.upc.dsa.MiniJoc.BreakoutGame"
+        android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
+        android:screenOrientation="landscape"
+        />
+        <activity android:name=".popUps.popUpUno"
+            ></activity>
     </application>
 
 </manifest>

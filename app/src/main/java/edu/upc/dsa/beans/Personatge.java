@@ -8,6 +8,11 @@ import android.widget.Toast;
 
 import edu.upc.dsa.DAOG.DAO;
 import edu.upc.dsa.beans.mapa.Drawable;
+import edu.upc.dsa.beans.mapa.FocCell;
+import edu.upc.dsa.beans.mapa.Mapa;
+import edu.upc.dsa.beans.mapa.PortaCell;
+import edu.upc.dsa.clientjoc.inputOutput.ApiAdapter;
+import retrofit2.Call;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -155,6 +160,23 @@ public class Personatge extends DAO implements Drawable, Interactuador {
         this.resistencia = resistencia;
     }
 
+    public void addMochila(Objeto newObject){
+        this.arrMisObjetos.add(newObject);
+
+    }
+    public boolean useWater(){
+        int i=0;
+        boolean encontradoAgua = false;
+        while(i<this.getArrMisObjetos().size()&&!encontradoAgua){
+            if(this.getArrMisObjetos().get(i).getNombre().equals("aigua"))
+            {
+                this.arrMisObjetos.remove(i);
+                return true;
+            }
+
+        }
+        return false;
+    }
 
     public int getTipo() {
         return tipo;
@@ -165,60 +187,99 @@ public class Personatge extends DAO implements Drawable, Interactuador {
     }
 
     @Override
-    public void interactua(Interactivo interactivo) {
-        if (interactivo instanceof  Objeto){
+    public boolean interactua(Interactivo interactivo,final Mapa mapa,final int x,final int y) {
+        /*if (interactivo instanceof  Objeto){
             if(((Objeto) interactivo).dialegTrobat(this))
             {
-            this.arrMisObjetos.add((Objeto) interactivo);}
-            return;
+                 this.arrMisObjetos.add((Objeto) interactivo);
+                 ContexteDelJoc.getDialogador().globus("Has recollit un: "+interactivo.getClass());
+            }
+            return true;
+        }*/
+        if (interactivo instanceof  Objeto){
+            switch(((Objeto) interactivo).getTipo()){
+
+                case "aigua":{
+                    this.addMochila((Objeto) interactivo);
+                    mapa.buidarCela(x,y);
+                    }break;
+                case "llave":{
+                    this.addMochila((Objeto) interactivo);
+                    mapa.buidarCela(x,y);
+                }
+                break;
+
+            }
+
+        }
+        if(interactivo instanceof PortaCell){
+
+
+        }
+        if(interactivo instanceof FocCell){
+            boolean waterIsPresent = useWater();
+            if(waterIsPresent){
+                ContexteDelJoc.getDialogador().globus("Fuego apagado");
+                mapa.buidarCela(x,y);
+
+            }
+            else{
+                ContexteDelJoc.getDialogador().globus("No tienes suficiente agua para apagar el fuego");
+            }
+
         }
         if (interactivo instanceof  Monstruo){
-            Monstruo m = (Monstruo) interactivo;
-            if(m.getNomMonstruo()== "trump")
-            {
-                Toast toastMonstruo = Toast.makeText(getAppContext(),"Has trobat al trump, A lluitar!", Toast.LENGTH_LONG);
-                toastMonstruo.show();
-            }
-            if(Math.random()>0.5) {
-                this.setDefensa(0);
-            }
 
-            return;
+            Monstruo m = (Monstruo) interactivo;
+            ContexteDelJoc.getDialogador().globus("Has trobat un monstre");
+            final Dialogador dialeg = ContexteDelJoc.getDialogador();
+            if(consultarLlave()){
+            Decisio decisionBajaDefensaSiFalse= new Decisio() {
+                @Override
+                public void dotrue() {
+                    dialeg.globus("Que sabio, no puedo interponeme en tu camino, pasa..");
+                    mapa.buidarCela(x,y);
+                    //mapa.abrirpuerta(); cambiar el drawable???//
+                }
+
+                @Override
+                public void dofalse() {
+                    dialeg.globus("Mentira, aquí seguire hasta que me respondas bién");
+                }
+            };
+            boolean answer = dialeg.siNoQuestion("De que color era el caballo blanco de santiago?","Blanco","Gris", decisionBajaDefensaSiFalse);
+
+
+            return false;
+        }
+        else{
+                dialeg.globus("Busca la llave antes de interntar continuar");
+            }
         }
 
+return false;
+    }
 
+    private boolean consultarLlave() {
+        int i =0;
+        boolean encontrado = false;
+        while(i<this.arrMisObjetos.size()){
+            if(this.arrMisObjetos.get(i).getNombre().equals("llave")){
+                return true;
+            }
+
+        }
+        return false;
     }
 
     public void restarDefensa(){
-        if(this.getDefensa()==0){
-            Toast toast = Toast.makeText(getAppContext(), "Parece que tienes la defensa tan baja que por el momento no te ha afectado....", Toast.LENGTH_SHORT);
-            toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
-            toast.show();
-        }
-        else{Toast toast = Toast.makeText(getAppContext(), "Vaya ahora eres más vulnerable....", Toast.LENGTH_SHORT);
-            toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
-            toast.show();
-            this.setDefensa(this.getDefensa()-1);
-        }
+
     }
     public void message(Context context){
 
 
         }
     public void aumentarDefensa(){
-        if(this.getDefensa()==0){
-            Toast toast = Toast.makeText(getAppContext(), "Parece que tienes la defensa tan baja que por el momento no te ha afectado....", Toast.LENGTH_SHORT);
-            toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
-            toast.show();
-        }
-        else{Toast toast = Toast.makeText(getAppContext(), "Vaya ahora eres más vulnerable....", Toast.LENGTH_SHORT);
-            toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
-            toast.show();
-            this.setDefensa(this.getDefensa()-1);
-        }
-    }
 
-    public static Context getAppContext() {
-        return Personatge.getAppContext();
     }
 }

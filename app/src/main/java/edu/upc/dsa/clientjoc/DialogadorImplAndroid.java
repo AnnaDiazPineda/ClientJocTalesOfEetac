@@ -31,13 +31,23 @@ public class DialogadorImplAndroid implements Dialogador {
         i=0;
         String[]parts = missatge.split(" ");
         TextView txtView = (TextView) ((Activity)context).findViewById(R.id.textView16);
-        txtView.append(missatge);
+        if(txtView.getText().length()>60)
+        {
+            txtView.setText("");
+            txtView.append(missatge);
+        }
+        else{
+        txtView.append(missatge);}
     }
 
 
     @Override
     public boolean siNoQuestion(String missatge, String trueStr, String falseStr, final Decisio decision) {
-
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
         alertDialogBuilder.setTitle("Responde:");
         alertDialogBuilder.setMessage(missatge).setCancelable(false)

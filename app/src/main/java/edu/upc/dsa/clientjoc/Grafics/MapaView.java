@@ -150,6 +150,9 @@ public class MapaView extends SurfaceView {
             if(obj.getTipo().equals("espada")) {
                 type = R.mipmap.espasa;
             }
+            if(obj.getTipo().equals("aigua")) {
+                type = R.mipmap.aigua;
+            }
             if(obj.getTipo().equals("casco")) {
                 type = R.mipmap.helmet;
             }

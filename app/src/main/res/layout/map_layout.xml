@@ -136,7 +136,7 @@
             android:layout_height="wrap_content"
             android:text="TextView"
             android:minLines = "2"
-            android:maxLines="17"/>
+            android:maxLines="4"/>
 
 
     </TableRow>

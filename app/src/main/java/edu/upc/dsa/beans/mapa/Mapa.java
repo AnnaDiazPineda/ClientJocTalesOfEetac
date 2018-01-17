@@ -58,8 +58,6 @@ public class Mapa {
         return columns.get(x).rows.get(y);
     }
     public void moure(int amuntInc, int esquerraInc, Drawable amover) {
-//TODO: Llogica de combat/ cambiar coses quant es fa colisió amb monstre o objecte  1h
-//TODO: toasts(bocadillos de texto) a sobre del jugador   2h
 
         int x = this.doGetDrawableIndexX(amover);
         int y = this.doGetDrawableIndexY(amover);
@@ -67,19 +65,18 @@ public class Mapa {
             return;
         }
         if(encuentroObjetoInteractivo(x +esquerraInc, y + amuntInc) && amover instanceof Interactuador){
-
+            boolean respuesta = false;
             Drawable cosaConLaQueHaColisionadoAmover = this.doGetElement(x +esquerraInc, y + amuntInc);
-            //interactua es la funció que es troba dins personatge
-            ((Interactuador)amover).interactua((Interactivo)cosaConLaQueHaColisionadoAmover);
-
-            //TODO: post personaje con nuevo objeto o nueva vida/defensa ... al servidor
+            respuesta = ((Interactuador)amover).interactua((Interactivo)cosaConLaQueHaColisionadoAmover,this,x+esquerraInc,y+amuntInc);
+            if(respuesta ==  true) {
+                this.putElement(x + esquerraInc, y + amuntInc, amover);
+                buidarCela(x, y);
+            }
         }
-        this.putElement( x+esquerraInc,y+amuntInc,amover);
-        buidarCela(x,y);
-
-           /*
-       */
-        //post personaje a JSONSEVICE
+        else {
+            buidarCela(x,y);
+            this.putElement(x + esquerraInc, y + amuntInc, amover);
+        }
     }
 
     private boolean encuentroObjetoInteractivo(int x, int y) {
@@ -89,7 +86,7 @@ public class Mapa {
         return false;
     }
 
-    private void buidarCela(int x, int y){
+    public void buidarCela(int x, int y){
         this.putElement(x,y,new EmptyCell());
     }
 
@@ -160,5 +157,16 @@ public class Mapa {
         }
         return null;
     }
+
+    /*public void abrirpuerta() {
+        for (int x = 0; x < this.doGetWidth(); x++) {
+            for (int y = 0; x < columns.get(x).getRows().size(); y++) {
+                if (columns.get(x).rows.get(y) instanceof PortaCell) {
+
+
+                }
+                }
+
+    }*/
 }
     
