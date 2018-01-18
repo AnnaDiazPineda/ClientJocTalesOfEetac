@@ -1,18 +1,11 @@
 package edu.upc.dsa.beans;
 
-import android.content.Context;
-import android.content.DialogInterface;
-import android.support.v7.app.AlertDialog;
-import android.view.Gravity;
-import android.widget.Toast;
-
 import edu.upc.dsa.DAOG.DAO;
 import edu.upc.dsa.beans.mapa.Drawable;
 import edu.upc.dsa.beans.mapa.FocCell;
 import edu.upc.dsa.beans.mapa.Mapa;
 import edu.upc.dsa.beans.mapa.PortaCell;
-import edu.upc.dsa.clientjoc.inputOutput.ApiAdapter;
-import retrofit2.Call;
+import edu.upc.dsa.beans.mapa.PortaCellOberta;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -205,14 +198,24 @@ public class Personatge extends DAO implements Drawable, Interactuador {
         }
         if (interactivo instanceof PortaCell) {
 
-            if (((PortaCell) interactivo).getEstado() == 1)
-                ContexteDelJoc.getDialogador().globus("La puerta parece que esta abierta...");
+            /*if (((PortaCell) interactivo).dogetEstado() == 1)
+                ContexteDelJoc.getDialogador().globus("La puerta parece que esta abierta...");*/
             //------> enviem seguent nivell i personatge
             //------>rebem nou mapa
             //enviem servidor nivell, personatge
 
 
         }
+        if (interactivo instanceof PortaCellOberta) {
+
+            if(x > 4) {
+                this.nivel++;
+                //saveMapaNivel
+                ContexteDelJoc.loadNextMapa();
+            }
+        }
+
+
         if (interactivo instanceof FocCell) {
             boolean waterIsPresent = useWater();
             if (waterIsPresent) {
@@ -229,7 +232,7 @@ public class Personatge extends DAO implements Drawable, Interactuador {
             Monstruo m = (Monstruo) interactivo;
             ContexteDelJoc.getDialogador().globus("Has trobat un monstre");
             final Dialogador dialeg = ContexteDelJoc.getDialogador();
-            if (consultarLlave()) {
+            /*if (consultarLlave()) {*/
                 Decisio decisionBajaDefensaSiFalse = new Decisio() {
                     @Override
                     public void dotrue() {
@@ -247,10 +250,10 @@ public class Personatge extends DAO implements Drawable, Interactuador {
 
 
                 return false;
-            } else {
+            } /*else {
                 dialeg.globus("Busca la llave antes de interntar continuar");
-            }
-        }
+            }*/
+
 
         return false;
     }
@@ -281,13 +284,12 @@ public class Personatge extends DAO implements Drawable, Interactuador {
     }
 
     public void abrirPuerta(Mapa mapa) {
-        //NIVELL ACTUAL ---> SEGUENT SERA +1
+
         for (int x = 0; x < mapa.doGetWidth(); x++) {
-            if (mapa.columns.get(x).getRows().get(x) instanceof PortaCell) {
-                PortaCell mipuerta = ((PortaCell) mapa.columns.get(x).getRows().get(x));
-                if (mipuerta.getNivelActual() == mapa.getNivel()) {
-                    mipuerta.setEstado(1);//obrim porta
-                } else {}
+            for (int y = 0; y < mapa.columns.get(x).getRows().size(); y++) {
+                if (mapa.columns.get(x).getRows().get(y) instanceof PortaCell) {
+                    mapa.putElement(x,y, new PortaCellOberta());
+                }
             }
         }
     }

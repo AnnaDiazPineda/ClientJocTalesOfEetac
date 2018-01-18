@@ -23,6 +23,7 @@ import edu.upc.dsa.beans.mapa.FocCell;
 import edu.upc.dsa.beans.mapa.Mapa;
 import edu.upc.dsa.beans.mapa.ParedCell;
 import edu.upc.dsa.beans.mapa.PedraCell;
+import edu.upc.dsa.beans.mapa.PortaCellOberta;
 import edu.upc.dsa.beans.mapa.PortaCell;
 import edu.upc.dsa.clientjoc.R;
 
@@ -165,8 +166,12 @@ public class MapaView extends SurfaceView {
             type = R.mipmap.pedra;
         }
         if(dr instanceof PortaCell) {
-            type = R.mipmap.porta1;
+                 type = R.mipmap.doorclose;
         }
+        if(dr instanceof PortaCellOberta) {
+            type = R.mipmap.dooropen;
+        }
+
         if (dr instanceof FocCell){
             type = R.mipmap.foccell;
         }

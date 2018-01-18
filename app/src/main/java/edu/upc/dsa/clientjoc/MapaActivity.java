@@ -144,4 +144,44 @@ public class MapaActivity extends AppCompatActivity {
     }
 
 
+
+
+    public void crearNewMapaPerPersonatgeSellecionat() {
+
+        // If jugador no te personatge , dir que es crei un al menu android corresponent i interrompre la crida a NewMapa
+
+        Call<String> mapaCall = ApiAdapter.getApiService().newMapa(mijugador.getId(), pers);
+
+        mapaCall.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                switch (response.code()) {
+                    case 200:
+                        showLoginError("mapa creat ! nivell associat al mapa:");
+                        getMapaFromServer();
+                        //enviar jugador rebut nova activitat
+                        break;
+                    case 204://cas de no hi ha partida desada
+                        Context context = getApplicationContext();
+                        CharSequence text = "ERROR CREANT UNA";
+                        int duration = Toast.LENGTH_SHORT;
+                        Toast toast = Toast.makeText(context, text, duration);
+                        toast.show();
+                        finish();
+                        break;
+                    case 500://el email no existeix
+                        showLoginError("500");
+                        break;
+                }
+            }
+
+            public void onFailure(Call<String> call, Throwable t) {
+                showLoginError("error");
+                t.printStackTrace();
+                return;
+            }
+        });
+    }
+
+
 }

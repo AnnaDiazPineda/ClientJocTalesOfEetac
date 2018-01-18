@@ -158,7 +158,7 @@ public class Mapa {
 
     public Personatge findPersonatge() {
         for (int x = 0; x < this.doGetWidth(); x++) {
-            for (int y = 0; x < columns.get(x).getRows().size(); y++) {
+            for (int y = 0; y < columns.get(x).getRows().size(); y++) {
                 if (columns.get(x).rows.get(y) instanceof Personatge) {
                     return (Personatge) columns.get(x).rows.get(y);
                 }

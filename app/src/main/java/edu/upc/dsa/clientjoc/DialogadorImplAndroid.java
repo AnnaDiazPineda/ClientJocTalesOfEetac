@@ -18,12 +18,12 @@ import edu.upc.dsa.beans.Dialogador;
  */
 
 public class DialogadorImplAndroid implements Dialogador {
-    Context context;
+    MapaActivity context;
     Context appcontext;
     int i;
     String[]parts;
 
-    public DialogadorImplAndroid(Context ctxt, Context appcontext){
+    public DialogadorImplAndroid(MapaActivity ctxt, Context appcontext){
         context = ctxt;
         this.appcontext = appcontext;
     }
@@ -64,6 +64,11 @@ public class DialogadorImplAndroid implements Dialogador {
         AlertDialog alertDialog = alertDialogBuilder.create();
         alertDialog.show();
         return true;
+    }
+
+    @Override
+    public void loadNextMapa() {
+        context.crearNewMapaPerPersonatgeSellecionat();
     }
 
 }
