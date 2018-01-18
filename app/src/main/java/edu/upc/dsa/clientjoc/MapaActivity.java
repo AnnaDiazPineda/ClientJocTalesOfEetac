@@ -104,6 +104,7 @@ public class MapaActivity extends AppCompatActivity {
 
                         try {
                             mapa = mapper.readValue(mapastr, Mapa.class);
+                            ContexteDelJoc.getDialogador().globus("el nivell associat al mapa es:"+mapa.getNivel());
                             MapaView v = (MapaView)findViewById(R.id.surfaceView1);
                             v.setMap(mapa);
 

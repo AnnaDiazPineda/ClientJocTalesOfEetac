@@ -89,7 +89,7 @@ public class PersonajesActivity extends AppCompatActivity {
             public void onResponse(Call<String> call, Response<String> response) {
                 switch (response.code()) {
                     case 200:
-                        showLoginError("mapa creat !");
+                        showLoginError("mapa creat ! nivell associat al mapa:");
                         //enviar jugador rebut nova activitat
                         break;
                     case 204://cas de no hi ha partida desada

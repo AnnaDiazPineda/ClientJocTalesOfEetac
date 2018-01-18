@@ -121,7 +121,7 @@ public class MapaView extends SurfaceView {
         //TODO: posar-nos d'accord en com fer els personatges i quins utilitzar depenent el nivell
         if(dr instanceof Personatge){
             if((((Personatge)dr).defensa == 0) || (((Personatge)dr).nivel == 0)) {
-                type = R.mipmap.pers_indefens;
+                type = R.mipmap.tipo1;
             } else
             /*if(((Personatge)dr).nivel == 1){
                 type = R.mipmap.pers_indefens;
@@ -165,7 +165,7 @@ public class MapaView extends SurfaceView {
             type = R.mipmap.pedra;
         }
         if(dr instanceof PortaCell) {
-            type = R.mipmap.porta;
+            type = R.mipmap.porta1;
         }
         if (dr instanceof FocCell){
             type = R.mipmap.foccell;

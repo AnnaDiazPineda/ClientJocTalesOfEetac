@@ -15,6 +15,15 @@ import java.util.ArrayList;
 public class Mapa {
 
     public ArrayList<Column> columns;
+    public int getNivel() {
+        return nivel;
+    }
+
+    public void setNivel(int nivel) {
+        this.nivel = nivel;
+    }
+
+    private int nivel;
 
 
     public Mapa() {

@@ -36,8 +36,7 @@ public class Personatge extends DAO implements Drawable, Interactuador {
     }
 
 
-
-    public Personatge(String nombre, int n, int a, int d, int r,int tipo)//constructor
+    public Personatge(String nombre, int n, int a, int d, int r, int tipo)//constructor
     {
         this.nombre = nombre;
         this.nivel = n;
@@ -60,9 +59,10 @@ public class Personatge extends DAO implements Drawable, Interactuador {
         arrMisObjetos = new ArrayList<Objeto>();
 
     }
-    public Personatge(int tipus, String nombre){
 
-        switch(tipus){
+    public Personatge(int tipus, String nombre) {
+
+        switch (tipus) {
             case 0://personatge defensiu
             {
                 this.nombre = nombre;
@@ -96,8 +96,7 @@ public class Personatge extends DAO implements Drawable, Interactuador {
                 arrMisObjetos = new ArrayList<Objeto>();
             }
             break;
-            case 3:
-            {
+            case 3: {
                 this.nombre = nombre;
                 this.nivel = 0;
                 this.ataque = 1;
@@ -107,8 +106,7 @@ public class Personatge extends DAO implements Drawable, Interactuador {
                 arrMisObjetos = new ArrayList<Objeto>();
             }
             break;
-            case 4:
-            {
+            case 4: {
                 this.nombre = nombre;
                 this.nivel = 0;
                 this.ataque = 0;
@@ -123,15 +121,19 @@ public class Personatge extends DAO implements Drawable, Interactuador {
 
 
     }//constructor bytype
+
     public String getNombre() {
         return nombre;
     }
+
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
+
     public int getNivel() {
         return nivel;
     }
+
     public void setNivel(int nivel) {
         this.nivel = nivel;
     }
@@ -160,23 +162,11 @@ public class Personatge extends DAO implements Drawable, Interactuador {
         this.resistencia = resistencia;
     }
 
-    public void addMochila(Objeto newObject){
+    public void addMochila(Objeto newObject) {
         this.arrMisObjetos.add(newObject);
 
     }
-    public boolean useWater(){
-        int i=0;
-        boolean encontradoAgua = false;
-        while(i<this.getArrMisObjetos().size()&&!encontradoAgua){
-            if(this.getArrMisObjetos().get(i).getNombre().equals("aigua"))
-            {
-                this.arrMisObjetos.remove(i);
-                return true;
-            }
 
-        }
-        return false;
-    }
 
     public int getTipo() {
         return tipo;
@@ -187,7 +177,7 @@ public class Personatge extends DAO implements Drawable, Interactuador {
     }
 
     @Override
-    public boolean interactua(Interactivo interactivo,final Mapa mapa,final int x,final int y) {
+    public boolean interactua(Interactivo interactivo, final Mapa mapa, final int x, final int y) {
         /*if (interactivo instanceof  Objeto){
             if(((Objeto) interactivo).dialegTrobat(this))
             {
@@ -196,75 +186,80 @@ public class Personatge extends DAO implements Drawable, Interactuador {
             }
             return true;
         }*/
-        if (interactivo instanceof  Objeto){
-            switch(((Objeto) interactivo).getTipo()){
+        if (interactivo instanceof Objeto) {
+            switch (((Objeto) interactivo).getTipo()) {
 
-                case "aigua":{
+                case "aigua": {
                     this.addMochila((Objeto) interactivo);
-                    mapa.buidarCela(x,y);
-                    }break;
-                case "llave":{
+                    mapa.buidarCela(x, y);
+                }
+                break;
+                case "llave": {
                     this.addMochila((Objeto) interactivo);
-                    mapa.buidarCela(x,y);
+                    mapa.buidarCela(x, y);
                 }
                 break;
 
             }
 
         }
-        if(interactivo instanceof PortaCell){
+        if (interactivo instanceof PortaCell) {
+
+            if (((PortaCell) interactivo).getEstado() == 1)
+                ContexteDelJoc.getDialogador().globus("La puerta parece que esta abierta...");
+            //------> enviem seguent nivell i personatge
+            //------>rebem nou mapa
+            //enviem servidor nivell, personatge
 
 
         }
-        if(interactivo instanceof FocCell){
+        if (interactivo instanceof FocCell) {
             boolean waterIsPresent = useWater();
-            if(waterIsPresent){
+            if (waterIsPresent) {
                 ContexteDelJoc.getDialogador().globus("Fuego apagado");
-                mapa.buidarCela(x,y);
+                mapa.buidarCela(x, y);
 
-            }
-            else{
+            } else {
                 ContexteDelJoc.getDialogador().globus("No tienes suficiente agua para apagar el fuego");
             }
 
         }
-        if (interactivo instanceof  Monstruo){
+        if (interactivo instanceof Monstruo) {
 
             Monstruo m = (Monstruo) interactivo;
             ContexteDelJoc.getDialogador().globus("Has trobat un monstre");
             final Dialogador dialeg = ContexteDelJoc.getDialogador();
-            if(consultarLlave()){
-            Decisio decisionBajaDefensaSiFalse= new Decisio() {
-                @Override
-                public void dotrue() {
-                    dialeg.globus("Que sabio, no puedo interponeme en tu camino, pasa..");
-                    mapa.buidarCela(x,y);
-                    //mapa.abrirpuerta(); cambiar el drawable???//
-                }
+            if (consultarLlave()) {
+                Decisio decisionBajaDefensaSiFalse = new Decisio() {
+                    @Override
+                    public void dotrue() {
+                        dialeg.globus("Que sabio, no puedo interponeme en tu camino, pasa..");
+                        mapa.buidarCela(x, y);
+                        abrirPuerta(mapa);
+                        }
 
-                @Override
-                public void dofalse() {
-                    dialeg.globus("Mentira, aquí seguire hasta que me respondas bién");
-                }
-            };
-            boolean answer = dialeg.siNoQuestion("De que color era el caballo blanco de santiago?","Blanco","Gris", decisionBajaDefensaSiFalse);
+                    @Override
+                    public void dofalse() {
+                        dialeg.globus("Mentira, aquí seguire hasta que me respondas correctamente");
+                    }
+                };
+                boolean answer = dialeg.siNoQuestion("De que color era el caballo blanco de santiago?", "Blanco", "Gris", decisionBajaDefensaSiFalse);
 
 
-            return false;
-        }
-        else{
+                return false;
+            } else {
                 dialeg.globus("Busca la llave antes de interntar continuar");
             }
         }
 
-return false;
+        return false;
     }
 
     private boolean consultarLlave() {
-        int i =0;
+        int i = 0;
         boolean encontrado = false;
-        while(i<this.arrMisObjetos.size()){
-            if(this.arrMisObjetos.get(i).getNombre().equals("llave")){
+        while (i < this.arrMisObjetos.size()) {
+            if (this.arrMisObjetos.get(i).getNombre().equals("llave")) {
                 return true;
             }
 
@@ -272,14 +267,28 @@ return false;
         return false;
     }
 
-    public void restarDefensa(){
-
-    }
-    public void message(Context context){
-
+    public boolean useWater() {
+        int i = 0;
+        boolean encontradoAgua = false;
+        while (i < this.getArrMisObjetos().size() && !encontradoAgua) {
+            if (this.getArrMisObjetos().get(i).getNombre().equals("aigua")) {
+                this.arrMisObjetos.remove(i);
+                return true;
+            }
 
         }
-    public void aumentarDefensa(){
+        return false;
+    }
 
+    public void abrirPuerta(Mapa mapa) {
+        //NIVELL ACTUAL ---> SEGUENT SERA +1
+        for (int x = 0; x < mapa.doGetWidth(); x++) {
+            if (mapa.columns.get(x).getRows().get(x) instanceof PortaCell) {
+                PortaCell mipuerta = ((PortaCell) mapa.columns.get(x).getRows().get(x));
+                if (mipuerta.getNivelActual() == mapa.getNivel()) {
+                    mipuerta.setEstado(1);//obrim porta
+                } else {}
+            }
+        }
     }
 }
