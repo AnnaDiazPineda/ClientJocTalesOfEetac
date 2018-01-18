@@ -136,7 +136,7 @@ public class Mapa {
 
     public static DAOMapa readMapFromile(int level) {
         try {
-            File file = new File("mapas/" + level + ".txt");
+            File file = new File("java/edu.upc.dsa/mapasEmptys/" + level + ".txt");
             FileReader fileReader = new FileReader(file);
             StringBuffer stringBuffer = new StringBuffer();
             int numCharsRead;

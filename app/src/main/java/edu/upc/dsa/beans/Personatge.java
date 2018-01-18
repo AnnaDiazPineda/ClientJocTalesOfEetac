@@ -209,9 +209,17 @@ public class Personatge extends DAO implements Drawable, Interactuador {
         if (interactivo instanceof PortaCellOberta) {
 
             if(x > 4) {
-                this.nivel++;
-                //saveMapaNivel
-                ContexteDelJoc.loadNextMapa();
+                if(mapa.getNivel()+1==this.nivel){
+                //cas pasem del 0 al 1,2-3
+                ContexteDelJoc.loadNextMapa();}
+                else{
+                    this.nivel++;
+                    ContexteDelJoc.loadNextMapa();
+                }
+            }
+            else{
+                ContexteDelJoc.loadAndEmptyMap();
+
             }
         }
 

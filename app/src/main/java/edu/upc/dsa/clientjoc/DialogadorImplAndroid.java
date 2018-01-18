@@ -71,4 +71,9 @@ public class DialogadorImplAndroid implements Dialogador {
         context.crearNewMapaPerPersonatgeSellecionat();
     }
 
+    @Override
+    public void loadAndEmptyMap() {
+        context.EstablirMapabuit();
+    }
+
 }

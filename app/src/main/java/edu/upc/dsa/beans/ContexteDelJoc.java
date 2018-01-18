@@ -17,4 +17,8 @@ public class ContexteDelJoc {
 
     public static void levelUpPersonatge() {
     }
+
+    public static void loadAndEmptyMap() {
+        dialogador.loadAndEmptyMap();
+    }
 }

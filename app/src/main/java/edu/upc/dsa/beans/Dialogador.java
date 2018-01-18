@@ -10,4 +10,6 @@ public interface Dialogador {
     public boolean siNoQuestion(String missatge, String trueStr, String falseStr, Decisio decision);
 
     public void loadNextMapa();
+
+    public  void loadAndEmptyMap();
 }

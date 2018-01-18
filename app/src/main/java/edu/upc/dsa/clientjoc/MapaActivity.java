@@ -18,6 +18,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import edu.upc.dsa.DAOG.DAOMapa;
 import edu.upc.dsa.beans.ContexteDelJoc;
 import edu.upc.dsa.beans.Jugador;
 import edu.upc.dsa.beans.Personatge;
@@ -184,4 +185,11 @@ public class MapaActivity extends AppCompatActivity {
     }
 
 
+    public void EstablirMapabuit() {
+        Mapa mimapa = new Mapa(10,10);
+        mimapa.readMapFromile(1);
+
+        MapaView v = (MapaView)findViewById(R.id.surfaceView1);
+        v.setMap(mimapa);
+    }
 }
