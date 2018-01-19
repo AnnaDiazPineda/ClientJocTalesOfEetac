@@ -2,14 +2,17 @@ package edu.upc.dsa.beans.mapa;
 //un mapa es una col·leció de sprites
 
 import android.content.Context;
+import android.content.res.AssetManager;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.upc.dsa.DAOG.DAOMapa;
 import edu.upc.dsa.beans.*;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 
 public class Mapa {
@@ -136,18 +139,22 @@ public class Mapa {
 
     public static DAOMapa readMapFromile(int level) {
         try {
-            File file = new File("java/edu.upc.dsa/mapasEmptys/" + level + ".txt");
-            FileReader fileReader = new FileReader(file);
-            StringBuffer stringBuffer = new StringBuffer();
-            int numCharsRead;
-            char[] charArray = new char[1024];
-            while ((numCharsRead = fileReader.read(charArray)) > 0) {
-                stringBuffer.append(charArray, 0, numCharsRead);
+            AssetManager am = ContexteDelJoc.getDialogador().getContext().getAssets();
+            InputStream is = am.open( level + ".txt");
+            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+
+            int i;
+
+            i = is.read();
+            while (i != -1)
+            {
+                byteArrayOutputStream.write(i);
+                i = is.read();
             }
-            fileReader.close();
+            is.close();
             ObjectMapper mapper = new ObjectMapper();
             mapper.enableDefaultTyping(ObjectMapper.DefaultTyping.NON_FINAL);
-            DAOMapa mapa = mapper.readValue(stringBuffer.toString(), DAOMapa.class);
+            DAOMapa mapa = mapper.readValue(byteArrayOutputStream.toString(), DAOMapa.class);
             return mapa;
         } catch (Exception e) {
             e.printStackTrace();

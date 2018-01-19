@@ -1,5 +1,7 @@
 package edu.upc.dsa.beans;
 
+import android.content.Context;
+
 /**
  * Created by Marta on 11/1/2018.
  */
@@ -12,4 +14,6 @@ public interface Dialogador {
     public void loadNextMapa();
 
     public  void loadAndEmptyMap();
+
+    Context getContext();
 }

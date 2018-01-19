@@ -20,6 +20,7 @@ import java.util.ArrayList;
 
 import edu.upc.dsa.DAOG.DAOMapa;
 import edu.upc.dsa.beans.ContexteDelJoc;
+import edu.upc.dsa.beans.Dialogador;
 import edu.upc.dsa.beans.Jugador;
 import edu.upc.dsa.beans.Personatge;
 import edu.upc.dsa.beans.mapa.Drawable;
@@ -36,7 +37,7 @@ import retrofit2.Response;
  */
 
 public class MapaActivity extends AppCompatActivity {
-    Mapa mapa;
+    DAOMapa mapa;
     Personatge pers;
     private String value;
     private ObjectMapper mapper = new ObjectMapper();
@@ -84,10 +85,52 @@ public class MapaActivity extends AppCompatActivity {
             }
         });
         ContexteDelJoc.setDialogador(new DialogadorImplAndroid(this,getApplicationContext()));
+        Button save = (Button) findViewById(R.id.save);
+        save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                saveMapToServer();
 
+            }
+        });
     }
 
 
+    public void saveMapToServer() {
+        if(pers.getNivel() != mapa.getNivel()){
+            ContexteDelJoc.getDialogador().globus("el mapa nomes es pot guardar en l'ultim nivell desbloqueijat");
+            return;
+        }
+        Call<Integer> mapaCall = ApiAdapter.getApiService().saveMapa(mapa,mijugador.getId());
+        mapaCall.enqueue(new Callback<Integer>() {
+            @Override
+            public void onResponse(Call<Integer> call, Response<Integer> response) {
+                switch (response.code()) {
+                    case 200:
+                        ContexteDelJoc.getDialogador().globus("el mapa s'ha guardat");
+                        break;
+                    case 204://cas de no hi ha partida desada
+                        Context context = getApplicationContext();
+                        CharSequence text = "el mapa NO s'ha guardat";
+                        int duration = Toast.LENGTH_SHORT;
+                        Toast toast = Toast.makeText(context, text, duration);
+                        toast.show();
+
+                        finish();
+                        break;
+                    case 500://el email no existeix
+                        showLoginError("500");
+                        break;
+                }
+            }
+
+            public void onFailure(Call<Integer> call, Throwable t) {
+                showLoginError("error");
+                t.printStackTrace();
+                return;
+            }
+        });
+    }
 
 
     public void getMapaFromServer() {
@@ -104,7 +147,7 @@ public class MapaActivity extends AppCompatActivity {
                         mapper.enableDefaultTyping(ObjectMapper.DefaultTyping.NON_FINAL);
 
                         try {
-                            mapa = mapper.readValue(mapastr, Mapa.class);
+                            mapa = mapper.readValue(mapastr, DAOMapa.class);
                             ContexteDelJoc.getDialogador().globus("el nivell associat al mapa es:"+mapa.getNivel());
                             MapaView v = (MapaView)findViewById(R.id.surfaceView1);
                             v.setMap(mapa);
@@ -186,10 +229,13 @@ public class MapaActivity extends AppCompatActivity {
 
 
     public void EstablirMapabuit() {
-        Mapa mimapa = new Mapa(10,10);
-        mimapa.readMapFromile(1);
-
+        DAOMapa mimapa = new DAOMapa(10,10);
+        int nuevoNivel = mapa.getNivel()-1;
+        mimapa = mimapa.readMapFromile(nuevoNivel);
+        mimapa.setNivel(nuevoNivel);
+        mimapa.putElement(7,7,pers);
         MapaView v = (MapaView)findViewById(R.id.surfaceView1);
         v.setMap(mimapa);
+        mapa = mimapa;
     }
 }

@@ -76,4 +76,9 @@ public class DialogadorImplAndroid implements Dialogador {
         context.EstablirMapabuit();
     }
 
+    @Override
+    public Context getContext() {
+        return context;
+    }
+
 }

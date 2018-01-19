@@ -494,7 +494,7 @@
                                     {}
                                 ],
                                 [
-                                    "edu.upc.dsa.beans.mapa.PortaCell",
+                                    "edu.upc.dsa.beans.mapa.PortaCellOberta",
                                     {
                                     }
                                 ],

@@ -2,6 +2,7 @@ package edu.upc.dsa.clientjoc.inputOutput;
 
 import java.util.ArrayList;
 
+import edu.upc.dsa.DAOG.DAOMapa;
 import edu.upc.dsa.beans.Answer;
 import edu.upc.dsa.beans.Jugador;
 
@@ -46,6 +47,7 @@ public interface ApiService {
     Call<Personatge> newPersonaje(@Path("nomPersonatge") String nomPersonatge, @Path("tipus") String type, @Path("idjugador") String id);
     @POST("NewMapa/{idJugador}")
     Call<String>getNewMapa(Personatge personatgeEnviatPelClient, @Path("idJugador")int idJugador);
-
+    @POST("saveMapa/{idJugador}")
+    Call<Integer>saveMapa(@Body  DAOMapa mapa, @Path("idJugador")int idJugador);
 
 }
