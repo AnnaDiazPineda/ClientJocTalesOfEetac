@@ -16,11 +16,12 @@ public class MiniJoc extends AppCompatActivity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_mini_joc);
 
-        Button btnEsquerra = (Button) findViewById(R.id.btnEsquerra);
+
+       /*Button btnEsquerra = (Button) findViewById(R.id.btnEsquerra);
         btnEsquerra.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                MiniJocView.mourePersonatge(-1);
+                MiniJocState.mourePersonatge(-1);
 
             }
         });
@@ -29,9 +30,9 @@ public class MiniJoc extends AppCompatActivity {
         btnDreta.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                MiniJocView.mourePersonatge(1);
+                MiniJocState.mourePersonatge(1);
             }
-        });
+        });*/
 
 
     }

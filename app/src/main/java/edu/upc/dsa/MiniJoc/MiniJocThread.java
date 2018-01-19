@@ -1,5 +1,12 @@
 package edu.upc.dsa.MiniJoc;
 
+import android.content.Context;
+import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.view.SurfaceHolder;
+
+import java.util.logging.Handler;
+
 import static java.lang.Thread.*;
 
 /**
@@ -9,39 +16,36 @@ import static java.lang.Thread.*;
 public class MiniJocThread extends Thread{
     static  final long FPS = 30;
 
-    private MiniJocView viewMinijoc;
+    private SurfaceHolder surfaceHolder;
+    private Paint paint;
+    private MiniJocState state;
+
     //nomes ens diu quan esta corrent el joc
     private boolean running = false;
 
-    public MiniJocThread(MiniJocView viewMinijoc)
-    {
-        this.viewMinijoc = viewMinijoc;
+    public MiniJocThread(SurfaceHolder surfaceHolder, Context context, Handler handler){
+        this.surfaceHolder = surfaceHolder;
+        this.paint = new Paint();
+        this.state = new MiniJocState();
+
     }
-    public void setRunning(boolean running)
-    {
-        this.running = running;
-    }
-    //@Override
+
+
+    @Override
     public void run()
     {
-        long ticksPs = 1000 / FPS; //=1s cada 33.33ms dibuixem un quadre,, ja mirem si nem mes rapid despres
-        long startTime;
-        long sleepTime;
-
-        while (running)
+        while (true)
         {
-            startTime = System.currentTimeMillis();
-            viewMinijoc.postInvalidate();
+            Canvas canvas = surfaceHolder.lockCanvas();
+            state.update();
+            state.draw(canvas, paint);
+            surfaceHolder.unlockCanvasAndPost(canvas);
 
-            sleepTime = ticksPs -(System.currentTimeMillis() - startTime);
-            try
-            {
-                if (sleepTime > 0)
-                    sleep(sleepTime);
-            }catch (Exception e)
-            {
 
-            }
         }
+    }
+
+    public MiniJocState getGameState() {
+        return state;
     }
 }
