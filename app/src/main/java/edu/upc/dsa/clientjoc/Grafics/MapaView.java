@@ -62,6 +62,7 @@ public class MapaView extends SurfaceView {
 
     int topBatX = 50;//(screenWidth / 2) - (batLength / 2);
      int topBatY = 30;
+     int topBatSpeed = 10;
 
     int bottonBatX = 50;//(screenWidth/2) - (batLength / 2);
      int bottonBatY = 870;
@@ -209,9 +210,9 @@ public class MapaView extends SurfaceView {
         }
         if(dr instanceof Objeto){
             Objeto obj = (Objeto )dr;
-            if(obj.getTipo().equals("espada")) {
+/*            if(obj.getTipo().equals("espada")) {
                 type = R.mipmap.espasa;
-            }
+            }*/
             if(obj.getTipo().equals("aigua")) {
                 type = R.mipmap.aigua;
             }
@@ -273,6 +274,7 @@ public class MapaView extends SurfaceView {
         if(i < 0){
 
             bottonBatX -= batsSpeed;
+
         }
         else
         {
@@ -309,8 +311,11 @@ public class MapaView extends SurfaceView {
          pilotaSize = 70;
          pilotaX = 50;
          pilotaY = 250;
+
          speedPilotaX = 6;
          speedPilotaY = 6;
+
+        topBatSpeed = 10;
 
         //els bats
           batLength = 300;
@@ -322,7 +327,7 @@ public class MapaView extends SurfaceView {
          bottonBatX = 50;//(screenWidth/2) - (batLength / 2);
           bottonBatY = 700;
 
-          batsSpeed = 20;
+          batsSpeed = 40;
           modepong = false;
 
     }

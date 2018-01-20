@@ -114,7 +114,7 @@ public class Registre extends AppCompatActivity {
                             showLoginError(getString(R.string.error_password));
                             break;
                         case 500://el email no existeix
-                            showLoginError(getString(R.string.error_user));
+                            showLoginError("Aquest mail ja existeix");
                             break;
                     }
                 }

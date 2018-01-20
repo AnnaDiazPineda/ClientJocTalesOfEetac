@@ -70,9 +70,9 @@ public class PersonajesActivity extends AppCompatActivity {
         initBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intentRegistre = new Intent(PersonajesActivity.this, NewPersonaje.class);
+                Intent intentDatosPersonales = new Intent(PersonajesActivity.this, DatosPersonales.class);
                 crearNewMapaPerPersonatgeSellecionat();
-                startActivity(intentRegistre);
+                startActivity(intentDatosPersonales);
             }
         });
     }
@@ -188,7 +188,7 @@ public class PersonajesActivity extends AppCompatActivity {
         final TableRow tr1 = new TableRow(this);
         tr1.setLayoutParams(new TableLayout.LayoutParams(TableLayout.LayoutParams.FILL_PARENT, TableLayout.LayoutParams.WRAP_CONTENT));
         TextView textview = new TextView(this);
-        textview.setText("Personajes disponibles");
+        textview.setText("Personajes disponibles, Escull un!");
         tr1.addView(textview);
         final HashMap<Integer, Personatge> mihash = new HashMap<Integer, Personatge>();
         //recibimos personaje añadimos
