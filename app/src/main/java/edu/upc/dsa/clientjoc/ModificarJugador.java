@@ -41,12 +41,12 @@ public class ModificarJugador extends AppCompatActivity {
         setContentView(R.layout.activity_modificar);
         mRestAdapter =  ApiAdapter.getApiService();
         Intent intent = getIntent();
-        Jugador   jugador =  SingletonDades.getInstancia().getJugador();
+        mijugador =  SingletonDades.getInstancia().getJugador();
 
         mcanviContraView = (EditText) findViewById(R.id.editContra);
-        mcanviContraView.setText(jugador.getContrasenya());
+        mcanviContraView.setText(mijugador.getContrasenya());
         mcanviNomView = (EditText) findViewById(R.id.editNom);
-        mcanviNomView.setText(jugador.getNom());
+        mcanviNomView.setText(mijugador.getNom());
         ferCanvis = (Button) findViewById(R.id.bAplicar);
         ferCanvis.setOnClickListener(new View.OnClickListener() {
             @Override

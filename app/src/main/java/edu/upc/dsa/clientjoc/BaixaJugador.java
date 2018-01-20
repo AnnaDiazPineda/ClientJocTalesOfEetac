@@ -64,7 +64,7 @@ public class BaixaJugador extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intentPerfil = new Intent(BaixaJugador.this, MapaActivity.class);
-                intentPerfil.putExtra("jugador", value);
+                //intentPerfil.putExtra("jugador", value);
                 startActivity(intentPerfil);
             }
         });
@@ -88,6 +88,9 @@ public class BaixaJugador extends AppCompatActivity {
                                     int duration = Toast.LENGTH_SHORT;
                                     Toast toast = Toast.makeText(context, text, duration);
                                     toast.show();
+                                    Intent intentPerfil = new Intent(BaixaJugador.this, LoginActivity.class);
+                                    //intentPerfil.putExtra("jugador", value);
+                                    startActivity(intentPerfil);
                                     finish();
                                     break;
                                 case 204://cas de no hi ha partida desada

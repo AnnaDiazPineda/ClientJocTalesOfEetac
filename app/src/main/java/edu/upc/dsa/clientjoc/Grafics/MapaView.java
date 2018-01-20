@@ -209,14 +209,14 @@ public class MapaView extends SurfaceView {
             }
         }
         if(dr instanceof Objeto){
-            Objeto obj = (Objeto )dr;
-           if(obj.getTipo().equals("espada")) {
+            Objeto obj = (Objeto)dr;
+           if(obj.getTipo()!= null && obj.getTipo().equals("espada")) {
                 type = R.mipmap.espasa;
             }
-            if(obj.getTipo().equals("aigua")) {
+            if(obj.getTipo()!= null && obj.getTipo().equals("aigua")) {
                 type = R.mipmap.agua;
             }
-            if(obj.getTipo().equals("casco")) {
+            if(obj.getTipo()!= null && obj.getTipo().equals("casco")) {
                 type = R.mipmap.helmet;
             }
         }
