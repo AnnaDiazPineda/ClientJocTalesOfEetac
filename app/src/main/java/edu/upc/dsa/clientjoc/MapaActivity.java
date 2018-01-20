@@ -99,7 +99,7 @@ public class MapaActivity extends AppCompatActivity {
             }
         });
     }
-
+//***
 
     public void saveMapToServer() {
         sender = mapa;

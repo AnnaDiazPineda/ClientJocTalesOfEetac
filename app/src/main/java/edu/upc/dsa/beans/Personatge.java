@@ -189,21 +189,36 @@ public class Personatge extends DAO implements Drawable, Interactuador {
         }*/
         if (interactivo instanceof Objeto) {
             final Objeto miobjeto= (Objeto) interactivo;
-            switch (((Objeto) interactivo).getTipo()) {
 
-                case "aigua": {
+
+            switch (((Objeto) interactivo).getId()) {
+                case 15:{
+                    ContexteDelJoc.getDialogador().globus("Parece que has encontrado la famosa espada del Cid....A ver si conoces su historia...");
+                    final Dialogador dialeg = ContexteDelJoc.getDialogador();
+                    Decisio decisionBajaDefensaSiFalse = new Decisio() {
+                        @Override
+                        public void dotrue() {
+                            dialeg.globus("Parece que conoces bien sus orígenes...Es toda tuya");
+                            mapa.buidarCela(x, y);
+                            addMochila(miobjeto);
+                        }
+
+                        @Override
+                        public void dofalse() {
+                            dialeg.globus("No mereces poseer la espada del mismíso Cid...");
+                            mapa.buidarCela(x, y);
+                        }
+                    };
+                    boolean answer = dialeg.siNoQuestion("¿Cúal es su nombre?", "Tizona", "Zulfiqar", decisionBajaDefensaSiFalse);
+                }
+                break;
+                case 22: {
                     this.addMochila((Objeto) interactivo);
                     mapa.buidarCela(x, y);
                 }
                 break;
-                case "llave": {
-                    //TODO:AQUI ES ON AFEGIREM EL MINIJOC- TORNARA UN TRUE SI HEM ACONSEGUIT LA CLAU
-                    this.addMochila((Objeto) interactivo);
-                    mapa.buidarCela(x, y);
-                }
-                break;
-                case "espada":{
-                    ContexteDelJoc.getDialogador().globus("Parece que has encontrado la famosa espada del rey Arturo....A ver si conoces sus origenes...");
+                case 17:{
+                    ContexteDelJoc.getDialogador().globus("...");
                     final Dialogador dialeg = ContexteDelJoc.getDialogador();
                     Decisio decisionBajaDefensaSiFalse = new Decisio() {
                         @Override
@@ -211,16 +226,12 @@ public class Personatge extends DAO implements Drawable, Interactuador {
                             dialeg.globus("Parece que conoces la espada...Es toda tuya");
                             mapa.buidarCela(x, y);
                             addMochila(miobjeto);
-
-
-
-                                                    }
+                        }
 
                         @Override
                         public void dofalse() {
                             dialeg.globus("No mereces poseer la espada...");
                             mapa.buidarCela(x, y);
-
                         }
                     };
                     boolean answer = dialeg.siNoQuestion("De que país te convertias en rey si sacabas la espada?", "Inglaterra", "Alemania", decisionBajaDefensaSiFalse);
@@ -229,6 +240,13 @@ public class Personatge extends DAO implements Drawable, Interactuador {
 
                 }
                 break;
+                /*case "llave": {
+                    ///***caso de la llave
+                    this.addMochila((Objeto) interactivo);
+                    mapa.buidarCela(x, y);
+                }
+                break;*/
+
 
             }
 
