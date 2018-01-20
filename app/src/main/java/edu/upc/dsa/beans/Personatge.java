@@ -188,8 +188,36 @@ public class Personatge extends DAO implements Drawable, Interactuador {
                 }
                 break;
                 case "llave": {
+                    //TODO:AQUI ES ON AFEGIREM EL MINIJOC- TORNARA UN TRUE SI HEM ACONSEGUIT LA CLAU
                     this.addMochila((Objeto) interactivo);
                     mapa.buidarCela(x, y);
+                }
+                break;
+                case "espada":{
+                    ContexteDelJoc.getDialogador().globus("Parece que has encontrado la famosa espada del rey Arturo....A ver si conoces sus origenes...");
+                    final Dialogador dialeg = ContexteDelJoc.getDialogador();
+                    Decisio decisionBajaDefensaSiFalse = new Decisio() {
+                        @Override
+                        public void dotrue() {
+                            dialeg.globus("Parece que conoces la espada...Es toda tuya");
+                            mapa.buidarCela(x, y);
+
+                        }
+
+                        @Override
+                        public void dofalse() {
+                            dialeg.globus("No mereces poseer la espada...");
+                            mapa.buidarCela(x, y);
+
+                        }
+                    };
+                    boolean answer = dialeg.siNoQuestion("De que país te convertias en rey si sacabas la espada?", "Inglaterra", "Alemania", decisionBajaDefensaSiFalse);
+                    if (answer == true){
+                        addMochila((Objeto) interactivo);
+                        //TODO: ESTARIA GUAY GUARDAR-HO AQUI PER NO TENIR LA POSSIBILITAT DE SORTIR I AGAFAR LA ESPASA
+                    }
+
+
                 }
                 break;
 
@@ -197,15 +225,8 @@ public class Personatge extends DAO implements Drawable, Interactuador {
 
         }
         if (interactivo instanceof PortaCell) {
-
-            /*if (((PortaCell) interactivo).dogetEstado() == 1)
-                ContexteDelJoc.getDialogador().globus("La puerta parece que esta abierta...");*/
-            //------> enviem seguent nivell i personatge
-            //------>rebem nou mapa
-            //enviem servidor nivell, personatge
-
-
-        }
+        ContexteDelJoc.getDialogador().globus("...Parece que la puerta está cerrada...");
+         }
         if (interactivo instanceof PortaCellOberta) {
 
             if(x > 4) {
