@@ -169,7 +169,7 @@ public class PersonajesActivity extends AppCompatActivity {
                     }
                     if (milista.get(j).getNombre().equals("espada")) {
                         ImageView mi = new ImageView(PersonajesActivity.this);
-                        mi.setImageResource(R.mipmap.espada);
+                        mi.setImageResource(R.mipmap.espasa);
                         tr2.addView(mi);
                     }
                 }

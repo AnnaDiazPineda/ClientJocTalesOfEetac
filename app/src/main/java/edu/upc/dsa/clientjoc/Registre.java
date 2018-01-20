@@ -1,4 +1,4 @@
-package edu.upc.dsa.clientjoc.inputOutput;
+package edu.upc.dsa.clientjoc;
 
 import android.content.Context;
 import android.content.Intent;
@@ -14,9 +14,8 @@ import android.widget.Toast;
 
 import edu.upc.dsa.beans.Jugador;
 import edu.upc.dsa.beans.Login;
-import edu.upc.dsa.clientjoc.DatosPersonales;
-import edu.upc.dsa.clientjoc.R;
-import edu.upc.dsa.clientjoc.SingletonDades;
+import edu.upc.dsa.clientjoc.inputOutput.ApiAdapter;
+import edu.upc.dsa.clientjoc.inputOutput.ApiService;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -140,8 +139,7 @@ public class Registre extends AppCompatActivity {
         return password.length() > 3;
     }
     private void returnToInit(){
-        //showProgress(false);
-        //mEmailView.requestFocus();
+
     }
     //verificar connexió de xarxa
     private boolean isOnline()

@@ -185,12 +185,12 @@ public class MapaView extends SurfaceView {
             if((((Personatge)dr).defensa == 0) || (((Personatge)dr).nivel == 0)) {
                 type = R.mipmap.tipo1;
             } else
-            /*if(((Personatge)dr).nivel == 1){
+            if(((Personatge)dr).nivel == 1){
                 type = R.mipmap.pers_indefens;
             } else
             if(((Personatge)dr).nivel == 2){
                 type = R.mipmap.pers_indefens;
-            } else */
+            } else
             {
                 type = R.mipmap.d1;
             }
@@ -207,7 +207,7 @@ public class MapaView extends SurfaceView {
                 type = R.mipmap.putin;
             }
         }
-        /*if(dr instanceof Objeto){
+        if(dr instanceof Objeto){
             Objeto obj = (Objeto )dr;
             if(obj.getTipo().equals("espada")) {
                 type = R.mipmap.espasa;
@@ -218,7 +218,7 @@ public class MapaView extends SurfaceView {
             if(obj.getTipo().equals("casco")) {
                 type = R.mipmap.helmet;
             }
-        }*/
+        }
         if(dr instanceof ParedCell){
             type = R.mipmap.pared;
         }
