@@ -70,7 +70,7 @@ public class PersonajesActivity extends AppCompatActivity {
         initBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intentRegistre = new Intent(PersonajesActivity.this, NewPersonaje.class);
+                Intent intentRegistre = new Intent(PersonajesActivity.this, MapaActivity.class);
                 crearNewMapaPerPersonatgeSellecionat();
                 startActivity(intentRegistre);
             }

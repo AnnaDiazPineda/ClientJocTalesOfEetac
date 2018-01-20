@@ -9,6 +9,7 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 
@@ -36,6 +37,8 @@ public class MapaActivity extends AppCompatActivity {
     private String mapaString;
     private Mapa mimapa=null;
     private MapaView mapaView;
+    private String mapaState;
+    DAOMapa sender = new DAOMapa(10,10);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,39 +102,47 @@ public class MapaActivity extends AppCompatActivity {
 
 
     public void saveMapToServer() {
+        sender = mapa;
+
         if(pers.getNivel() != mapa.getNivel()){
             ContexteDelJoc.getDialogador().globus("el mapa nomes es pot guardar en l'ultim nivell desbloqueijat");
             return;
         }
-        Call<Integer> mapaCall = ApiAdapter.getApiService().saveMapa(mapa,mijugador.getId());
-        mapaCall.enqueue(new Callback<Integer>() {
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            mapper.enableDefaultTyping(ObjectMapper.DefaultTyping.NON_FINAL);
+            mapaState = mapper.writeValueAsString(sender);
+            mapaState = mapaState.substring(0,mapaState.length()-12);
+            mapaState = mapaState +"}]";
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+        new Thread(new Runnable() {
             @Override
-            public void onResponse(Call<Integer> call, Response<Integer> response) {
-                switch (response.code()) {
-                    case 200:
-                        ContexteDelJoc.getDialogador().globus("el mapa s'ha guardat");
-                        break;
-                    case 204://cas de no hi ha partida desada
-                        Context context = getApplicationContext();
-                        CharSequence text = "el mapa NO s'ha guardat";
-                        int duration = Toast.LENGTH_SHORT;
-                        Toast toast = Toast.makeText(context, text, duration);
-                        toast.show();
+            public void run() {
+                Call<String> mapaCall = ApiAdapter.getApiService().SaveMapa(mapaState,mijugador.getId());
+                mapaCall.request().header("application/json");
+                mapaCall.enqueue(new Callback<String>() {
 
-                        finish();
-                        break;
-                    case 500://el email no existeix
-                        showLoginError("500");
-                        break;
-                }
-            }
 
-            public void onFailure(Call<Integer> call, Throwable t) {
-                showLoginError("error");
-                t.printStackTrace();
-                return;
+                    @Override
+                    public void onResponse(Call<String> call, Response<String> response) {
+
+                    }
+
+                    @Override
+                    public void onFailure(Call<String> call, Throwable t) {
+
+                    }
+
+
+
+
+                });
+
             }
-        });
+        }).start();
+
     }
 
 
@@ -236,11 +247,11 @@ public class MapaActivity extends AppCompatActivity {
             public void onResponse(Call<String> call, Response<String> response) {
 
             if(response.body().equals("OK")){
-                ContexteDelJoc.dialogador.globus("el objecte s'ha afegit al personatge");
+                ContexteDelJoc.dialogador.globus(" El objecte s'ha afegit al personatge");
             }
 
             if(response.body().equals("KO")){
-                ContexteDelJoc.dialogador.globus("NO S'HA POGUT AFEGIT");
+                ContexteDelJoc.dialogador.globus(" Hi ha un problema al servidor, intenta-ho més tard");
             }
             }
 
@@ -250,8 +261,6 @@ public class MapaActivity extends AppCompatActivity {
             }
         });
     }
-
-
     public void EstablirMapabuit() {
         DAOMapa mimapa = new DAOMapa(10,10);
         int nuevoNivel = mapa.getNivel()-1;

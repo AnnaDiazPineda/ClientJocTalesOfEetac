@@ -38,6 +38,7 @@ public class NewPersonaje extends AppCompatActivity {
     public String type;
     private String value;
     private Jugador jugador;
+    private Jugador mijugador;
     private String name;
     private ApiService mRestAdapter;
     final Context context = this;
@@ -48,6 +49,7 @@ public class NewPersonaje extends AppCompatActivity {
         Intent intent = getIntent();
         mRestAdapter =  ApiAdapter.getApiService();
         ObjectMapper mapper = new ObjectMapper();
+        mijugador = SingletonDades.getInstancia().getJugador();
 
             jugador = SingletonDades.getInstancia().getJugador();
             Context context = getApplicationContext();
@@ -112,6 +114,7 @@ public class NewPersonaje extends AppCompatActivity {
                                     jugador.getPersonatges().add(p);
                                     created = p;
                                     message();
+
                                 }
                             }break;
                         }
@@ -129,6 +132,41 @@ public class NewPersonaje extends AppCompatActivity {
                     e.printStackTrace();
             }};});
 
+    }
+    private void crearNewMapaPerPersonatgeSellecionat() {
+
+        // If jugador no te personatge , dir que es crei un al menu android corresponent i interrompre la crida a NewMapa
+
+        Call<String> mapaCall = ApiAdapter.getApiService().newMapa(mijugador.getId(), created);
+
+        mapaCall.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                switch (response.code()) {
+                    case 200:
+
+                        //enviar jugador rebut nova activitat
+                        break;
+                    case 204://cas de no hi ha partida desada
+                        Context context = getApplicationContext();
+                        CharSequence text = "ERROR CREANT UNA";
+                        int duration = Toast.LENGTH_SHORT;
+                        Toast toast = Toast.makeText(context, text, duration);
+                        toast.show();
+                        finish();
+                        break;
+                    case 500://el email no existeix
+
+                        break;
+                }
+            }
+
+            public void onFailure(Call<String> call, Throwable t) {
+
+                t.printStackTrace();
+                return;
+            }
+        });
     }
 
 
@@ -181,8 +219,9 @@ public class NewPersonaje extends AppCompatActivity {
                 .setPositiveButton("SI",new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog,int id) {
 
-                    Intent intentPersonajes  = new Intent(NewPersonaje.this, PersonajesActivity.class);
-                    startActivity(intentPersonajes);
+                        Intent intentRegistre = new Intent(NewPersonaje.this, MapaActivity.class);
+                        crearNewMapaPerPersonatgeSellecionat();
+                        startActivity(intentRegistre);
 
 
 
