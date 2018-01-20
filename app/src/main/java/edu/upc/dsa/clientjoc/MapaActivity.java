@@ -1,10 +1,7 @@
 package edu.upc.dsa.clientjoc;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -15,18 +12,12 @@ import android.widget.Toast;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 
-import java.io.IOException;
-import java.util.ArrayList;
-
 import edu.upc.dsa.DAOG.DAOMapa;
 import edu.upc.dsa.beans.ContexteDelJoc;
-import edu.upc.dsa.beans.Dialogador;
 import edu.upc.dsa.beans.Jugador;
 import edu.upc.dsa.beans.Personatge;
-import edu.upc.dsa.beans.mapa.Drawable;
 import edu.upc.dsa.beans.mapa.Mapa;
 import edu.upc.dsa.clientjoc.Grafics.MapaView;
-import edu.upc.dsa.clientjoc.Grafics.Sprite;
 import edu.upc.dsa.clientjoc.inputOutput.ApiAdapter;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -44,6 +35,7 @@ public class MapaActivity extends AppCompatActivity {
     private Jugador mijugador;
     private String mapaString;
     private Mapa mimapa=null;
+    private MapaView mapaView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +44,7 @@ public class MapaActivity extends AppCompatActivity {
         setContentView(R.layout.map_layout);
         Intent intent = getIntent();
         mijugador =  SingletonDades.getInstancia().getJugador();
+        mapaView = findViewById(R.id.surfaceView1);
 
         getMapaFromServer();//if it's a string you stored.
 
@@ -69,22 +62,31 @@ public class MapaActivity extends AppCompatActivity {
                 mapa.moure(1,0,pers);
             }
         });
+
         Button bt3 = (Button) findViewById(R.id.left);
         bt3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mapa.moure(0,-1,pers);
+                if(ContexteDelJoc.getDialogador().isNoPong()) {
+                    mapa.moure(0, -1, pers);
+                }else {
+                    mapaView.moureBat(-1);
+                }
             }
         });
         Button bt4 = (Button) findViewById(R.id.right);
         bt4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mapa.moure(0,+1,pers);
+                if(ContexteDelJoc.getDialogador().isNoPong()) {
+                    mapa.moure(0, +1, pers);
+                }else {
+                    mapaView.moureBat(+1);
+                }
 
             }
         });
-        ContexteDelJoc.setDialogador(new DialogadorImplAndroid(this,getApplicationContext()));
+        ContexteDelJoc.setDialogador(new DialogadorImplAndroid(this,getApplicationContext(), (MapaView)findViewById(R.id.surfaceView1)));
         Button save = (Button) findViewById(R.id.save);
         save.setOnClickListener(new View.OnClickListener() {
             @Override

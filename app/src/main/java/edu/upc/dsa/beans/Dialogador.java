@@ -16,4 +16,8 @@ public interface Dialogador {
     public  void loadAndEmptyMap();
 
     Context getContext();
+
+    void startPong();
+
+    boolean isNoPong();
 }

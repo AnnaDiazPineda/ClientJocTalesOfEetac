@@ -10,7 +10,7 @@ import android.widget.EditText;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import edu.upc.dsa.MiniJoc.MiniJoc;
+
 import edu.upc.dsa.beans.Jugador;
 
 import edu.upc.dsa.clientjoc.inputOutput.ApiAdapter;
@@ -116,8 +116,7 @@ public class DatosPersonales extends AppCompatActivity {
         provarMiniJoc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intentMinijoc = new Intent(DatosPersonales.this, MiniJoc.class);
-                startActivity(intentMinijoc);
+
             }
         });
 

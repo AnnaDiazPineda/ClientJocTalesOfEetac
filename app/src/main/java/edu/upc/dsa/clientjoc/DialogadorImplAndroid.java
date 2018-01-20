@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.support.v7.app.AlertDialog;
 import android.view.Gravity;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -13,20 +14,25 @@ import java.util.TimerTask;
 
 import edu.upc.dsa.beans.Decisio;
 import edu.upc.dsa.beans.Dialogador;
+import edu.upc.dsa.clientjoc.Grafics.MapaView;
+
 /**
  * Created by Marta on 11/1/2018.
  */
 
 public class DialogadorImplAndroid implements Dialogador {
     MapaActivity context;
+    public  MapaView view;
     Context appcontext;
     int i;
     String[]parts;
 
-    public DialogadorImplAndroid(MapaActivity ctxt, Context appcontext){
-        context = ctxt;
-        this.appcontext = appcontext;
+    public DialogadorImplAndroid(MapaActivity mapaActivity, Context applicationContext, MapaView viewM) {
+        context = mapaActivity;
+        this.appcontext = applicationContext;
+        view = viewM;
     }
+
     public void globus(String missatge){
         i=0;
         String[]parts = missatge.split(" ");
@@ -79,6 +85,16 @@ public class DialogadorImplAndroid implements Dialogador {
     @Override
     public Context getContext() {
         return context;
+    }
+
+    @Override
+    public void startPong() {
+        view.startPong();
+    }
+
+    @Override
+    public boolean isNoPong() {
+        return !view.modepong;
     }
 
 }

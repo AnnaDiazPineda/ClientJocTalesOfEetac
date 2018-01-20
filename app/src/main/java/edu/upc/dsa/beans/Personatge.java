@@ -258,31 +258,8 @@ public class Personatge extends DAO implements Drawable, Interactuador {
         }
         if (interactivo instanceof Monstruo) {
 
-            Monstruo m = (Monstruo) interactivo;
-            ContexteDelJoc.getDialogador().globus("Has trobat un monstre");
-            final Dialogador dialeg = ContexteDelJoc.getDialogador();
-            /*if (consultarLlave()) {*/
-                Decisio decisionBajaDefensaSiFalse = new Decisio() {
-                    @Override
-                    public void dotrue() {
-                        dialeg.globus("Que sabio, no puedo interponeme en tu camino, pasa..");
-                        mapa.buidarCela(x, y);
-                        abrirPuerta(mapa);
-                        }
-
-                    @Override
-                    public void dofalse() {
-                        dialeg.globus("Mentira, aquí seguire hasta que me respondas correctamente");
-                    }
-                };
-                boolean answer = dialeg.siNoQuestion("De que color era el caballo blanco de santiago?", "Blanco", "Gris", decisionBajaDefensaSiFalse);
-
-
-                return false;
-            } /*else {
-                dialeg.globus("Busca la llave antes de interntar continuar");
-            }*/
-
+            ContexteDelJoc.getDialogador().startPong();
+        }
 
         return false;
     }
