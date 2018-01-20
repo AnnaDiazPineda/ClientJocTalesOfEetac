@@ -13,7 +13,7 @@ import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 public class ApiAdapter {
     private static ApiService API_SERVICE;
-
+//proba
     public static ApiService getApiService() {
 
 
