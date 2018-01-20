@@ -167,7 +167,7 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="textPersonName"
-            android:text="MI MOCHILA" />
+            android:text="Motxilla" />
 
         <TableLayout
             android:id="@+id/objetos"
