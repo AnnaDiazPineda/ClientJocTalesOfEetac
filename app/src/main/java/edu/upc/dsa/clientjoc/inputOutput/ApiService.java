@@ -39,6 +39,10 @@ public interface ApiService {
     @GET("Mapa/{idJugador}")
     Call<String> getMapa(@Path("idJugador")int id);
 
+    //testing
+    @POST("ActualizeTheCharacter")
+    Call<String> ActualizeTheCharacter(@Body Personatge p);
+
     @POST("NewMapa/{idJugador}")
     Call<String> newMapa(@Path("idJugador")int id, @Body Personatge personatge);
     @POST("addObject/{idpersonatge}")

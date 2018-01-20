@@ -207,7 +207,7 @@ public class MapaView extends SurfaceView {
                 type = R.mipmap.putin;
             }
         }
-        /*if(dr instanceof Objeto){
+        if(dr instanceof Objeto){
             Objeto obj = (Objeto )dr;
             if(obj.getTipo().equals("espada")) {
                 type = R.mipmap.espasa;
@@ -218,7 +218,7 @@ public class MapaView extends SurfaceView {
             if(obj.getTipo().equals("casco")) {
                 type = R.mipmap.helmet;
             }
-        }*/
+        }
         if(dr instanceof ParedCell){
             type = R.mipmap.pared;
         }

@@ -20,4 +20,6 @@ public interface Dialogador {
     void startPong();
 
     boolean isNoPong();
+
+    void actualizeToDatabase();
 }

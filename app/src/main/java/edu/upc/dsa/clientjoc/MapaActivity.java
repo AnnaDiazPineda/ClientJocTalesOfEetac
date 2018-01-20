@@ -228,6 +228,28 @@ public class MapaActivity extends AppCompatActivity {
             }
         });
     }
+    public void actualizeToDatabase(){
+        Call<String> characterCall = ApiAdapter.getApiService().ActualizeTheCharacter(pers);
+        characterCall.enqueue(new Callback<String>() {
+
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+
+            if(response.body().equals("OK")){
+                ContexteDelJoc.dialogador.globus("el objecte s'ha afegit al personatge");
+            }
+
+            if(response.body().equals("KO")){
+                ContexteDelJoc.dialogador.globus("NO S'HA POGUT AFEGIT");
+            }
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+
+            }
+        });
+    }
 
 
     public void EstablirMapabuit() {

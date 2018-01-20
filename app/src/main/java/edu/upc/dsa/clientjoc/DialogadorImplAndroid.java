@@ -97,4 +97,10 @@ public class DialogadorImplAndroid implements Dialogador {
         return !view.modepong;
     }
 
+    @Override
+    public void actualizeToDatabase() {
+        context.actualizeToDatabase();
+
+    }
+
 }

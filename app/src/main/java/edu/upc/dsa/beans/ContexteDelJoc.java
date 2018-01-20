@@ -21,4 +21,8 @@ public class ContexteDelJoc {
     public static void loadAndEmptyMap() {
         dialogador.loadAndEmptyMap();
     }
+
+    public static void actualizeToDatabase() {
+        dialogador.actualizeToDatabase();
+    }
 }

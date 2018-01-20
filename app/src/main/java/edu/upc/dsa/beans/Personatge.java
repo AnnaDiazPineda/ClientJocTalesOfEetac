@@ -157,7 +157,15 @@ public class Personatge extends DAO implements Drawable, Interactuador {
 
     public void addMochila(Objeto newObject) {
         this.arrMisObjetos.add(newObject);
+        if(newObject.getNombre().equals("aigua")){
 
+        }else{
+        actualizeToDatabase();}
+
+    }
+
+    private void actualizeToDatabase() {
+        ContexteDelJoc.actualizeToDatabase();
     }
 
 
@@ -180,6 +188,7 @@ public class Personatge extends DAO implements Drawable, Interactuador {
             return true;
         }*/
         if (interactivo instanceof Objeto) {
+            final Objeto miobjeto= (Objeto) interactivo;
             switch (((Objeto) interactivo).getTipo()) {
 
                 case "aigua": {
@@ -201,8 +210,11 @@ public class Personatge extends DAO implements Drawable, Interactuador {
                         public void dotrue() {
                             dialeg.globus("Parece que conoces la espada...Es toda tuya");
                             mapa.buidarCela(x, y);
+                            addMochila(miobjeto);
 
-                        }
+
+
+                                                    }
 
                         @Override
                         public void dofalse() {
@@ -212,10 +224,7 @@ public class Personatge extends DAO implements Drawable, Interactuador {
                         }
                     };
                     boolean answer = dialeg.siNoQuestion("De que país te convertias en rey si sacabas la espada?", "Inglaterra", "Alemania", decisionBajaDefensaSiFalse);
-                    if (answer == true){
-                        addMochila((Objeto) interactivo);
-                        //TODO: ESTARIA GUAY GUARDAR-HO AQUI PER NO TENIR LA POSSIBILITAT DE SORTIR I AGAFAR LA ESPASA
-                    }
+
 
 
                 }
