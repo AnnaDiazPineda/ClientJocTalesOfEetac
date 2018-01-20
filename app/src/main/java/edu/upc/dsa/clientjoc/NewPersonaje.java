@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import edu.upc.dsa.beans.ContexteDelJoc;
 import edu.upc.dsa.beans.Jugador;
 import edu.upc.dsa.beans.Personatge;
 import edu.upc.dsa.clientjoc.inputOutput.ApiAdapter;
@@ -61,10 +62,8 @@ public class NewPersonaje extends AppCompatActivity {
         imageType1view.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 type ="1";
-                Toast toast = Toast.makeText(getApplicationContext(), "tipo1", Toast.LENGTH_SHORT);
+                Toast toast = Toast.makeText(getApplicationContext(), type+""+name, Toast.LENGTH_SHORT);
                 toast.show();
-
-
          }});
         imageType2view.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -85,9 +84,14 @@ public class NewPersonaje extends AppCompatActivity {
                 toast.show();
             }});
         name = nameText.getText().toString();// hauriam d'afegir errors posibles al recollir el nom ANNA
+
+
         binitGamebtn.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View view) {
+
+
                 Call<Personatge> loginCall = ApiAdapter.getApiService().newPersonaje(name,type,""+jugador.getId());
                 try {
                     loginCall.enqueue(new Callback<Personatge>() {
@@ -125,10 +129,6 @@ public class NewPersonaje extends AppCompatActivity {
                     e.printStackTrace();
             }};});
 
-
-
-// Create the AlertDialog
-
     }
 
 
@@ -143,7 +143,7 @@ public class NewPersonaje extends AppCompatActivity {
         imageType2view = (ImageView)findViewById(R.id.imageViewType2);
         imageType3view = (ImageView)findViewById(R.id.imageViewType3);
         imageType4view = (ImageView)findViewById(R.id.imageViewType4);
-        nameText = (TextView)findViewById(R.id.textView13);
+        nameText = (TextView)findViewById(R.id.nomNouPersonatge);
         binitGamebtn = (Button)findViewById(R.id.button4);
 
 
@@ -174,15 +174,19 @@ public class NewPersonaje extends AppCompatActivity {
     public void message(){
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
                 context);
-        alertDialogBuilder.setTitle("Inici de partida");
+        alertDialogBuilder.setTitle("Ja tens el personatge");
         alertDialogBuilder
-                .setMessage("Click yes to start the game!")
+                .setMessage("Comencem!")
                 .setCancelable(false)
-                .setPositiveButton("Yes",new DialogInterface.OnClickListener() {
+                .setPositiveButton("SI",new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog,int id) {
 
-                    startTheGame();
-                        //enviem al servidor el personatge rebut
+                    Intent intentPersonajes  = new Intent(NewPersonaje.this, PersonajesActivity.class);
+                    startActivity(intentPersonajes);
+
+
+
+
 
                     }
                 })
@@ -200,6 +204,7 @@ public class NewPersonaje extends AppCompatActivity {
         // show it
         alertDialog.show();
     }
+
 
 }
 

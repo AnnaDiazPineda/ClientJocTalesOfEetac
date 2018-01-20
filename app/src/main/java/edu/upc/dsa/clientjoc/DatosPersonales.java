@@ -51,7 +51,7 @@ public class DatosPersonales extends AppCompatActivity {
         Intent intent = getIntent();
         ; //if it's a string you stored.
 
-        provarMiniJoc = (Button) findViewById(R.id.provarminijoc);
+
 
         try {
 
@@ -106,30 +106,15 @@ public class DatosPersonales extends AppCompatActivity {
         personajes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent myIntent = new Intent(DatosPersonales.this, PersonajesActivity.class);
+                Intent intentNewPersonatge = new Intent(DatosPersonales.this, PersonajesActivity.class);
                 ObjectMapper mapper = new ObjectMapper();
-                startActivity(myIntent);
+                startActivity(intentNewPersonatge);
             }
         });
 
 
-        provarMiniJoc.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
 
 
-/*
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });*/
 
 
 

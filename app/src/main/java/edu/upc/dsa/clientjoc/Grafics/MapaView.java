@@ -185,12 +185,12 @@ public class MapaView extends SurfaceView {
             if((((Personatge)dr).defensa == 0) || (((Personatge)dr).nivel == 0)) {
                 type = R.mipmap.tipo1;
             } else
-            /*if(((Personatge)dr).nivel == 1){
+            if(((Personatge)dr).nivel == 1){
                 type = R.mipmap.pers_indefens;
             } else
             if(((Personatge)dr).nivel == 2){
                 type = R.mipmap.pers_indefens;
-            } else */
+            } else
             {
                 type = R.mipmap.d1;
             }

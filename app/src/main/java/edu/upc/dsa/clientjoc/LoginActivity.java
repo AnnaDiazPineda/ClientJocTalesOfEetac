@@ -24,7 +24,6 @@ import edu.upc.dsa.beans.Jugador;
 import edu.upc.dsa.beans.Login;
 import edu.upc.dsa.clientjoc.inputOutput.ApiAdapter;
 import edu.upc.dsa.clientjoc.inputOutput.ApiService;
-import edu.upc.dsa.clientjoc.inputOutput.Registre;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;

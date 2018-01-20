@@ -35,7 +35,7 @@
             android:name=".DatosPersonales"
             android:label="@string/title_activity_datos_personales"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".inputOutput.Registre" />
+        <activity android:name=".Registre" />
         <activity android:name=".ModificarJugador" />
         <activity android:name=".Ranking" />
         <activity android:name=".MapaActivity" />
